@@ -44,3 +44,10 @@ dist/
 
 # Sandboxed/ephemeral thinking directories
 _working_docs/thinking/*.md
+
+# Runtime databases and uploads
+*.db
+data/uploads/
+src/backend/data/uploads/
+src/backend/data/*.db
+src/backend/data/*.json

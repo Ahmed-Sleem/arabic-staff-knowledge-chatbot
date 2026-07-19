@@ -140,3 +140,25 @@
   - **a) Is the gap fully fixed?** Yes, the data layer now ingests any user-uploaded file (`PDF`, `DOCX`, `TXT`, `MD`), extracts Table of Contents hierarchy (`toc_tree`), builds Obsidian Graph force-directed links (`ChunkConnectionORM`), and persists everything inside SQLite/Postgres (`data/knowledge_workspace.db`).
   - **b) Is everything wired and ready for production?** Yes, repository classes (`DocumentRepository`, `ChunkRepository`, `GraphRepository`, `TableRepository`) expose clean async interfaces for our upcoming FastAPI upload and streaming endpoints (`GAP-ASKC-02/03`).
   - **c) Is my test really validating that?** Yes, `test_persistent_storage_survives_restarts` explicitly closes the DB engine, opens a completely fresh session instance (`simulated restart`), and asserts that both uploaded documents (`test_doc_hr_v1` and `test_doc_md_policy`), all `450+` TOC hierarchy nodes, and `100+` Obsidian graph edges are still stored intact.
+
+---
+
+## 2026-07-19 — GAP-ASKC-02 & GAP-ASKC-03: FastAPI Core Routing & Streaming ReAct Agent with Graph Events
+
+- **Gap ID + One-line description:** GAP-ASKC-02/03 — Implemented FastAPI server (`main.py`), multi-document API endpoints (`api/documents.py`, `api/chat.py`), ReAct agent with universal tools (`agent/tools.py`, `agent/react_agent.py`), dynamic `X-LLM-API-Key` resolution, and live SSE `agent_search` events for Obsidian Graph camera animation.
+- **Files touched:**
+  - `src/backend/requirements.txt` (added `python-multipart`, `openai`, `httpx`, `pytest-asyncio`, `anyio`)
+  - `src/backend/agent/tools.py` (implemented `search_chunks`, `get_table`, `get_chunk_relations`, `get_document_toc`)
+  - `src/backend/agent/react_agent.py` (implemented DeepSeek ReAct streaming loop yielding `agent_search` / `active_node_ids` camera events before `token` generation + bilingual AR/EN exact inline citation grounding)
+  - `src/backend/api/documents.py` (implemented multi-format `POST /upload`, `GET /documents`, `GET /documents/{id}`, `DELETE /documents/{id}`, and `GET /documents/graph`)
+  - `src/backend/api/chat.py` (implemented `POST /chat/stream` SSE generator handling `X-LLM-API-Key` and `X-App-Language` headers)
+  - `src/backend/main.py` (configured CORS middleware and modern Lifespan handler initializing DB)
+  - `src/backend/tests/test_api.py` & `test_react_agent.py` (created 5 integration tests using `httpx.AsyncClient`)
+- **Tests added:** `test_api_health_check`, `test_document_upload_and_listing`, `test_obsidian_graph_api`, `test_streaming_chat_arabic_with_graph_event`, `test_streaming_chat_english_grounding`.
+- **How I verified:**
+  - Executed `PYTHONPATH=/home/user/src/backend pytest -v tests/test_api.py tests/test_react_agent.py`. All 5 tests PASSED (`5 passed in 20.11s`).
+  - Executed full backend regression suite `PYTHONPATH=/home/user/src/backend pytest -v tests/`. All **15 automated tests passed 100% (`15 passed in 58.14s`)**.
+- **Self-check answers:**
+  - **a) Is the gap fully fixed?** Yes, the API endpoints and streaming ReAct agent are fully implemented and verified without hardcoded API keys.
+  - **b) Is everything wired and ready for production?** Yes, `main.py` exposes clean CORS-ready endpoints connecting persistent DB repositories (`DocumentRepository`, `ChunkRepository`, `GraphRepository`) to our streaming SSE agent (`run_agent_stream`).
+  - **c) Is my test really validating that?** Yes, `test_streaming_chat_arabic_with_graph_event` verifies that when an Arabic query is sent (`من المسؤول عن متابعة حوادث السلامة...`), the stream emits the exact `event: agent_search` dictionary containing `active_node_ids` to pan the Obsidian Graph camera, followed by grounded Arabic tokens containing inline citations (`[المصدر: القسم ...]`).

@@ -56,3 +56,16 @@
   - `graph_builder.py`: Extracts hierarchical parent-child edges AND semantic keyword cross-references across chunks (`ChunkConnectionORM`) for force-directed rendering.
   - `universal_pipeline.py`: Master multi-document ingestion orchestrator.
 - Created `tests/test_universal_pipeline.py` and ran complete verification across all 10 unit and integration tests (`test_ingestion.py` + `test_universal_pipeline.py`). Confirmed 100% test pass (`10 passed in 38.17s`), including explicit verification that persistent documents, Table of Contents hierarchies, and `450+` Obsidian Graph nodes survive simulated database restarts.
+
+---
+
+## 2026-07-19 session 6 (FastAPI Core Routing & ReAct Streaming Agent with Live Graph Events `GAP-ASKC-02/03`)
+- Implemented universal retrieval tools in `src/backend/agent/tools.py` (`search_chunks`, `get_table`, `get_chunk_relations`, `get_document_toc`) executing directly against our repository layer.
+- Implemented `src/backend/agent/react_agent.py` featuring:
+  - Dynamic API key resolution (`X-LLM-API-Key` header or server fallback without hardcoded production constraints).
+  - System prompt generation enforcing strict AR/EN inline citations (`[المصدر: القسم X.Y - العنوان]`) and standard out-of-scope refusal.
+  - ReAct tool execution loop (`run_agent_stream`) yielding live `{"event": "agent_search", "data": "{"query": "...", "active_node_ids": [...]}"}` dictionaries before token generation (`{"event": "token", "data": token}`).
+- Implemented `src/backend/api/documents.py` providing `POST /api/v1/documents/upload`, `GET /api/v1/documents`, `GET /api/v1/documents/{id}`, `DELETE /api/v1/documents/{id}`, and `GET /api/v1/documents/graph`.
+- Implemented `src/backend/api/chat.py` providing `POST /api/v1/chat/stream` SSE generator.
+- Implemented `src/backend/main.py` with CORS middleware (`allow_origins=["*"]`) and modern Lifespan startup DB initialization.
+- Created `src/backend/tests/test_api.py` and `src/backend/tests/test_react_agent.py` and executed verification across the full backend suite (`PYTHONPATH=/home/user/src/backend pytest -v tests/`). All **15 automated tests passed 100% (`15 passed in 58.14s`)**.
