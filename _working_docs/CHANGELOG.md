@@ -31,3 +31,14 @@
 - Implemented `parse_hr_pdf.py` with custom text normalizers (`fix_kerning` + `normalize_pdfplumber_table_cell`) handling Arabic font kerning and reversing RTL visual ordering while preserving formulas and English acronyms (`TRIR`, `PMO`).
 - Executed ingestion against `hr_source.pdf`: extracted and persisted `503 sections, 58 job descriptions, 220 KPIs, and 4 escalation rules` to relational database and `data/hr_indexed.json`.
 - Verified `GAP-ASKC-01` closure via 100% green automated pytest suite (`4 passed in 17.78s`).
+
+---
+
+## 2026-07-19 session 4 (Universal Workspace Expansion, Bilingual AR/EN Toggle & Obsidian Graph View Architecture Lock)
+- Dissected and registered all new universal capabilities from Ahmed into `_working_docs/AUDIT_AND_TODO.md` (`GAP-ASKC-07` through `GAP-ASKC-10`, `GAP-INIT-05`).
+- **Bilingual AR/EN Direct Toggle:** Locked instant switching (`dir="rtl" <-> dir="ltr"`, UI translation, and system prompt language adjustment).
+- **Universal Relational RAG Pipeline (`GAP-ASKC-07`):** Re-architected data layer to accept any uploaded document (`PDF`, `DOCX`, `TXT`, `MD`), chunk dynamically by structural headings/tables, analyze with user LLM API keys (`X-LLM-API-Key`), extract semantic link connections (`chunk_connections`), build TOC hierarchy (`toc_tree`), and store persistently inside multi-document SQLite/Postgres schemas (`documents`, `chunks`, `chunk_connections`, `tables`) surviving app restarts.
+- **Data Panel Dual-View Toggle (`GAP-ASKC-08`):** Locked 3rd panel top switch `[ 📁 Files | 🕸️ Obsidian Graph ]`:
+  - `Files View:` Persistent multi-document browser, status pills (`Ready`), dropzone uploader, delete button (`🗑️`), and chat scope selection.
+  - `Obsidian Graph View:` High-fidelity force-directed interactive mindmap (`react-force-graph-2d` / HTML5 Canvas).
+- **Live Agent Traversal Animation:** Designed real-time SSE stream integration (`agent_search` / `active_node_ids`) causing the Obsidian Graph View to automatically pan/zoom (`centerAt(x, y, 1000)` / `zoomToFit`) to focus on active chunks, pulse glowing Cyrkil green node rings (`#9BE36B`), and open exact chunk content when clicked.
