@@ -26,3 +26,10 @@
 - Use a fixed-height composer shell with its own padding/reserved send-button column. The textarea alone grows inside the shell; the send action is absolutely anchored to the shell’s block-end/inline-end, so it never moves when the textarea height changes.
 - Apply a theme-aware top/bottom message viewport fade using a mask where supported, with non-interactive gradient overlays as fallback. Keep the composer outside the masked scroll region and give it a subtle elevation/shadow separator.
 - Mobile menu remains an icon-only native button with text accessible name, focus target, Escape/backdrop close, and body-scroll locking. The left panel’s min width will be calculated from the required controls plus consistent side padding rather than an arbitrary width.
+
+### 2026-07-22 remediation outcome
+- A user-authorized mirror rewrite removed discovered credential material from all eight reachable repository commits, then force-updated GitHub `main`.
+- The scan intentionally detects GitHub PAT forms, provider key forms, Google API-key forms, PEM private-key markers, and the specific documented admin password. It returned no matches after rewrite.
+- Production source equivalence was measured with a SHA-256 manifest of 70 non-test application/deployment files before and after history surgery; all hashes matched.
+- GitHub’s Secret Scanning alerts endpoint was accessible and returned zero alerts after the force-push.
+- This is repository hygiene, not credential revocation: any credential previously exposed must still be rotated at its issuing provider, and GitHub Support/clone owners may be necessary to remove external caches/copies.

@@ -562,3 +562,10 @@
 - Performed tracked-file/reachable-history pattern scan: no GitHub PAT-format match; found a live-looking provider credential in a tracked governance file/history and a deliberately fake key-shaped test fixture. No secrets are reproduced in this changelog.
 - Added research findings (`research/12_2026-07-22_streaming_ux_security.md`), eight planned audit gaps (`GAP-GPR-31` through `38`), and detailed implementation plan (`_working_docs/IMPLEMENTATION_PLAN_2026-07-22.md`).
 - No source implementation, commit, branch creation, rewrite, push, or deployment performed.
+
+## 2026-07-22 session 35 — GAP-GPR-31 security cleanup completed
+
+- Under explicit user authorization, surgically rewrote and force-pushed all reachable GitHub history to remove documented credential material while preserving production source byte-for-byte.
+- Replaced current documented values with placeholders; normalized a fake secret-shaped test fixture; removed local transient mappings/mirror and pruned reflogs/objects.
+- Verified clean reachable-history and workspace scans for configured credential patterns, GitHub `main` synchronization, and zero GitHub Secret Scanning alerts.
+- No product behavior changed in this security-only release.

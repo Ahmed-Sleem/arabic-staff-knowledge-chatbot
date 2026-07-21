@@ -633,3 +633,25 @@
   - a) Is the gap fully fixed? Yes, all 9 user points implemented and verified with file-level evidence.
   - b) Is everything wired? Yes, `LoadScreen` wired to `isReady`, `textarea` wired to `onInput` auto-grow, `markdown` renderer wired to both stream and finished content, `deselect` icon updated in DOM, settings suggestions removed.
   - c) Does the test validate? Yes, `npm run build` passes cleanly (`Route / 10.7 kB`), `pytest -v` passes (`16/16` in ~62s), no TypeScript errors, no runtime errors.
+
+---
+
+## 2026-07-22 — GAP-GPR-31: Credential Incident Containment & Full Git History Remediation
+
+- **Gap ID + one-line description:** GAP-GPR-31 — Removed documented credential material from current repository content and every reachable Git ref, normalized a fake secret-shaped test fixture, and force-pushed the surgically rewritten history under explicit user authorization.
+- **Files touched:**
+  - `_working_docs/AGENT_RULES.md` — replaced the previously documented provider key and admin password with environment-variable placeholders.
+  - `src/backend/tests/test_react_agent.py` — normalized the non-secret test fixture so it is no longer shaped like a production provider key.
+  - `_working_docs/AUDIT_AND_TODO.md`, `_working_docs/CHANGELOG.md`, `_working_docs/IMPLEMENTATION_PLAN_2026-07-22.md`, `research/12_2026-07-22_streaming_ux_security.md` — recorded the remediation and forward plan without copying credentials.
+  - All reachable historical refs — rewritten using `git-filter-repo --sensitive-data-removal --replace-text` from a disposable local mirror. No production application files changed.
+- **Tests / verification added:** Credential-pattern history scan (GitHub PAT formats, provider-key formats, Google API-key formats, PEM private-key markers, and discovered documented password); production source SHA-256 manifest equivalence check; GitHub secret-scanning-alert API query.
+- **How I verified:**
+  - Rewrote all 8 reachable commits; GitHub `main` was force-updated from the old history to clean rewritten history, then fetched and verified equal to local `main` (`0 0` ahead/behind).
+  - History scan reported no configured credential patterns in any reachable rewritten commit.
+  - The 70-file production source manifest before and after rewrite was byte-identical, proving the cleanup did not modify production application content.
+  - GitHub Secret Scanning API was accessible and returned `0` alerts.
+  - Expired local reflogs, aggressively pruned unreachable project objects, deleted the disposable mirror/replacement mappings, and scanned workspace text files. Final workspace scan reported clean for the configured credential patterns.
+- **Self-check answers:**
+  - **a) Is the gap fully fixed?** Yes for repository-controlled current files and reachable GitHub history: current/history scans are clean and GitHub Secret Scanning reports no alerts. Rotating any credential that was exposed remains the owner/provider-side protection step; history rewriting cannot remove copies from third-party clones, cached artifacts, or the chat transcript.
+  - **b) Is everything wired and ready for production?** Yes: production source files were byte-identical through the rewrite. The repository now uses placeholders rather than documented credential values. A preventive scanner gate remains scheduled in GAP-GPR-38.
+  - **c) Is my test really validating that?** Yes: scans inspect every reachable commit, not only HEAD; the manifest proves no production source content changed; remote fetch comparison proves GitHub now serves the rewritten `main`; GitHub’s alert API independently reported zero secret-scanning alerts.
