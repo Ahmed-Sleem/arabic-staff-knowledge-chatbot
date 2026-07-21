@@ -554,3 +554,11 @@
 - **P7:** Load screen added (`LoadScreen.tsx`, `AppContext.tsx`, `layout.tsx`, `page.tsx`) — default English (`en`/`ltr`), no glitch.
 - **P8:** Textarea auto-grow with hidden scrollbar (`ChatPanel.tsx`, `globals.css`).
 - **Audit (P9):** Verified all previous GAP-GPR-27 to GPR-30 points; zero production mocks confirmed (`react_agent.py`); build clean (`10.7 kB`); backend tests green (`16/16` in `61.96s`).
+
+## 2026-07-22 session 35 — Planning, repository audit, security scan, and research only
+
+- Publicly cloned and audited `Ahmed-Sleem/gpr-general-purpose-rag` without using any credential.
+- Verified `main` equals `origin/main` at `115afeb`; no remote feature branch exists.
+- Performed tracked-file/reachable-history pattern scan: no GitHub PAT-format match; found a live-looking provider credential in a tracked governance file/history and a deliberately fake key-shaped test fixture. No secrets are reproduced in this changelog.
+- Added research findings (`research/12_2026-07-22_streaming_ux_security.md`), eight planned audit gaps (`GAP-GPR-31` through `38`), and detailed implementation plan (`_working_docs/IMPLEMENTATION_PLAN_2026-07-22.md`).
+- No source implementation, commit, branch creation, rewrite, push, or deployment performed.

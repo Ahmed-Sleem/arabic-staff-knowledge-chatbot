@@ -153,8 +153,8 @@ This file is APPEND-ONLY. Every session I re-read it before doing anything.
 
 ## Standing context (short reference)
 
-- **DeepSeek API key** (working): `REMOVED_PROVIDER_CREDENTIAL`
-- **Vyne admin creds after rotation**: `admin@vyne.local` / `REMOVED_ADMIN_PASSWORD`
+- **DeepSeek API key** (working): `${PROVIDER_API_KEY}`
+- **Vyne admin creds after rotation**: `admin@vyne.local` / `${VYNE_ADMIN_PASSWORD}``
 - **GitHub PAT** (scopes `repo` + `workflow`): `${GITHUB_PAT}`
 - **Vyne repo**: `Ahmed-Sleem/vyne`, primary branch = `main` (auto-deploys on push)
 - **GPR repo**: `Ahmed-Sleem/gpr`, primary branch = `main` (auto-deploys on push)

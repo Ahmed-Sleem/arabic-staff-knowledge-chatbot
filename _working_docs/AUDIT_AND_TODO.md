@@ -116,3 +116,23 @@
 - **[FIXED] P8 — Expandable Text Input (Hidden Scrollbar, Best Practice):** Replaced `<input>` with `<textarea>` in `ChatPanel.tsx`; added `max-height: 120px`, `overflow-y: auto`, hidden scrollbar (`scrollbar-width: none`), auto-grow via `onChange`, and best-practice sizing (`min-height: 34px`) in `globals.css`.
 - **[FIXED] P9 — Audit & Verification:** Verified all 11 points from GAP-GPR-30, GAP-GPR-29, GAP-GPR-28, GAP-GPR-27, and all previous audit entries. Confirmed zero production mocks (`react_agent.py`), real-time streaming (`ChatPanel.tsx`), structured markdown output, clean settings (no emojis, no suggestions, smooth animations), and consistent panel sizing. 
 - **Verification:** `npm run build` (`Route / 10.7 kB`) passed cleanly; `PYTHONPATH=/home/user/src/backend pytest -v src/backend/tests/` (`16/16 passed` in ~62s) passed. All files read/verified with bash/file reads.
+
+---
+
+## 2026-07-22 — Planned Gaps (PLAN ONLY — no implementation approved yet)
+
+- **[OPEN — approval required] GAP-GPR-31: Credential incident containment and repository-history remediation.** Verified scan: no GitHub-PAT-format token found in tracked files or reachable history; however, a live-looking provider API credential is tracked in `_working_docs/AGENT_RULES.md` and reachable history. Rotate/revoke the credential first; remove/replace secret material in current documentation; add an automated secret-scanning gate; then, only after explicit approval, perform a documented `git-filter-repo --sensitive-data-removal` mirror rewrite and coordinated force push. This cannot erase third-party clones/caches; GitHub Support may be required after rewrite.
+
+- **[OPEN — approval required] GAP-GPR-32: End-to-end native provider-delta SSE contract.** Replace all post-hoc word/character splitting in production paths with actual upstream streaming for every supported provider (including Gemini native streaming), preserve exact provider deltas in typed JSON SSE events, propagate disconnect/cancellation, prevent proxy buffering, and complete only on terminal provider event. Add backend contract tests that prove first delta arrives before completion and no source string is artificially split.
+
+- **[OPEN — approval required] GAP-GPR-33: Resilient incremental client stream, safe real-time Markdown, and accessible status.** Extract the ad-hoc line parser from `ChatPanel.tsx` into a tested SSE parser/state machine; buffer React paints by animation frame without delaying/synthesizing provider deltas; render safe partial Markdown and citations as text arrives; distinguish pending/streaming/completed/error/cancelled; prevent unwanted autoscroll when the reader has moved away from bottom.
+
+- **[OPEN — approval required] GAP-GPR-34: Fixed-corner AI composer redesign.** Redesign the form into a stable composer shell matching AI-chat interaction conventions: auto-growing textarea, reserved action rail, bottom-right anchored send button that never shifts with height, clear enabled/disabled/loading states, keyboard/IME behavior, touch target sizing, and consistent spacing.
+
+- **[OPEN — approval required] GAP-GPR-35: Chat viewport fade and composer elevation.** Add a short theme-aware top/bottom scroll fade to the message-only viewport, use a progressive-enhancement mask with overlay fallback, preserve legibility/scrolling/accessibility, and add the requested text-input shadow/divider without clipping message controls or citations.
+
+- **[OPEN — approval required] GAP-GPR-36: Sidebar and mobile navigation geometry.** Calculate and enforce the desktop left-panel minimum width from the search plus both action buttons and symmetrical margins; remove conflicting inline width caps; align search/control spacing to the shared spacing tokens/right panel; polish the mobile drawer icon, focus behavior, and full-width balanced control row.
+
+- **[OPEN — approval required] GAP-GPR-37: Deterministic loading-mode continuity.** Make the load screen read only the last persisted, validated theme/language mode before the application becomes interactive, use the same design tokens as the destination UI, and test no light/dark or AR/EN flash occurs.
+
+- **[OPEN — approval required] GAP-GPR-38: Verification, accessibility, and release readiness.** Add focused unit/contract/UI tests for each above gap; run backend regression and frontend production build; perform responsive visual/manual checks at desktop and mobile widths, keyboard and screen-reader smoke checks, provider-stream packet timing verification, and only then prepare a single reviewed branch/PR for user confirmation. No push until user approves.
