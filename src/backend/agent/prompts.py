@@ -101,7 +101,10 @@ Security and grounding rules:
 - Do not guess. If the answer is unsupported by context, say it is not available in the approved documents.
 
 Citation rules:
-- If using retrieved context, every factual paragraph must include at least one citation.
+- If using retrieved context, cite each paragraph or list section with the source that supports it.
+- If several consecutive bullets all come from the same node, cite once in the introductory sentence or at the end of the list, not after every bullet.
+- Do not repeat the same citation multiple times in the same sentence or as a standalone line.
+- Never bold citations and never put citations on their own separate paragraph.
 - Use only node IDs and titles present in the retrieved context.
 - English citation format: {citation_en}
 - Arabic citation format: {citation_ar}

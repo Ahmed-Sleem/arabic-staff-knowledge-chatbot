@@ -1080,3 +1080,29 @@
   - **a) Is the issue fixed?** Yes. `createConversation()` now refuses to create another empty chat and reuses the active/existing empty draft.
   - **b) Is it wired?** Yes. The active `LeftPanel` click path delays switching long enough for the empty chat row animation, then the context wrapper removes the empty conversation and selects the target chat.
   - **c) Does validation prove it?** The frontend build proves the changed React/TypeScript compiles; behavior is deterministic from the updated state logic and CSS animation.
+
+---
+
+## 2026-07-22 — Main Hotfix: Default New Chat and Markdown/Citation Cleanup
+
+- **Description:** Made the app open on a fresh empty chat by default, reduced citation repetition through prompt rules, and fixed Markdown/citation rendering issues observed in model output.
+- **Files touched:**
+  - `src/frontend/context/AppContext.tsx` — boot now selects/reuses exactly one empty draft chat instead of restoring the last active chat; existing non-empty conversations remain in history.
+  - `src/backend/agent/prompts.py` — citation rules now instruct the model to cite a paragraph/list section once when the same source supports consecutive bullets, never bold citations, and never place citations on standalone lines.
+  - `src/backend/tests/test_prompts.py` — updated prompt assertions for the improved anti-repetition citation policy.
+  - `src/frontend/components/ChatPanel.tsx` — replaced the previous Markdown/citation path with entity decoding, inline citation chips, support for citations wrapped in markdown markers, and block-safe rendering.
+  - `src/frontend/app/globals.css` — cleaned citation chip pseudo-marker behavior and inline chip spacing.
+  - `_working_docs/CHANGELOG.md`, `_working_docs/IMPLEMENTATION_LOG.md` — recorded the hotfix and validation.
+- **How I verified:**
+  - Frontend production build:
+    - `cd src/frontend && npm install --legacy-peer-deps && npm run build`
+    - Result: `✓ Compiled successfully` (`Route / 11.6 kB`, First Load JS `124 kB`).
+  - Backend regression:
+    - `GPR_VAULT_MASTER_KEY=<test-key> GPR_COOKIE_SECURE=false PYTHONPATH=. pytest -q tests/`
+    - Result: `28 passed in 37.81s`.
+  - Secret scan:
+    - Workspace text scan for configured PAT/provider/PEM/admin-password patterns found `0` findings.
+- **Self-check answers:**
+  - **a) Is the issue fixed?** Yes. Boot selects a new/empty draft by default, prompt instructions reduce repetitive citations, and frontend rendering now decodes entities and renders citations inline without broken Markdown structure.
+  - **b) Is it wired?** Yes. The boot behavior is in active AppContext, the prompt rule is in the production prompt builder, and ChatPanel uses the new renderer for streaming and completed assistant content.
+  - **c) Does validation prove it?** The frontend build validates React/TypeScript integration; backend prompt tests validate the new citation rule; full backend regression remains green.

@@ -1497,3 +1497,15 @@ body[dir="rtl"] .main-window.right-panel-closed .panel-right {
 body[dir="rtl"] .chat-item.removing-empty {
     transform: translateX(8px) scale(0.96);
 }
+
+/* Markdown/citation rendering cleanup: no duplicate emoji, inline source chips. */
+.message .bubble .content .source-chip::before {
+    content: none !important;
+}
+.message .bubble .content .source-chip {
+    vertical-align: baseline;
+    margin: 0 3px;
+    padding: 1px 7px;
+    gap: 3px;
+    text-decoration: none;
+}

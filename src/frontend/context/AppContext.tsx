@@ -288,7 +288,6 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       else document.body.classList.remove("dark-mode");
 
       const convsJson = localStorage.getItem(`gpr_conversations_${devId}`) || localStorage.getItem("gpr_conversations");
-      const activeConvId = localStorage.getItem(`gpr_active_conv_id_${devId}`) || localStorage.getItem("gpr_active_conv_id");
       let initialConvs: Conversation[] = [
         {
           id: "default_conv",
@@ -307,8 +306,20 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         }
       }
 
-      setConversations(initialConvs);
-      setActiveConversationIdState(activeConvId || (initialConvs.length > 0 ? initialConvs[0].id : "default_conv"));
+      const existingEmpty = initialConvs.find(conv => conv.turns.length === 0);
+      const bootEmptyConversation: Conversation = existingEmpty || {
+        id: `conv_${Date.now()}`,
+        title: savedLang === "ar" ? "محادثة استفسار في الدليل المؤسسي" : "New Grounded Query",
+        created_at: new Date().toISOString(),
+        turns: []
+      };
+      const bootConversations = [
+        bootEmptyConversation,
+        ...initialConvs.filter(conv => conv.turns.length > 0)
+      ];
+
+      setConversations(bootConversations);
+      setActiveConversationIdState(bootEmptyConversation.id);
 
       await initializeVault(devId);
       hasLoadedFromStorage.current = true;

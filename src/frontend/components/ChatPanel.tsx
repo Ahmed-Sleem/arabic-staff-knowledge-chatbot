@@ -214,10 +214,77 @@ export const ChatPanel: React.FC = () => {
     }
   };
 
+  const decodeTextEntities = (text: string) => {
+    return text
+      .replace(/&amp;/g, "&")
+      .replace(/&lt;/g, "<")
+      .replace(/&gt;/g, ">")
+      .replace(/&quot;/g, '"')
+      .replace(/&#39;/g, "'");
+  };
+
+  const renderCitationButton = (code: string, key: string) => (
+    <button
+      key={key}
+      onClick={() => setInspectingNodeId(code)}
+      className="source-chip"
+      type="button"
+      title={language === "ar" ? "انقر لفحص البطاقة وقراءة النص الكامل" : "Click to inspect exact source node"}
+      aria-label={`Open source ${code}`}
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true" style={{ width: "12px", height: "12px", stroke: "currentColor", fill: "none", strokeWidth: 2 }}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M7 4h7l3 3v13H7z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M14 4v4h4" />
+      </svg>
+      <span>{code}</span>
+    </button>
+  );
+
+  const renderInlineMarkdownOnly = (text: string, keyPrefix: string) => {
+    const parts: React.ReactNode[] = [];
+    let lastIdx = 0;
+    const regex = /(\*\*[^*]+\*\*|\*[^*]+\*)/g;
+    let match;
+    let keyIdx = 0;
+    while ((match = regex.exec(text)) !== null) {
+      if (match.index > lastIdx) parts.push(<span key={`${keyPrefix}_t_${keyIdx++}`}>{text.slice(lastIdx, match.index)}</span>);
+      const token = match[0];
+      if (token.startsWith("**") && token.endsWith("**")) {
+        parts.push(<strong key={`${keyPrefix}_b_${keyIdx++}`} style={{ fontWeight: 700 }}>{token.slice(2, -2)}</strong>);
+      } else if (token.startsWith("*") && token.endsWith("*")) {
+        parts.push(<em key={`${keyPrefix}_i_${keyIdx++}`} style={{ fontStyle: "italic" }}>{token.slice(1, -1)}</em>);
+      } else {
+        parts.push(<span key={`${keyPrefix}_raw_${keyIdx++}`}>{token}</span>);
+      }
+      lastIdx = match.index + token.length;
+    }
+    if (lastIdx < text.length) parts.push(<span key={`${keyPrefix}_t_${keyIdx++}`}>{text.slice(lastIdx)}</span>);
+    return parts.length > 0 ? parts : text;
+  };
+
+  const renderInlineRichText = (text: string, keyPrefix: string) => {
+    const decoded = decodeTextEntities(text);
+    const citationRegex = /\*{0,2}\[(?:المصدر|Source):\s*(?:القسم|Section|جدول|Table)?\s*([0-9\.\w\-]+)\s*[\-\:]?\s*([^\]]+)?\]\*{0,2}/g;
+    const nodes: React.ReactNode[] = [];
+    let lastIdx = 0;
+    let match;
+    let idx = 0;
+    while ((match = citationRegex.exec(decoded)) !== null) {
+      if (match.index > lastIdx) {
+        nodes.push(...([] as React.ReactNode[]).concat(renderInlineMarkdownOnly(decoded.slice(lastIdx, match.index), `${keyPrefix}_seg_${idx}`)));
+      }
+      nodes.push(renderCitationButton(match[1] || "1", `${keyPrefix}_cite_${idx++}`));
+      lastIdx = match.index + match[0].length;
+    }
+    if (lastIdx < decoded.length) {
+      nodes.push(...([] as React.ReactNode[]).concat(renderInlineMarkdownOnly(decoded.slice(lastIdx), `${keyPrefix}_tail`)));
+    }
+    return nodes.length > 0 ? <>{nodes}</> : decoded;
+  };
+
   const renderMarkdownContent = (text: string) => {
     if (!text) return null;
-    // Basic structured markdown rendering for real-time output
-    const lines = text.split("\n");
+    const lines = decodeTextEntities(text).split("\n");
     const elements: React.ReactNode[] = [];
     let listItems: React.ReactNode[] = [];
     let listKey = 0;
@@ -230,100 +297,28 @@ export const ChatPanel: React.FC = () => {
     };
 
     lines.forEach((line, i) => {
-      // Heading
       if (line.startsWith("## ") || line.startsWith("# ")) {
         flushList();
-        elements.push(<h3 key={`h_${i}`} style={{ fontWeight: 700, fontSize: "15px", margin: "10px 0 6px 0", color: "var(--text-primary)" }}>{line.replace(/^##? /, "")}</h3>);
+        elements.push(<h3 key={`h_${i}`} style={{ fontWeight: 700, fontSize: "15px", margin: "10px 0 6px", color: "var(--text-primary)" }}>{line.replace(/^##? /, "")}</h3>);
         return;
       }
-      // List item
       if (line.trim().startsWith("- ") || line.trim().startsWith("* ")) {
-        const content = line.trim().slice(2);
-        listItems.push(<li key={`li_${i}`} style={{ marginBottom: "4px", fontSize: "13px", lineHeight: 1.6 }}>{renderInlineMarkdown(content)}</li>);
+        listItems.push(<li key={`li_${i}`} style={{ marginBottom: "4px", fontSize: "13px", lineHeight: 1.6 }}>{renderInlineRichText(line.trim().slice(2), `li_${i}`)}</li>);
         return;
       }
-      // Empty line -> flush list and add break
       if (line.trim() === "") {
         flushList();
         elements.push(<div key={`br_${i}`} style={{ height: "6px" }} />);
         return;
       }
       flushList();
-      elements.push(<p key={`p_${i}`} style={{ margin: "4px 0", fontSize: "13px", lineHeight: 1.65, color: "var(--text-body)", wordBreak: "break-word" }}>{renderInlineMarkdown(line)}</p>);
+      elements.push(<p key={`p_${i}`} style={{ margin: "4px 0", fontSize: "13px", lineHeight: 1.65, color: "var(--text-body)", wordBreak: "break-word" }}>{renderInlineRichText(line, `p_${i}`)}</p>);
     });
     flushList();
-    return <div style={{ whiteSpace: "pre-wrap" }}>{elements}</div>;
+    return <>{elements}</>;
   };
 
-  const renderInlineMarkdown = (text: string) => {
-    // Split by bold (**text**) and italic (*text*) patterns
-    const parts: React.ReactNode[] = [];
-    let lastIdx = 0;
-    const regex = /(\*\*[^*]+\*\*|\*[^*]+\*)/g;
-    let match;
-    let keyIdx = 0;
-    while ((match = regex.exec(text)) !== null) {
-      if (match.index > lastIdx) {
-        parts.push(<span key={`t_${keyIdx++}`}>{text.slice(lastIdx, match.index)}</span>);
-      }
-      const token = match[0];
-      if (token.startsWith("**") && token.endsWith("**")) {
-        parts.push(<strong key={`b_${keyIdx++}`} style={{ fontWeight: 700 }}>{token.slice(2, -2)}</strong>);
-      } else if (token.startsWith("*") && token.endsWith("*")) {
-        parts.push(<em key={`i_${keyIdx++}`} style={{ fontStyle: "italic" }}>{token.slice(1, -1)}</em>);
-      } else {
-        parts.push(<span key={`t2_${keyIdx++}`}>{token}</span>);
-      }
-      lastIdx = match.index + token.length;
-    }
-    if (lastIdx < text.length) {
-      parts.push(<span key={`t_${keyIdx++}`}>{text.slice(lastIdx)}</span>);
-    }
-    if (parts.length === 0) return text;
-    return <span>{parts}</span>;
-  };
-
-  const renderContentWithCitations = (content: string) => {
-    // Render structured markdown first, then handle citations
-    const citationRegex = /\[(المصدر|Source):\s*(القسم|Section|جدول|Table)?\s*([0-9\.\w\-]+)\s*[\-\:]?\s*([^\]]+)?\]/g;
-    const rawText = content;
-    // Split by citations; render markdown for non-citation text, citation buttons for citations
-    const parts: React.ReactNode[] = [];
-    let lastIdx = 0;
-    let match;
-    let keyIdx = 0;
-
-    while ((match = citationRegex.exec(rawText)) !== null) {
-      if (match.index > lastIdx) {
-        const segment = rawText.slice(lastIdx, match.index);
-        parts.push(<span key={`md_${keyIdx++}`}>{renderMarkdownContent(segment)}</span>);
-      }
-      const code = match[3] || "1.0";
-      parts.push(
-        <button
-          key={`cite_${keyIdx++}`}
-          onClick={() => setInspectingNodeId(code)}
-          className="source-chip"
-          style={{ cursor: "pointer", border: "1px solid var(--border-soft)", outline: "none", margin: "0 4px", display: "inline-flex", alignItems: "center", gap: "4px", padding: "2px 8px", borderRadius: "9999px", background: "var(--color-blue-pale)", color: "var(--text-meta)", fontSize: "10px", fontWeight: 600 }}
-          title={language === "ar" ? "انقر لفحص البطاقة وقراءة النص الكامل المحمي" : "Click to inspect exact node JSON from manual"}
-        >
-          <span>📄</span>
-          <span>{code}</span>
-        </button>
-      );
-      lastIdx = match.index + match[0].length;
-    }
-
-    if (lastIdx < rawText.length) {
-      const segment = rawText.slice(lastIdx);
-      parts.push(<span key={`md_final_${keyIdx++}`}>{renderMarkdownContent(segment)}</span>);
-    }
-
-    if (parts.length === 0) {
-      return renderMarkdownContent(rawText);
-    }
-    return <div style={{ whiteSpace: "pre-wrap", lineHeight: 1.6 }}>{parts}</div>;
-  };
+  const renderContentWithCitations = (content: string) => renderMarkdownContent(content);
 
   return (
     <div className="chat-container">

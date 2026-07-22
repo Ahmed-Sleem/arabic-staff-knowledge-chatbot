@@ -692,3 +692,11 @@
 - If an empty draft conversation already exists, New Chat reuses/selects it instead of adding another blank chat.
 - When switching from an empty draft chat to an existing conversation, the empty draft row fades/slides away smoothly before it is removed.
 - Verification: frontend production build compiled successfully (`Route / 11.5 kB`, First Load JS `124 kB`); workspace secret scan found 0 configured findings.
+
+## 2026-07-22 session 40 — Main hotfix: default new chat and Markdown citation cleanup
+
+- Changed app boot behavior so GPR opens on a new/empty chat by default instead of restoring the last active conversation, while preserving existing chat history and avoiding duplicate empty drafts.
+- Improved model citation prompt rules to avoid repeating the same source citation after every bullet when one source supports a whole section/list.
+- Reworked ChatPanel Markdown/citation rendering to decode common HTML entities, render citations inline as source chips, support citations wrapped in markdown bold markers, and avoid invalid block-inside-inline nesting.
+- Removed duplicate emoji/pseudo citation marker behavior so citation chips render cleaner.
+- Verification: frontend production build compiled successfully (`Route / 11.6 kB`, First Load JS `124 kB`); backend suite passed `28 passed in 37.81s`; workspace secret scan found 0 configured findings.
