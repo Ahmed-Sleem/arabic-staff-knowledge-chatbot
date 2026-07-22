@@ -51,6 +51,7 @@ class ChunkORM(Base):
     chunk_type = Column(String(50), index=True, nullable=False)  # heading, text, table, kpi_row, escalation
     parent_chunk_id = Column(String(36), ForeignKey("chunks.id", ondelete="SET NULL"), nullable=True, index=True)
     word_count = Column(Integer, default=0)
+    metadata_json = Column(Text, default="{}")
 
     document = relationship("DocumentORM", back_populates="chunks")
     parent = relationship("ChunkORM", remote_side=[id], backref="children")

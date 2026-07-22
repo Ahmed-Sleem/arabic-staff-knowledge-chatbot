@@ -1,7 +1,7 @@
 """
 Database Seeding Engine for Curated Knowledge Graph (`seed_curated.py`).
 
-Loads the 111 manually curated, high-density self-contained semantic cards from `curated_knowledge_graph.json`
+Loads the active curated, high-density self-contained semantic cards from `curated_knowledge_graph.json`
 into persistent relational tables (`DocumentORM`, `ChunkORM`, `ChunkConnectionORM`),
 replacing any legacy fragmented line chunks (`Rule 21`, `Rule 26`).
 """
@@ -95,7 +95,8 @@ async def seed_curated_knowledge_graph(session=None) -> bool:
                 page_number=c["page_number"],
                 chunk_type=c["chunk_type"],
                 parent_chunk_id=c["parent_chunk_id"],
-                word_count=len(c["content"].split())
+                word_count=len(c["content"].split()),
+                metadata_json=c.get("metadata_json", "{}")
             )
             session.add(chunk_orm)
         await session.flush()
@@ -107,8 +108,9 @@ async def seed_curated_knowledge_graph(session=None) -> bool:
                 document_id=doc_id,
                 source_chunk_id=conn["source_chunk_id"],
                 target_chunk_id=conn["target_chunk_id"],
-                relation_type=conn["relationship_type"],
-                weight=float(conn.get("strength", 1.0))
+                relation_type=conn.get("relationship_type") or conn.get("relation_type") or "semantic_link",
+                weight=float(conn.get("strength", 1.0)),
+                explanation=conn.get("explanation") or conn.get("reason") or conn.get("evidence")
             )
             session.add(conn_orm)
 

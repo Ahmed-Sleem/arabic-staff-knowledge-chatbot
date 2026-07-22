@@ -34,6 +34,7 @@ class ChunkDTO(BaseModel):
     chunk_type: str = Field(..., description="heading, text, table, kpi_row, or escalation")
     parent_chunk_id: Optional[str] = Field(None, description="Parent chunk UUID")
     word_count: int = Field(..., description="Word count")
+    metadata_json: str = Field("{}", description="Enriched node metadata JSON")
 
 
 class ChunkConnectionDTO(BaseModel):
@@ -75,11 +76,25 @@ class DocumentDTO(BaseModel):
 class GraphNodeDTO(BaseModel):
     id: str = Field(..., description="Node UUID matching `ChunkORM.id`")
     label: str = Field(..., description="Display title on the Obsidian canvas")
+    label_ar: Optional[str] = Field(None, description="Arabic display title when available")
     group: str = Field(..., description="Node group matching `chunk_type` for color coding")
     val: float = Field(..., description="Node size weight based on word count or hierarchy level")
     content_preview: str = Field(..., description="First 150 characters of chunk text for hover tooltips")
-    content: str = Field("", description="Full complete protected content of the node")
-    connections: List[str] = Field(default=[], description="List of connected target node IDs")
+    content: str = Field("", description="Full complete protected English content of the node")
+    content_ar: Optional[str] = Field(None, description="Full complete protected Arabic content of the node")
+    description: Optional[str] = Field(None, description="English short description")
+    description_ar: Optional[str] = Field(None, description="Arabic short description")
+    aliases: List[str] = Field(default=[], description="Search aliases")
+    keywords_ar: List[str] = Field(default=[], description="Arabic search keywords")
+    keywords_en: List[str] = Field(default=[], description="English search keywords")
+    role_profile: Optional[dict] = Field(None, description="Structured role profile metadata")
+    kpis: List[dict] = Field(default=[], description="Structured KPI metadata")
+    answerable_questions: List[str] = Field(default=[], description="Questions this node can answer")
+    not_answered_here: List[str] = Field(default=[], description="Boundaries for unsupported questions")
+    approval_status: Optional[str] = Field(None, description="Approval status")
+    last_verified: Optional[str] = Field(None, description="Last verification date")
+    confidence: Optional[str] = Field(None, description="Curator confidence")
+    connections: List[dict | str] = Field(default=[], description="Connected target node IDs or enriched connection objects")
     page_number: Optional[int] = Field(None, description="Page number")
 
 

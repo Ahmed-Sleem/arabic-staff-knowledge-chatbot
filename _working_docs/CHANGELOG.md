@@ -604,3 +604,13 @@
 - Removed unused `passlib[argon2]` and `argon2-cffi` dependencies.
 - FastAPI now mounts vault/documents/chat routers without the obsolete auth router.
 - Verification: backend suite `20 passed in 36.59s`; frontend production build compiled successfully; cleanup grep confirmed no active old auth references in source; secret scan found 0 configured findings.
+
+## 2026-07-22 session 36 — GAP-GPR-45A enriched JSON integration
+
+- Added Ahmed's new enriched source JSON `deepseek_json_20260722_6a33e9.json` to repo uploads and backend data path.
+- Updated curated graph builder to support the new `{ nodes: [...] }` shape, bilingual fields, structured connections, role profiles, KPIs, approval metadata, and backward-compatible legacy connection strings.
+- Regenerated `src/backend/data/curated_knowledge_graph.json` from the enriched source: 80 nodes and 279 typed connections.
+- Added `ChunkORM.metadata_json` plus lightweight DB migration, returned enriched `GraphNodeDTO` metadata, and searched enriched metadata.
+- Updated Obsidian graph search/display and CitationDrawer to use bilingual/enriched node data.
+- Added `test_curated_schema.py` proving enriched JSON build/seed/API/search round trip.
+- Verification: backend suite `21 passed in 36.38s`; frontend build compiled successfully; secret scan found 0 configured findings.

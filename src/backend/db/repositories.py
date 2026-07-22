@@ -164,12 +164,13 @@ class ChunkRepository:
 
         tokens = [t.strip() for t in query.split() if len(t.strip()) > 2]
         if not tokens:
-            stmt = stmt.where(or_(ChunkORM.title.ilike(f"%{query}%"), ChunkORM.content.ilike(f"%{query}%")))
+            stmt = stmt.where(or_(ChunkORM.title.ilike(f"%{query}%"), ChunkORM.content.ilike(f"%{query}%"), ChunkORM.metadata_json.ilike(f"%{query}%")))
         else:
             conditions = []
             for token in tokens[:4]:
                 conditions.append(ChunkORM.title.ilike(f"%{token}%"))
                 conditions.append(ChunkORM.content.ilike(f"%{token}%"))
+                conditions.append(ChunkORM.metadata_json.ilike(f"%{token}%"))
             stmt = stmt.where(or_(*conditions))
 
         stmt = stmt.limit(limit)
@@ -212,14 +213,35 @@ class GraphRepository:
         for c in raw_nodes:
             node_ids.add(c.id)
             val = 4.0 if c.chunk_type == "heading" else (3.0 if c.chunk_type == "table" else 2.0)
-            preview = c.content[:150] + ("..." if len(c.content) > 150 else "")
+            try:
+                metadata = json.loads(c.metadata_json or "{}")
+            except Exception:
+                metadata = {}
+            content_ar = metadata.get("content_ar")
+            preview_source = metadata.get("short_description") or c.content
+            preview = preview_source[:150] + ("..." if len(preview_source) > 150 else "")
             nodes_list.append(GraphNodeDTO(
                 id=c.id,
                 label=c.title,
+                label_ar=metadata.get("name_ar"),
                 group=c.chunk_type,
                 val=val,
                 content_preview=preview,
                 content=c.content,
+                content_ar=content_ar,
+                description=metadata.get("short_description"),
+                description_ar=metadata.get("short_description_ar"),
+                aliases=metadata.get("aliases") or [],
+                keywords_ar=metadata.get("keywords_ar") or [],
+                keywords_en=metadata.get("keywords_en") or [],
+                role_profile=metadata.get("role_profile"),
+                kpis=metadata.get("kpis") or [],
+                answerable_questions=metadata.get("answerable_questions") or [],
+                not_answered_here=metadata.get("not_answered_here") or [],
+                approval_status=metadata.get("approval_status"),
+                last_verified=metadata.get("last_verified"),
+                confidence=metadata.get("confidence"),
+                connections=metadata.get("connections") or [],
                 page_number=c.page_number
             ))
 

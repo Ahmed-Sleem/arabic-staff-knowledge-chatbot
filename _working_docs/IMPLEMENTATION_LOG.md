@@ -789,3 +789,44 @@
   - **a) Is the gap fully fixed?** Yes. The unused OTP/login/session code and dependencies are removed from active source, and the only user-facing behavior that remained useful (provider key testing) now lives under the vault API.
   - **b) Is everything wired and ready for production?** Yes for auth cleanup. FastAPI now mounts vault/documents/chat without auth, SettingsModal uses the vault check endpoint, and backend tests validate the active no-login vault model.
   - **c) Is my test really validating that?** Yes. The full backend suite passes without old auth tests, the frontend build proves the Settings endpoint update compiles, and grep proves old auth symbols are gone from active source.
+
+---
+
+## 2026-07-22 — GAP-GPR-45A: Enriched JSON Schema Integration and Data Viewer Compatibility
+
+- **Gap ID + one-line description:** GAP-GPR-45A — Integrated Ahmed's new enriched JSON source format into the backend curated graph pipeline, graph API/search, and frontend graph/drawer viewers before prompt hardening.
+- **Files touched:**
+  - `uploads/deepseek_json_20260722_6a33e9.json` — added Ahmed's new enriched source JSON to repository source materials.
+  - `src/backend/data/deepseek_json_20260722_6a33e9.json` — added the enriched source JSON to the backend data path so Docker/container builds can regenerate curated graph data.
+  - `src/backend/data/curated_knowledge_graph.json` — regenerated from the enriched JSON source, now preserving metadata and typed relations.
+  - `src/backend/services/ingestion/build_curated_knowledge.py` — updated source resolution to prefer the new file, support top-level `{ "nodes": [...] }`, support old string and new object connection formats, preserve enriched metadata in `metadata_json`, and preserve typed relation fields/reasons/strengths.
+  - `src/backend/services/ingestion/seed_curated.py` — stores `metadata_json` in `ChunkORM` and persists enriched relation type/explanation fields.
+  - `src/backend/models/orm.py` — added `ChunkORM.metadata_json` for flexible enriched node metadata.
+  - `src/backend/db/session.py` — added lightweight migration to add `chunks.metadata_json` to existing SQLite/Postgres DBs.
+  - `src/backend/models/domain.py` — extended `ChunkDTO` and `GraphNodeDTO` with enriched bilingual metadata fields.
+  - `src/backend/db/repositories.py` — searches `metadata_json` and returns enriched graph node DTOs.
+  - `src/backend/tests/test_curated_schema.py` — added round-trip tests proving enriched JSON survives build/seed/API/search.
+  - `src/frontend/components/ObsidianGraphView.tsx` — added bilingual node labels and enriched search across Arabic/English content, aliases, keywords, KPIs, answerable questions, and role profiles.
+  - `src/frontend/components/CitationDrawer.tsx` — displays bilingual content plus aliases, keywords, role profile, KPI cards, connection reasons, approval status, last verified, and confidence.
+- **Tests added/updated:**
+  - Added `src/backend/tests/test_curated_schema.py`.
+- **How I verified:**
+  - Inspected new JSON:
+    - top-level `nodes`, 80 nodes, 0 invalid connections, 0 self-connections.
+    - all 80 nodes include `content_ar` and `role_profile`; 63 nodes include KPI metadata.
+    - relation types include `reports_to`, `collaborates_with`, `manages`, `parent_child`, `semantic_related`, `escalates_to`, and `approves`.
+  - Curated build:
+    - `PYTHONPATH=. python -m services.ingestion.build_curated_knowledge`
+    - Result summary: `80` nodes, `279` typed connections, source `deepseek_json_20260722_6a33e9.json`.
+  - Backend tests:
+    - `GPR_VAULT_MASTER_KEY=<test-key> GPR_COOKIE_SECURE=false PYTHONPATH=. pytest -q tests/`
+    - Result: `21 passed in 36.38s`.
+  - Frontend production build:
+    - `cd src/frontend && npm install --legacy-peer-deps && npm run build`
+    - Result: `✓ Compiled successfully` (`Route / 10.8 kB`, First Load JS `123 kB`).
+  - Secret scan:
+    - Workspace text scan for configured PAT/provider/PEM/admin-password patterns found `0` findings, excluding tracked JSON data files and deliberate dummy backend test fixtures.
+- **Self-check answers:**
+  - **a) Is the gap fully fixed?** Yes. The project can now consume Ahmed's enriched JSON source, preserve its structured metadata, and expose it through graph/search/viewer paths.
+  - **b) Is everything wired and ready for production?** Yes for enriched data integration. The backend data path includes the new source, the curated production graph was regenerated, existing DBs receive a metadata column migration, and frontend graph/drawer viewers can use the new metadata.
+  - **c) Is my test really validating that?** Yes. The new test validates source selection, build output, relation type preservation, DB seeding, graph API enriched fields, Arabic metadata, role/KPI metadata, and metadata-backed search.

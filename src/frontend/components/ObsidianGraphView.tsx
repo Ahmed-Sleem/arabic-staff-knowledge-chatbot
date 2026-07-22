@@ -18,10 +18,25 @@ const ForceGraph2D = dynamic(() => import("react-force-graph-2d"), { ssr: false 
 interface GraphNode {
   id: string;
   label: string;
+  label_ar?: string;
   group: string;
   val: number;
   content_preview: string;
   content?: string;
+  content_ar?: string;
+  description?: string;
+  description_ar?: string;
+  aliases?: string[];
+  keywords_ar?: string[];
+  keywords_en?: string[];
+  role_profile?: Record<string, unknown>;
+  kpis?: Array<Record<string, unknown>>;
+  answerable_questions?: string[];
+  not_answered_here?: string[];
+  approval_status?: string;
+  last_verified?: string;
+  confidence?: string;
+  connections?: Array<Record<string, unknown> | string>;
   page_number?: number;
   x?: number;
   y?: number;
@@ -44,6 +59,24 @@ export const ObsidianGraphView: React.FC = () => {
   const [isFlashingAll, setIsFlashingAll] = useState(false);
   const fgRef = useRef<any>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const nodeLabelText = (node: GraphNode) => (language === "ar" && node.label_ar ? node.label_ar : node.label);
+  const searchableNodeText = (node: GraphNode) => [
+    node.id,
+    node.label,
+    node.label_ar,
+    node.content_preview,
+    node.content,
+    node.content_ar,
+    node.description,
+    node.description_ar,
+    ...(node.aliases || []),
+    ...(node.keywords_ar || []),
+    ...(node.keywords_en || []),
+    ...(node.answerable_questions || []),
+    ...(node.kpis || []).flatMap((kpi) => Object.values(kpi || {}).map(String)),
+    node.role_profile ? JSON.stringify(node.role_profile) : "",
+  ].filter(Boolean).join(" ").toLowerCase();
 
   const handleDeselectAll = () => {
     setActiveGraphNodeIds([]);
@@ -163,11 +196,7 @@ export const ObsidianGraphView: React.FC = () => {
 
   // Filter nodes by live search query
   const searchResults = searchQuery.trim()
-    ? graphData.nodes.filter(n =>
-        n.label.toLowerCase().includes(searchQuery.trim().toLowerCase()) ||
-        n.id.toLowerCase().includes(searchQuery.trim().toLowerCase()) ||
-        (n.content_preview && n.content_preview.toLowerCase().includes(searchQuery.trim().toLowerCase()))
-      ).slice(0, 6)
+    ? graphData.nodes.filter(n => searchableNodeText(n).includes(searchQuery.trim().toLowerCase())).slice(0, 6)
     : [];
 
   const searchMatchIds = searchResults.map(n => n.id);
@@ -277,7 +306,7 @@ export const ObsidianGraphView: React.FC = () => {
               >
                 <div style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: 0, flex: 1 }}>
                   <span style={{ fontSize: "12px", fontWeight: 700, color: "var(--text-primary)", lineClamp: 1, overflow: "hidden", textOverflow: "ellipsis" }}>
-                    [{resNode.id}] {resNode.label}
+                    [{resNode.id}] {nodeLabelText(resNode)}
                   </span>
                   <span style={{ fontSize: "10px", color: "var(--text-meta)", lineClamp: 1, overflow: "hidden", textOverflow: "ellipsis" }}>
                     {resNode.content_preview}
@@ -332,7 +361,7 @@ export const ObsidianGraphView: React.FC = () => {
           ctx.fill();
 
           if (globalScale > 1.6 || isActive || isSearched) {
-            const label = node.label || "";
+            const label = nodeLabelText(node) || "";
             const fontSize = Math.max(10 / globalScale, 2.8);
             ctx.font = `${isActive || isSearched ? "bold " : ""}${fontSize}px sans-serif`;
             ctx.fillStyle = isActive || isSearched
