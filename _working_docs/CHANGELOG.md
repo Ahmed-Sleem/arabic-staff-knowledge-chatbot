@@ -632,3 +632,9 @@
 - Added no-buffer SSE headers to chat streaming responses.
 - Added provider parser and chat stream header contract tests.
 - Verification: targeted streaming tests `4 passed in 1.16s`; full backend suite `28 passed in 36.85s`; secret scan found 0 configured findings.
+
+## 2026-07-22 session 36 — GAP-GPR-47 frontend SSE parser and delta rendering
+
+- Added `src/frontend/utils/sseParser.ts`, a robust event-block SSE parser for CRLF, comments, multiple data lines, and final flush.
+- Updated ChatPanel to consume backend `delta` events and legacy token events, RAF-batch streaming paints, and keep exact received chunks without fake typewriter animation.
+- Verification: frontend production build compiled successfully; secret scan found 0 configured findings.

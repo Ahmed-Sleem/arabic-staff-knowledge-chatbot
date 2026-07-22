@@ -9,6 +9,7 @@
  */
 import React, { useState, useRef, useEffect } from "react";
 import { useApp, ConversationTurn } from "../context/AppContext";
+import { createSseParser } from "../utils/sseParser";
 
 interface ExtendedTurn extends ConversationTurn {
   cycle_logs?: string[];
@@ -29,9 +30,19 @@ export const ChatPanel: React.FC = () => {
   const [showCopyBtn, setShowCopyBtn] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const streamingContentRef = useRef("");
+  const rafRef = useRef<number | null>(null);
 
   const activeConv = conversations.find(c => c.id === activeConversationId);
   const turns = activeConv ? (activeConv.turns as ExtendedTurn[]) : [];
+
+  const scheduleStreamingPaint = () => {
+    if (rafRef.current !== null) return;
+    rafRef.current = requestAnimationFrame(() => {
+      rafRef.current = null;
+      setStreamingContent(streamingContentRef.current);
+    });
+  };
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -83,6 +94,7 @@ export const ChatPanel: React.FC = () => {
     addTurnToConversation(userTurn);
 
     setIsStreaming(true);
+    streamingContentRef.current = "";
     setStreamingContent("");
     setCycleLogs([]);
     setActiveSearchStatus(language === "ar" ? "🔍 جاري تحليل السؤال ومراجعة الفهرس..." : "🔍 Analyzing query and examining TOC...");
@@ -116,66 +128,54 @@ export const ChatPanel: React.FC = () => {
       const reader = response.body?.getReader();
       const decoder = new TextDecoder("utf-8");
       let partialText = "";
-      let sseBuffer = "";
+
+      const parser = createSseParser((evt) => {
+        const valStr = evt.data;
+        if (evt.event === "agent_search") {
+          try {
+            const searchData = JSON.parse(valStr);
+            if (searchData.active_node_ids && searchData.active_node_ids.length > 0) setActiveGraphNodeIds(searchData.active_node_ids);
+            if (searchData.query) setActiveSearchStatus(language === "ar" ? `استرجاع في الخريطة: "${searchData.query}"` : `Graph querying: "${searchData.query}"`);
+          } catch {}
+        } else if (evt.event === "cycle_step" || evt.event === "status") {
+          try {
+            const stepObj = JSON.parse(valStr);
+            if (stepObj.status) {
+              setActiveSearchStatus(stepObj.status);
+              accumulatedLogs.push(stepObj.status);
+              setCycleLogs([...accumulatedLogs]);
+            }
+          } catch {}
+        } else if (evt.event === "delta" || evt.event === "token" || evt.event === "message") {
+          try {
+            const obj = JSON.parse(valStr);
+            partialText += obj.content ?? obj.token ?? "";
+          } catch {
+            partialText += valStr;
+          }
+          streamingContentRef.current = partialText;
+          scheduleStreamingPaint();
+        } else if (evt.event === "error") {
+          try {
+            const errObj = JSON.parse(valStr);
+            throw new Error(errObj.error || errObj.message || "Streaming error");
+          } catch (err) {
+            if (err instanceof Error) throw err;
+            throw new Error("Streaming error");
+          }
+        }
+      });
 
       if (reader) {
-        let currentEvent = "token";
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
-
-          sseBuffer += decoder.decode(value, { stream: true });
-          const lines = sseBuffer.split("\n");
-          sseBuffer = lines.pop() || "";
-
-          for (const line of lines) {
-            const trimmedLine = line.trim();
-            if (!trimmedLine) continue;
-
-            const colonIdx = trimmedLine.indexOf(":");
-            if (colonIdx !== -1) {
-              const prefix = trimmedLine.slice(0, colonIdx).trim();
-              const valStr = trimmedLine.slice(colonIdx + 1).trim();
-
-              if (prefix === "event") {
-                currentEvent = valStr;
-              } else if (prefix === "data") {
-                if (currentEvent === "agent_search") {
-                  try {
-                    const searchData = JSON.parse(valStr);
-                    if (searchData.active_node_ids && searchData.active_node_ids.length > 0) {
-                      setActiveGraphNodeIds(searchData.active_node_ids);
-                    }
-                    if (searchData.query) {
-                      setActiveSearchStatus(language === "ar" ? `🔍 استرجاع في الخريطة: "${searchData.query}"` : `🔍 Graph querying: "${searchData.query}"`);
-                    }
-                  } catch (err) {}
-                } else if (currentEvent === "cycle_step") {
-                  try {
-                    const stepObj = JSON.parse(valStr);
-                    if (stepObj.status) {
-                      setActiveSearchStatus(stepObj.status);
-                      accumulatedLogs.push(stepObj.status);
-                      setCycleLogs([...accumulatedLogs]);
-                    }
-                  } catch (err) {}
-                } else if (currentEvent === "token") {
-                  try {
-                    const tokenObj = JSON.parse(valStr);
-                    if (tokenObj.token !== undefined) {
-                      partialText += tokenObj.token;
-                    } else {
-                      partialText += valStr;
-                    }
-                  } catch (err) {
-                    partialText += valStr;
-                  }
-                  setStreamingContent(partialText);
-                }
-              }
-            }
-          }
+          parser.feed(decoder.decode(value, { stream: true }));
         }
+        parser.feed(decoder.decode());
+        parser.end();
+        partialText = streamingContentRef.current;
+        setStreamingContent(partialText);
       }
 
       const assistantTurn: ExtendedTurn = {

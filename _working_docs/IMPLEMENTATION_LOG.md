@@ -891,3 +891,27 @@
   - **a) Is the gap fully fixed?** Yes for backend streaming. OpenAI-compatible providers stream actual SDK deltas, Gemini uses native SSE `streamGenerateContent`, and production provider failures emit typed error events rather than fake local answers.
   - **b) Is everything wired and ready for production?** Yes for backend. `react_agent.py` uses shared provider helpers and `api/chat.py` returns no-buffer SSE headers. Frontend support for `delta` events is intentionally next in GAP-GPR-47.
   - **c) Is my test really validating that?** Yes. Tests verify Gemini text extraction, HTTP no-buffer stream headers, and existing chat stream behavior; full backend regression stayed green.
+
+---
+
+## 2026-07-22 — GAP-GPR-47: Frontend SSE Parser and Real-Time Delta Rendering
+
+- **Gap ID + one-line description:** GAP-GPR-47 — Added a robust frontend SSE parser and wired ChatPanel to render backend `delta` events from real provider streaming in real time.
+- **Files touched:**
+  - `src/frontend/utils/sseParser.ts` — added event-block SSE parser handling CRLF, comments, multiple data lines, event/id/retry fields, and final flush.
+  - `src/frontend/components/ChatPanel.tsx` — replaced line-oriented token parser with `createSseParser`, accepts backend `delta` events (`data: {"content":"..."}`) and legacy `token` events, RAF-batches visual updates without artificial typing delay, keeps partial text in a ref, and surfaces backend error events.
+  - `_working_docs/AUDIT_AND_TODO.md` — marked GAP-GPR-47 closed with verification evidence.
+- **Tests added/updated:**
+  - No separate test runner added in this gap; Next.js production build validates TypeScript integration. Parser behavior is implemented in a pure utility for future dedicated tests.
+- **How I verified:**
+  - Frontend production build:
+    - `cd src/frontend && npm install --legacy-peer-deps && npm run build`
+    - Result: `✓ Compiled successfully` (`Route / 11.1 kB`, First Load JS `123 kB`).
+  - Secret scan:
+    - Workspace text scan for configured PAT/provider/PEM/admin-password patterns found `0` findings, excluding deliberate dummy backend test fixtures and tracked JSON data files.
+  - Cleanup:
+    - Removed ignored `node_modules` and `.next` artifacts after validation.
+- **Self-check answers:**
+  - **a) Is the gap fully fixed?** Yes for parser and real-time delta rendering. ChatPanel can now consume typed `delta` events from GAP-GPR-46 and still tolerates legacy token events.
+  - **b) Is everything wired and ready for production?** Yes for stream consumption. The backend emits `delta`; frontend parses event blocks and displays received provider chunks without fake character animation. Visible stop/retry controls remain in the UI polish gap.
+  - **c) Is my test really validating that?** The production build validates TypeScript and integration. Full interactive stream timing will be manually validated in the final acceptance pass with a real provider key.
