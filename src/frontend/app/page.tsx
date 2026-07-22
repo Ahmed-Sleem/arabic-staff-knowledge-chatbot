@@ -14,8 +14,36 @@ import { LoadScreen } from "../components/LoadScreen";
 import { useApp } from "../context/AppContext";
 
 export default function Home() {
-  const { language, isReady } = useApp();
+  const { language, isReady, deviceId } = useApp();
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  const layoutKey = (name: string) => `gpr_layout_${deviceId}_${name}`;
+
+  useEffect(() => {
+    if (!isReady || !deviceId) return;
+    const leftPanel = document.getElementById("leftPanel");
+    const rightPanel = document.getElementById("rightPanel");
+    const mainWindow = document.getElementById("mainWindow");
+    const leftWidth = Number(localStorage.getItem(layoutKey("left_width")) || "280");
+    const rightWidth = Number(localStorage.getItem(layoutKey("right_width")) || "290");
+    const safeLeft = Math.min(Math.max(leftWidth, 280), 420);
+    const safeRight = Math.min(Math.max(rightWidth, 290), 540);
+
+    document.documentElement.style.setProperty("--left-width", `${safeLeft}px`);
+    document.documentElement.style.setProperty("--right-width", `${safeRight}px`);
+    if (leftPanel) {
+      leftPanel.style.width = `${safeLeft}px`;
+      leftPanel.style.minWidth = `${safeLeft}px`;
+      leftPanel.style.maxWidth = `${safeLeft}px`;
+    }
+    if (rightPanel) {
+      rightPanel.style.width = `${safeRight}px`;
+      rightPanel.style.minWidth = `${safeRight}px`;
+      rightPanel.style.maxWidth = `${safeRight}px`;
+    }
+    if (mainWindow) {
+      mainWindow.classList.toggle("right-panel-closed", localStorage.getItem(layoutKey("right_closed")) === "true");
+    }
+  }, [isReady, deviceId]);
 
   useEffect(() => {
     document.body.classList.toggle("mobile-sidebar-open", isMobileSidebarOpen);
@@ -45,6 +73,7 @@ export default function Home() {
     if (!targetPanel) return;
     const startWidth = targetPanel.getBoundingClientRect().width;
     const isRtl = language === "ar";
+    let latestWidth = startWidth;
 
     const onMouseMove = (moveEvent: MouseEvent) => {
       const deltaX = moveEvent.clientX - startX;
@@ -53,6 +82,7 @@ export default function Home() {
         let newWidth = isRtl ? startWidth - deltaX : startWidth + deltaX;
         const maxAllowed = Math.min(420, Math.max(leftMin, window.innerWidth - 420));
         newWidth = Math.min(Math.max(newWidth, leftMin), maxAllowed);
+        latestWidth = newWidth;
         targetPanel.style.width = `${newWidth}px`;
         targetPanel.style.minWidth = `${newWidth}px`;
         targetPanel.style.maxWidth = `${newWidth}px`;
@@ -64,6 +94,7 @@ export default function Home() {
       const maxAllowed = Math.min(540, window.innerWidth - 320 - 240);
       newWidth = Math.min(Math.max(newWidth, 290), Math.max(290, maxAllowed));
 
+      latestWidth = newWidth;
       targetPanel.style.width = `${newWidth}px`;
       targetPanel.style.minWidth = `${newWidth}px`;
       targetPanel.style.maxWidth = `${newWidth}px`;
@@ -73,6 +104,7 @@ export default function Home() {
     const onMouseUp = () => {
       document.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mouseup", onMouseUp);
+      localStorage.setItem(layoutKey(target === "left" ? "left_width" : "right_width"), String(Math.round(latestWidth)));
       document.body.style.cursor = "";
       document.body.style.userSelect = "";
     };
@@ -89,7 +121,7 @@ export default function Home() {
       <div className="app-title" id="appTitle">
         <div className="app-title-left">
           <button
-            className="mobile-sidebar-btn"
+            className="mobile-menu-trigger"
             id="mobileSidebarBtn"
             aria-label="Toggle conversations menu"
             aria-expanded={isMobileSidebarOpen}
@@ -97,8 +129,10 @@ export default function Home() {
             type="button"
             onClick={() => setIsMobileSidebarOpen(prev => !prev)}
           >
-            <svg viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+            <svg viewBox="0 0 24 24" aria-hidden="true" className="mobile-menu-icon">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 7h14" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 17h14" />
             </svg>
           </button>
           <span className="brand-name">GPR</span>

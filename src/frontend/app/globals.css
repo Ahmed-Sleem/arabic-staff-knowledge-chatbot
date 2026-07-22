@@ -1509,3 +1509,83 @@ body[dir="rtl"] .chat-item.removing-empty {
     gap: 3px;
     text-decoration: none;
 }
+
+/* Adaptive panel controls and modern mobile menu trigger. */
+.mobile-menu-trigger {
+    display: none;
+}
+
+.sidebar-control-row {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) var(--sidebar-button-size) var(--sidebar-button-size);
+    gap: var(--sidebar-control-gap);
+    align-items: center;
+    width: 100%;
+    min-width: 0;
+}
+.conversation-search,
+.sidebar-search,
+.map-container .conversation-search {
+    min-width: 0 !important;
+    max-width: 100% !important;
+}
+.conversation-search input {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.sidebar-icon-btn {
+    min-width: var(--sidebar-button-size) !important;
+    max-width: var(--sidebar-button-size) !important;
+}
+.panel-left {
+    overflow: hidden;
+}
+.header-tools {
+    width: 100%;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .mobile-sidebar-btn {
+        display: none !important;
+    }
+    .mobile-menu-trigger {
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        flex: 0 0 36px;
+        border-radius: 11px;
+        border: 1px solid var(--border-soft);
+        background: var(--color-slate);
+        color: var(--text-primary);
+        cursor: pointer;
+        box-shadow: var(--shadow-panel);
+        transition: background 0.2s var(--ease-soft), border-color 0.2s var(--ease-soft), transform 0.18s var(--ease-soft), box-shadow 0.2s var(--ease-soft);
+    }
+    .mobile-menu-trigger:hover,
+    .mobile-menu-trigger:focus-visible {
+        background: var(--color-slate-raised);
+        border-color: var(--border-med);
+        transform: translateY(-1px);
+        outline: none;
+        box-shadow: var(--shadow-elevated);
+    }
+    .mobile-menu-trigger:active {
+        transform: scale(0.96);
+    }
+    .mobile-menu-icon {
+        width: 19px;
+        height: 19px;
+        stroke: currentColor;
+        stroke-width: 2.25;
+        fill: none;
+    }
+    .sidebar-control-row {
+        grid-template-columns: minmax(0, 1fr) 34px 34px;
+        --sidebar-button-size: 34px;
+        gap: 8px;
+    }
+}

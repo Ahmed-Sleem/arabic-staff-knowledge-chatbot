@@ -700,3 +700,12 @@
 - Reworked ChatPanel Markdown/citation rendering to decode common HTML entities, render citations inline as source chips, support citations wrapped in markdown bold markers, and avoid invalid block-inside-inline nesting.
 - Removed duplicate emoji/pseudo citation marker behavior so citation chips render cleaner.
 - Verification: frontend production build compiled successfully (`Route / 11.6 kB`, First Load JS `124 kB`); backend suite passed `28 passed in 37.81s`; workspace secret scan found 0 configured findings.
+
+## 2026-07-22 session 41 — Main hotfix: adaptive panel controls, mobile menu icon, persisted layout
+
+- Made sidebar control rows adaptive with grid-based search + fixed action buttons so controls do not overflow on narrower panel/device ratios.
+- Replaced the mobile side-menu trigger beside the GPR logo with a visible modern SVG menu icon and dedicated mobile styling.
+- Added per-device layout persistence for left panel width, right panel width, and right-panel open/closed state using localStorage.
+- Restores saved panel widths and right panel visibility on app open.
+- Saves panel widths after resize and saves right panel closed/open state when toggled.
+- Verification: frontend production build compiled successfully (`Route / 11.9 kB`, First Load JS `124 kB`); workspace secret scan found 0 configured findings; `git diff --check` passed.

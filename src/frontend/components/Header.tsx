@@ -5,18 +5,24 @@
  * Per Ahmed's exact requirement (`GAP-GPR-18`), 100% of action buttons are universal SVG icons
  * with descriptive hover tooltips (`AR/EN`): Globe (Language), Sun/Moon (Theme), Gear (Settings Modal), Map Toggle.
  */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useApp } from "../context/AppContext";
 
 export const Header: React.FC = () => {
-  const { language, setLanguage, theme, setTheme, setIsSettingsOpen } = useApp();
+  const { language, setLanguage, theme, setTheme, setIsSettingsOpen, deviceId } = useApp();
   const [isRightPanelClosed, setIsRightPanelClosed] = useState(false);
+
+  useEffect(() => {
+    if (!deviceId) return;
+    setIsRightPanelClosed(localStorage.getItem(`gpr_layout_${deviceId}_right_closed`) === "true");
+  }, [deviceId]);
 
   const toggleRightPanel = () => {
     const mainWindow = document.getElementById("mainWindow");
     if (!mainWindow) return;
     const closed = mainWindow.classList.toggle("right-panel-closed");
     setIsRightPanelClosed(closed);
+    if (deviceId) localStorage.setItem(`gpr_layout_${deviceId}_right_closed`, String(closed));
   };
 
   return (

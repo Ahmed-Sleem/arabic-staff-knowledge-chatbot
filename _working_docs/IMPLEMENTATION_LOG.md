@@ -1106,3 +1106,24 @@
   - **a) Is the issue fixed?** Yes. Boot selects a new/empty draft by default, prompt instructions reduce repetitive citations, and frontend rendering now decodes entities and renders citations inline without broken Markdown structure.
   - **b) Is it wired?** Yes. The boot behavior is in active AppContext, the prompt rule is in the production prompt builder, and ChatPanel uses the new renderer for streaming and completed assistant content.
   - **c) Does validation prove it?** The frontend build validates React/TypeScript integration; backend prompt tests validate the new citation rule; full backend regression remains green.
+
+---
+
+## 2026-07-22 — Main Hotfix: Adaptive Panel Controls, Mobile Menu Icon, and Persisted Layout
+
+- **Description:** Made panel controls more adaptive across aspect ratios, replaced the empty mobile menu trigger with a modern visible SVG, and persisted each device's layout preferences.
+- **Files touched:**
+  - `src/frontend/app/page.tsx` — added per-device layout restoration for left/right widths and right-panel closed state; saves widths after resizing; added modern mobile menu trigger SVG markup.
+  - `src/frontend/components/Header.tsx` — persists/restores right-panel open/closed state per device when toggled.
+  - `src/frontend/app/globals.css` — added adaptive grid sizing for sidebar controls, overflow-safe search/button constraints, modern mobile menu trigger styles, and toolbar centering refinements.
+  - `_working_docs/CHANGELOG.md`, `_working_docs/IMPLEMENTATION_LOG.md` — recorded hotfix and validation.
+- **How I verified:**
+  - Frontend production build:
+    - `cd src/frontend && npm install --legacy-peer-deps && npm run build`
+    - Result: `✓ Compiled successfully` (`Route / 11.9 kB`, First Load JS `124 kB`).
+  - `git diff --check` passed.
+  - Workspace secret scan for configured PAT/provider/PEM/admin-password patterns returned `0` findings.
+- **Self-check answers:**
+  - **a) Is the issue fixed?** Yes. Sidebar rows now use `minmax(0, 1fr)` grid behavior with fixed action columns, the mobile menu icon has explicit stroke/currentColor styling, and layout widths/states persist by device.
+  - **b) Is it wired?** Yes. The active page/header components read/write layout preferences and the active CSS classes constrain the left panel controls and mobile menu trigger.
+  - **c) Does validation prove it?** The frontend build validates the changed React/TypeScript integration; visual confirmation should be checked after Railway redeploys.
