@@ -72,7 +72,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose })
     setTestResult(null);
 
     try {
-      const res = await fetch("/api/v1/auth/check-api", {
+      const res = await fetch("/api/v1/vault/check-api", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

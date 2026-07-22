@@ -595,3 +595,12 @@
 - Updated backend chat endpoint to decrypt the selected vault profile by HttpOnly device cookie for production chat requests.
 - Deleted obsolete `ApiKeyModal.tsx` raw-key UI.
 - Verification: backend suite `21 passed, 1 warning in 36.13s`; frontend production build compiled successfully; secret scan found 0 configured findings.
+
+## 2026-07-22 session 36 — GAP-GPR-44 old OTP/auth cleanup
+
+- Added `POST /api/v1/vault/check-api` for one-time provider key tests before saving encrypted vault profiles.
+- Updated `SettingsModal` to call `/api/v1/vault/check-api` instead of `/api/v1/auth/check-api`.
+- Removed obsolete login/OTP/session backend files: `api/auth.py`, `models/auth.py`, `services/auth_service.py`, and `tests/test_auth.py`.
+- Removed unused `passlib[argon2]` and `argon2-cffi` dependencies.
+- FastAPI now mounts vault/documents/chat routers without the obsolete auth router.
+- Verification: backend suite `20 passed in 36.59s`; frontend production build compiled successfully; cleanup grep confirmed no active old auth references in source; secret scan found 0 configured findings.

@@ -3,7 +3,7 @@ Master FastAPI Application (`src/backend/main.py`).
 
 Initializes the GPR — General Purpose RAG & Obsidian Graph Backend:
 - Configures CORS middleware for Next.js GPR GUI (`localhost:3000`, `gpr-web`).
-- Mounts modular routers (`/api/v1/auth`, `/api/v1/documents`, `/api/v1/chat`).
+- Mounts modular routers (`/api/v1/vault`, `/api/v1/documents`, `/api/v1/chat`).
 - Initializes relational multi-document tables (`init_db`) and checks pre-indexed sample manuals on startup via modern Lifespan handler.
 - All terminal output and system logging strictly in English.
 """
@@ -18,12 +18,12 @@ try:
     from .db.session import init_db, AsyncSessionLocal
     from .models.orm import DocumentORM, ChunkORM
     from .services.ingestion.universal_pipeline import process_document_pipeline
-    from .api import auth_router, documents_router, chat_router, vault_router
+    from .api import documents_router, chat_router, vault_router
 except ImportError:
     from db.session import init_db, AsyncSessionLocal
     from models.orm import DocumentORM, ChunkORM
     from services.ingestion.universal_pipeline import process_document_pipeline
-    from api import auth_router, documents_router, chat_router, vault_router
+    from api import documents_router, chat_router, vault_router
 
 
 async def _auto_index_sample_manual():
@@ -89,7 +89,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(auth_router)
 app.include_router(vault_router)
 app.include_router(documents_router)
 app.include_router(chat_router)

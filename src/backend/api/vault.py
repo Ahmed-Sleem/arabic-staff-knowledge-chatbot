@@ -73,6 +73,12 @@ class VaultProfileTestResponse(BaseModel):
     preview: str = ""
 
 
+class VaultCheckApiRequest(BaseModel):
+    provider: ProviderName = "deepseek"
+    model: str = Field("", max_length=160)
+    api_key: str = Field(..., min_length=5, max_length=4096)
+
+
 def _dto(profile: VaultProfileORM) -> VaultProfileDTO:
     return VaultProfileDTO(
         id=profile.id,
@@ -138,6 +144,15 @@ async def list_vault_profiles(request: Request, response: Response, session: Asy
     except VaultConfigError as exc:
         raise HTTPException(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail=str(exc)) from exc
     return [_dto(profile) for profile in await _profiles_for_device(session, device_hash)]
+
+
+
+
+@router.post("/check-api", response_model=VaultProfileTestResponse)
+async def check_raw_api_key_once(payload: VaultCheckApiRequest):
+    """Test a raw key once before saving it; the key is never stored by this endpoint."""
+    check = await check_provider_connection(payload.provider, payload.model, payload.api_key)
+    return VaultProfileTestResponse(status=check.status, message=check.message, preview=check.preview)
 
 
 @router.post("/profiles", response_model=VaultProfileDTO, status_code=status.HTTP_201_CREATED)

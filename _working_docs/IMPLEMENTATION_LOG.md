@@ -753,3 +753,39 @@
   - **a) Is the gap fully fixed?** Yes. The active UI no longer stores new API keys in raw localStorage, legacy raw keys are migrated once and deleted after success, ChatPanel sends only a vault profile id, and backend chat decrypts the selected profile server-side.
   - **b) Is everything wired and ready for production?** Yes for the app/key flow covered by this gap. The vault router was already mounted in GAP-GPR-42; this gap wires the frontend and chat endpoint to it. Old auth/check-api remains temporarily for one-time raw test checks until GAP-GPR-44 cleanup.
   - **c) Is my test really validating that?** Yes. Backend tests prove vault and chat fallback contracts still work, frontend build proves TypeScript no longer depends on deleted raw-key UI, and grep/secret scans confirm no active frontend chat raw-key header remains.
+
+---
+
+## 2026-07-22 — GAP-GPR-44: Old OTP/Auth Cleanup and Dependency Cleanup
+
+- **Gap ID + one-line description:** GAP-GPR-44 — Removed the unused login/OTP/session backend from the active product after the encrypted vault path became available, while preserving one-time provider key testing through the vault API.
+- **Files touched:**
+  - `src/backend/api/vault.py` — added `POST /api/v1/vault/check-api` for one-time raw key testing before saving; the endpoint does not store the key.
+  - `src/frontend/components/SettingsModal.tsx` — changed the Test Connection button from `/api/v1/auth/check-api` to `/api/v1/vault/check-api`.
+  - `src/backend/api/__init__.py` — removed `auth_router` export and kept `documents_router`, `chat_router`, and `vault_router`.
+  - `src/backend/main.py` — removed `auth_router` import/include and updated router description to `/api/v1/vault`, `/documents`, and `/chat`.
+  - `src/backend/api/auth.py` — deleted obsolete register/login/OTP/check-api router.
+  - `src/backend/models/auth.py` — deleted obsolete User/OTP/Session schemas.
+  - `src/backend/services/auth_service.py` — deleted obsolete Argon2/OTP/session service.
+  - `src/backend/tests/test_auth.py` — deleted obsolete auth lifecycle test; vault tests now cover the active security model.
+  - `src/backend/requirements.txt` — removed `passlib[argon2]` and `argon2-cffi` after deleting old auth code.
+  - `_working_docs/AUDIT_AND_TODO.md` — marked GAP-GPR-44 closed with verification evidence.
+- **Tests added/updated:**
+  - Existing `test_vault.py` now owns the active security model coverage; no new test file was needed for removed OTP endpoints.
+- **How I verified:**
+  - Syntax check:
+    - `PYTHONPATH=. python -m py_compile api/vault.py api/__init__.py main.py`
+  - Full backend suite:
+    - `GPR_VAULT_MASTER_KEY=<test-key> GPR_COOKIE_SECURE=false PYTHONPATH=. pytest -q tests/`
+    - Result: `20 passed in 36.59s`.
+  - Frontend production build:
+    - `cd src/frontend && npm install --legacy-peer-deps && npm run build`
+    - Result: `✓ Compiled successfully` (`Route / 10.7 kB`, First Load JS `122 kB`).
+  - Cleanup grep:
+    - no active source references to `auth_router`, `AuthService`, `OTPRecordORM`, `SessionORM`, `UserORM`, `passlib`, `argon2`, `/api/v1/auth`, or OTP endpoints remain; README still has stale auth docs scheduled for GAP-GPR-49.
+  - Secret scan:
+    - Workspace text scan for configured PAT/provider/PEM/admin-password patterns found `0` findings, excluding deliberate dummy key-shaped backend test fixtures.
+- **Self-check answers:**
+  - **a) Is the gap fully fixed?** Yes. The unused OTP/login/session code and dependencies are removed from active source, and the only user-facing behavior that remained useful (provider key testing) now lives under the vault API.
+  - **b) Is everything wired and ready for production?** Yes for auth cleanup. FastAPI now mounts vault/documents/chat without auth, SettingsModal uses the vault check endpoint, and backend tests validate the active no-login vault model.
+  - **c) Is my test really validating that?** Yes. The full backend suite passes without old auth tests, the frontend build proves the Settings endpoint update compiles, and grep proves old auth symbols are gone from active source.
