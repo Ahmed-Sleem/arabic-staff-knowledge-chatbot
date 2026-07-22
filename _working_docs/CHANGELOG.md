@@ -658,3 +658,13 @@
 - Rewrote README to match the current no-login encrypted vault, real streaming, enriched JSON, and Railway setup.
 - Updated `NEXT_SESSIONS_ROADMAP.md` with current architecture and branch workflow.
 - Verification: backend suite `28 passed in 37.44s`; frontend build compiled successfully; secret scan found 0 configured findings.
+
+## 2026-07-22 session 36 — GAP-GPR-50 final validation
+
+- Completed final feature-branch validation for `feat/gpr-vault-streaming-ui-polish-20260722`.
+- Backend suite passed: `28 passed in 37.80s`.
+- Frontend production build compiled successfully: `Route / 11.3 kB`, First Load JS `124 kB`.
+- Shell syntax checks passed for `docker-entrypoint.sh` and `start.sh`.
+- `git diff --check origin/main` passed after whitespace cleanup.
+- Workspace and reachable-history secret scans returned 0 configured findings.
+- Branch is 10 commits ahead and 0 behind `origin/main`; main merge/push still requires Ahmed approval.

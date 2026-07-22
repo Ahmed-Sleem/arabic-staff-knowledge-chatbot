@@ -978,3 +978,41 @@
   - **a) Is the gap fully fixed?** Yes. The stale docs/deployment/repo issues identified in audit are addressed: Railway config exists, README/roadmap reflect actual architecture, generated config is removed, dead FilesView is removed, and upload no longer relies on raw key headers.
   - **b) Is everything wired and ready for production?** Yes. The remaining upload API can optionally use a vault profile for LLM-assisted ingestion, while normal offline/fallback ingestion still works without a key.
   - **c) Is my test really validating that?** Yes. Backend API tests still pass after the upload signature/key-path change, and frontend build confirms removal of FilesView does not break active UI imports.
+
+---
+
+## 2026-07-22 — GAP-GPR-50: Final Validation, Secret Scan, and Release Readiness
+
+- **Gap ID + one-line description:** GAP-GPR-50 — Performed final feature-branch validation and release-readiness checks for `feat/gpr-vault-streaming-ui-polish-20260722` without merging to `main`.
+- **Files touched:**
+  - `_working_docs/AUDIT_AND_TODO.md` — marked GAP-GPR-50 closed with validation evidence.
+  - `_working_docs/IMPLEMENTATION_LOG.md` and `_working_docs/CHANGELOG.md` — recorded final validation results.
+  - `_working_docs/DETAILED_IMPLEMENTATION_PLAN_2026-07-22.md` and `src/backend/models/orm.py` — removed trailing whitespace/EOF formatting issues found by `git diff --check`.
+- **Tests added/updated:**
+  - No new feature tests; this gap validates the complete branch.
+- **How I verified:**
+  - Branch/merge base:
+    - `git fetch origin --prune`
+    - branch is based on `origin/main` at merge-base `f6ae2df76b8aad3f7905d6fe6b8d73cbc057c811`.
+    - branch is `10` commits ahead and `0` behind `origin/main`.
+  - Whitespace check:
+    - `git diff --check origin/main` passed after cleanup.
+  - Backend tests:
+    - `GPR_VAULT_MASTER_KEY=<test-key> GPR_COOKIE_SECURE=false PYTHONPATH=. pytest -q tests/`
+    - Result: `28 passed in 37.80s`.
+  - Frontend production build:
+    - `cd src/frontend && npm install --legacy-peer-deps && npm run build`
+    - Result: `✓ Compiled successfully` (`Route / 11.3 kB`, First Load JS `124 kB`).
+  - Shell syntax:
+    - `bash -n docker-entrypoint.sh`
+    - `bash -n start.sh`
+    - both passed.
+  - Secret scans:
+    - workspace text scan returned `0` configured findings.
+    - reachable-history scan returned `0` configured findings across `20` commits, excluding tracked JSON data files and deliberate dummy backend test fixtures.
+  - Cleanup:
+    - Removed ignored validation artifacts (`node_modules`, `.next`, `gpr_workspace.db`, `__pycache__`, `.pytest_cache`).
+- **Self-check answers:**
+  - **a) Is the gap fully fixed?** Yes. The branch has passed backend tests, frontend build, shell syntax checks, whitespace check, and secret scans.
+  - **b) Is everything wired and ready for production?** The feature branch is merge-ready from local validation. Production deployment is intentionally not triggered because `main` has not been merged/pushed pending Ahmed approval.
+  - **c) Is my test really validating that?** Yes. The backend suite exercises vault, streaming contracts, prompt builders, curated JSON round trip, graph/search APIs, ingestion, and chat tests; the frontend production build validates active React/Next integration; secret scans check both workspace and reachable history.

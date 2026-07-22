@@ -112,4 +112,3 @@ class VaultProfileORM(Base):
     created_at = Column(String(64), default=lambda: datetime.now(timezone.utc).isoformat())
     updated_at = Column(String(64), default=lambda: datetime.now(timezone.utc).isoformat())
     last_used_at = Column(String(64), nullable=True)
-

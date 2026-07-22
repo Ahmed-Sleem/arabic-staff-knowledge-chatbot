@@ -1,7 +1,7 @@
 # Detailed Implementation Plan — GPR Streaming, Vault, Composer, Mobile, Loading, Cleanup
 
-_Date: 2026-07-22_  
-_Status: **PLAN ONLY** — no production/source implementation has been performed in this step._  
+_Date: 2026-07-22_
+_Status: **PLAN ONLY** — no production/source implementation has been performed in this step._
 _Base decision: start from clean `origin/main`; do **not** merge `origin/feat/gpr-streaming-composer-ux`; use it only as reference._
 
 ---
@@ -1676,7 +1676,7 @@ Done when:
 
 ## 16. Overall repository audit addendum — extra findings to include before implementation
 
-_Date appended: 2026-07-22_  
+_Date appended: 2026-07-22_
 _Status: audit/planning only; no source implementation performed._
 
 This section records additional issues found during a full repo audit after the detailed plan was created. These findings must be integrated into the implementation sequence rather than treated as separate afterthoughts.
@@ -2400,7 +2400,7 @@ Implementation is not complete unless these extra audit findings are closed or e
 
 ## 19. Prompt audit addendum — required prompt improvements before implementation
 
-_Date appended: 2026-07-22_  
+_Date appended: 2026-07-22_
 _Status: plan only; no prompt/source implementation performed._
 
 Ahmed requested that prompts be rechecked and improvements added to this plan. This section covers active model prompts and prompt-like provider checks in the repository.
@@ -2799,7 +2799,7 @@ Revised insertion point:
 
 ## 20. Plan self-audit corrections and readiness fixes
 
-_Date appended: 2026-07-22_  
+_Date appended: 2026-07-22_
 _Status: plan audit only._
 
 This section audits the plan itself and adds corrections so implementation can start directly with fewer ambiguities.
