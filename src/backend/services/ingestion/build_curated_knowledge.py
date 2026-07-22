@@ -39,7 +39,7 @@ def get_source_json_path() -> str:
 
 def generate_stable_uuid(code: str) -> str:
     """Generate a deterministic UUID v5 from unique edge code."""
-    return str(uuid.uuid5(uuid.NAMESPACE_DNS, f"gpr.workspace.kayan.{code}"))
+    return str(uuid.uuid5(uuid.NAMESPACE_DNS, f"gpr.workspace.sample.{code}"))
 
 
 def _load_nodes(source_path: str) -> List[Dict[str, Any]]:
@@ -114,7 +114,7 @@ def build_curated_knowledge_graph() -> Dict[str, Any]:
     doc_id = "HR-MANUAL-V1"
     document_meta = {
         "id": doc_id,
-        "title": "Kayan Al-Mamlaka Approved Organizational Structure Guide v1.0",
+        "title": "Sample Organization Approved Organizational Structure Guide v1.0",
         "filename": "hr_source.pdf",
         "file_type": "pdf",
         "file_size": 1828800,

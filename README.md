@@ -6,7 +6,7 @@ I built GPR because dense corporate manuals are hard to use in real work. A norm
 
 GPR solves that differently: it uses a curated relational knowledge graph, a live map, real streaming model responses, and exact citations back to approved organizational nodes.
 
-This repository is the GPR chat workspace for Kayan Al-Mamlaka / Cyrkil-style internal knowledge use.
+This repository is the GPR chat workspace for general internal knowledge internal knowledge use.
 
 ---
 
@@ -216,31 +216,46 @@ Steps:
 
 ---
 
-## Active JSON Data Workflow
+## Data Curation Workflow
 
-Ahmed edits:
+GPR is brand-agnostic. The bundled JSON is sample placeholder data that demonstrates the schema. In real deployments, replace it with the organization's own approved data.
+
+Active editable source JSON:
 
 ```text
 uploads/deepseek_json_20260722_6a33e9.json
 ```
 
-The backend build process creates:
+Production generated graph:
 
 ```text
 src/backend/data/curated_knowledge_graph.json
 ```
 
-The app supports enriched fields such as:
+Curation/rebuild code is included in the repository for future use:
 
-- Arabic title/content
-- aliases
-- Arabic/English keywords
-- typed graph relations
-- role profiles
-- KPIs
-- answerable questions
-- not-answerable boundaries
-- approval/confidence metadata
+```text
+src/backend/services/ingestion/build_curated_knowledge.py
+src/backend/services/ingestion/seed_curated.py
+src/backend/services/ingestion/universal_pipeline.py
+src/backend/services/ingestion/llm_semantic_analyzer.py
+```
+
+Regenerate the production graph after editing the source JSON:
+
+```bash
+cd src/backend
+PYTHONPATH=. python -m services.ingestion.build_curated_knowledge
+```
+
+The enriched schema supports:
+
+- Arabic/English title and content
+- aliases and multilingual keywords
+- typed graph relations with evidence and strength
+- role profiles and KPI tables
+- answerable questions and not-answerable boundaries
+- approval, last-verified, and confidence metadata
 
 ---
 

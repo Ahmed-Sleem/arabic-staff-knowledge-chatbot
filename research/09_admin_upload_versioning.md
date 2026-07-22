@@ -77,7 +77,7 @@ draft ──upload──▶ processing ──success──▶ active ──admin
 - **MIME check:** `application/pdf`. Reject otherwise.
 - **Virus scan:** optional, deferred to v2.
 
-### UI components (Cyrkil-styled)
+### UI components (GPR-styled)
 - `<SidePanel>` for "Documents" sidebar (in admin mode).
 - List of documents: name, version, status badge, "Re-index" button, "Make Active" button, "Disable" button, "Test" button.
 - Upload: drag-drop zone in admin panel.

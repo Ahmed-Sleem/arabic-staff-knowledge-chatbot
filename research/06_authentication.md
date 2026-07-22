@@ -18,7 +18,7 @@
    - Login with password + email OTP (every login? new device only? admin-toggle?).
    - Forgot password via email OTP.
 6. **Session strategy**:
-   - httpOnly + Secure + SameSite cookies (recommended for Cyrkil-style app).
+   - httpOnly + Secure + SameSite cookies (recommended for GPR-style app).
    - Server-side session store (Redis or DB) vs stateless JWT (with refresh).
 7. **CSRF protection** — necessary for cookie sessions; can use double-submit cookie or SameSite=Lax.
 8. **Account lockout / brute force** — rate-limit on login and OTP endpoints.

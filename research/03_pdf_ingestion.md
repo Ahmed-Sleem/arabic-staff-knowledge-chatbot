@@ -118,7 +118,7 @@ URL: https://towardsdatascience.com/your-chunks-failed-your-rag-in-production/
 - **English name:** Organizational Structure, Job Responsibilities & KPIs Guide
 - **Version:** 1.0
 - **Issue date:** 18/05/2026
-- **Issuer:** HR Department of "شركة كيان المملكة" (KSA company)
+- **Issuer:** HR Department of "المؤسسة النموذجية" (KSA company)
 - **Approved by:** CEO
 
 ### Numbered sections (sample)
@@ -167,9 +167,9 @@ This pattern is the key for chunking. Each "job role" section should be ONE chun
 
 ### Special text handling
 - The text contains "Moshref" (purpose-only) markers and dotted leader lines from the TOC that should be cleaned out at ingestion.
-- Repeated header "شركة كيان المملكة كاك" + "إدارة الموارد البشرية" + "كيان المملكة كاك" on every page — should be stripped from chunks.
+- Repeated header "المؤسسة النموذجية" + "إدارة الموارد البشرية" + "المؤسسة النموذجية" on every page — should be stripped from chunks.
 - Page numbers appear in the text and need to be extracted as `page` metadata, NOT included in the chunk content.
-- The string "كاك" is the company abbreviation ("KAK" — Kian Al-Mamlaka).
+- The repeated organization header is sample-source noise and should be stripped from production chunks.
 
 ### Implication for the ingestion pipeline
 - **Section detection regex** (post-cleanup):

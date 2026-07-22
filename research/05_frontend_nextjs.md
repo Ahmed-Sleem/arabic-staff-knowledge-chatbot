@@ -1,4 +1,4 @@
-# Topic 5 — Frontend (Next.js, Cyrkil-styled)
+# Topic 5 — Frontend (Next.js, GPR-styled)
 
 **Status:** Phase 2 — Deep Dive (in progress)
 **Last update:** 2026-07-10
@@ -7,9 +7,9 @@
 
 ## Open questions
 
-1. **Next.js version**: 15 (App Router) confirmed by modern Cyrkil design system.
-2. **Cyrkil design system adaptation**:
-   - The Cyrkil DS is for a broader IDE/chat product. We need to extract just the chat surface, tokens, and primitives we need.
+1. **Next.js version**: 15 (App Router) confirmed by modern GPR design system.
+2. **GPR design system adaptation**:
+   - The GPR DS is for a broader IDE/chat product. We need to extract just the chat surface, tokens, and primitives we need.
    - Tokens: colors, spacing, radii, control heights, icon sizes, typography, motion, z-index — apply all.
    - Primitives: `<Button>`, `<IconButton>`, `<Input>`, `<Field>`, `<Search>`, `<RowAction>`, `<Panel>`, `<SidePanel>`, `<Dialog>`, `<Tooltip>`, `<Kbd>`, etc.
 3. **Arabic RTL**:
@@ -21,7 +21,7 @@
      - GE SS Two
      - Cairo (Google Fonts)
    - Number handling — Arabic-Indic digits vs Latin digits (PRD doesn't specify, default to Latin digits for technical clarity).
-4. **Chat surface** (per Cyrkil design philosophy):
+4. **Chat surface** (per GPR design philosophy):
    - Conversation thread (scrollable panel)
    - Message bubble (user / assistant)
    - Markdown rendering (with Arabic-safe rules, RTL lists)
@@ -36,11 +36,11 @@
 6. **Auth surface**: login, register, OTP request/verify.
 7. **Mobile**:
    - Per `DEVELOPMENT_REQUIREMENTS.md §6`, mobile is chat/input-output only.
-   - Cyrkil DS has mobile rules — apply min 44x44 tap targets, safe-area-inset-bottom.
-8. **i18n**: Arabic only for MVP. Per Cyrkil §7.5, all user-facing copy still goes through `useT()` for future-proofing.
-9. **State management**: zustand per Cyrkil rule.
+   - GPR DS has mobile rules — apply min 44x44 tap targets, safe-area-inset-bottom.
+8. **i18n**: Arabic only for MVP. Per GPR §7.5, all user-facing copy still goes through `useT()` for future-proofing.
+9. **State management**: zustand per GPR rule.
 10. **Data fetching**: TanStack Query (React Query) for server state.
-11. **Styling**: Tailwind v4 + Cyrkil `@theme inline` tokens.
+11. **Styling**: Tailwind v4 + GPR `@theme inline` tokens.
 
 ---
 
@@ -123,11 +123,11 @@ URL: https://cloudtopia.net/articles/best-website-design-practices-for-rtl-arabi
 - **Body text size:** 16-17px in IBM Plex Sans Arabic, with line-height 1.75.
 - **Numerals:** Western Arabic (0-9) — matches KSA convention.
 - **Implementation:** Use `next/font/google` to load IBM Plex Sans Arabic. Apply via `:lang(ar)` selector or by setting `<html lang="ar" dir="rtl">` and using the font as the default.
-- **CSS strategy:** Use logical properties throughout (`margin-inline-start`, `padding-inline-end`). The Cyrkil design system uses Tailwind v4 which supports this.
-- **Cyrkil design system adaptation:**
-  - Apply Cyrkil's color/spacing/control tokens unchanged.
-  - Replace Inter (the Cyrkil default) with IBM Plex Sans Arabic for Arabic script, fall back to Inter for Latin.
-  - Adjust line-heights globally for Arabic (`leading-1.75` body, `leading-1.4` headings) — add as Cyrkil motion tokens.
+- **CSS strategy:** Use logical properties throughout (`margin-inline-start`, `padding-inline-end`). The GPR design system uses Tailwind v4 which supports this.
+- **GPR design system adaptation:**
+  - Apply GPR's color/spacing/control tokens unchanged.
+  - Replace Inter (the GPR default) with IBM Plex Sans Arabic for Arabic script, fall back to Inter for Latin.
+  - Adjust line-heights globally for Arabic (`leading-1.75` body, `leading-1.4` headings) — add as GPR motion tokens.
   - Set `<html dir="rtl" lang="ar">` in the root layout.
-  - Use logical properties in the Cyrkil primitives (`ms-2` instead of `ml-2`, `me-2` instead of `mr-2` — Tailwind v4 has these).
+  - Use logical properties in the GPR primitives (`ms-2` instead of `ml-2`, `me-2` instead of `mr-2` — Tailwind v4 has these).
 

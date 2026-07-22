@@ -284,6 +284,6 @@ CREATE INDEX idx_search_tsv ON search_index USING gin(content_tsv);
 ### Phase plan
 - **Phase 1:** Build the structure (sections table, kpi_tables, escalation_matrix, search_index) from the PDF.
 - **Phase 2:** Build the 5 tools + the ReAct agent loop + the chat endpoint. No frontend yet.
-- **Phase 3:** Cyrkil frontend + chat UI.
+- **Phase 3:** GPR frontend + chat UI.
 - **Phase 4-7:** Admin, auth, logs, hardening.
 

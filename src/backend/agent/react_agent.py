@@ -259,7 +259,7 @@ async def run_agent_stream(
                 yield {"event": "done", "data": "completed"}
                 return
             if any(msg_clean == q or msg_clean.startswith(q + " ") for q in identity_qs):
-                ident_ans = "أنا مساعد GPR (General Purpose RAG) المؤسسي المعتمد لشركة كيان المملكة. على عكس روبوتات الدردشة العامة، أنا متصل مباشرة بدليل الهيكل التنظيمي الكامل المكون من 80 بطاقة معرفية ومؤشرات الأداء وصلاحيات المسؤولين، حيث أقوم بالتنقل وتحليل الفهرس للوصول إلى الإجابة الدقيقة الموثقة." if is_ar else "I am the GPR (General Purpose RAG) Grounded Assistant for Kayan Al-Mamlaka Company. Unlike standard chatbots, I have direct, verified access to our 80-node Table of Contents and full organizational manual. I navigate section by section across up to 6 cycles to deliver detailed, authoritative answers with exact citations."
+                ident_ans = "أنا مساعد GPR (General Purpose RAG) المؤسسي المعتمد لالمؤسسة النموذجية. على عكس روبوتات الدردشة العامة، أنا متصل مباشرة بدليل الهيكل التنظيمي الكامل المكون من 80 بطاقة معرفية ومؤشرات الأداء وصلاحيات المسؤولين، حيث أقوم بالتنقل وتحليل الفهرس للوصول إلى الإجابة الدقيقة الموثقة." if is_ar else "I am the GPR (General Purpose RAG) Grounded Assistant for Sample Organization. Unlike standard chatbots, I have direct, verified access to our 80-node Table of Contents and full organizational manual. I navigate section by section across up to 6 cycles to deliver detailed, authoritative answers with exact citations."
                 for word in ident_ans.split():
                     yield {"event": "token", "data": json.dumps({"token": f"{word} "}, ensure_ascii=False)}
                 yield {"event": "done", "data": "completed"}
@@ -460,7 +460,7 @@ async def run_agent_stream(
             yield {"event": "done", "data": "completed"}
             return
         if any(msg_clean == q or msg_clean.startswith(q + " ") for q in identity_qs):
-            ident_ans = "أنا مساعد GPR (General Purpose RAG) المؤسسي المعتمد لشركة كيان المملكة. على عكس روبوتات الدردشة العامة، أنا متصل مباشرة بدليل الهيكل التنظيمي الكامل المكون من 80 بطاقة معرفية ومؤشرات الأداء وصلاحيات المسؤولين، حيث أقوم بالتنقل وتحليل الفهرس للوصول إلى الإجابة الدقيقة الموثقة." if is_ar else "I am the GPR (General Purpose RAG) Grounded Assistant for Kayan Al-Mamlaka Company. Unlike standard chatbots, I have direct, verified access to our 80-node Table of Contents and full organizational manual. I navigate section by section across up to 6 cycles to deliver detailed, authoritative answers with exact citations."
+            ident_ans = "أنا مساعد GPR (General Purpose RAG) المؤسسي المعتمد لالمؤسسة النموذجية. على عكس روبوتات الدردشة العامة، أنا متصل مباشرة بدليل الهيكل التنظيمي الكامل المكون من 80 بطاقة معرفية ومؤشرات الأداء وصلاحيات المسؤولين، حيث أقوم بالتنقل وتحليل الفهرس للوصول إلى الإجابة الدقيقة الموثقة." if is_ar else "I am the GPR (General Purpose RAG) Grounded Assistant for Sample Organization. Unlike standard chatbots, I have direct, verified access to our 80-node Table of Contents and full organizational manual. I navigate section by section across up to 6 cycles to deliver detailed, authoritative answers with exact citations."
             for word in ident_ans.split():
                 yield {"event": "token", "data": json.dumps({"token": f"{word} "}, ensure_ascii=False)}
             yield {"event": "done", "data": "completed"}

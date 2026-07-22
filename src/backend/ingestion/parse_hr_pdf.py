@@ -287,7 +287,7 @@ async def persist_knowledge_base(kb: IndexedKnowledgeBase, json_out_path: Option
             if not existing_doc:
                 existing_doc = DocumentORM(
                     id=doc_id,
-                    title="Kayan Al-Mamlaka Official HR Guide v1.0",
+                    title="Sample Organization Official HR Guide v1.0",
                     filename="hr_source.pdf",
                     file_type="pdf",
                     file_size=5728788,

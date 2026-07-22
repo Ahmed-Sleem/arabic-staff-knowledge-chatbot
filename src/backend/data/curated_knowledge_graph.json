@@ -1,7 +1,7 @@
 {
   "document": {
     "id": "HR-MANUAL-V1",
-    "title": "Kayan Al-Mamlaka Approved Organizational Structure Guide v1.0",
+    "title": "Sample Organization Approved Organizational Structure Guide v1.0",
     "filename": "hr_source.pdf",
     "file_type": "pdf",
     "file_size": 1828800,
@@ -4956,12 +4956,12 @@
       "document_id": "HR-MANUAL-V1",
       "chunk_code": "1",
       "title": "Introduction to the Guide",
-      "content": "This guide serves as a reference for the organizational structure, job responsibilities, and key performance indicators for all positions within Kayan Al-Mamlaka Company. It aims to clarify reporting lines, responsibilities, and performance measurement criteria to ensure operational efficiency and strategic alignment. This section introduces the purpose, scope, and application of the guide, setting the foundation for understanding roles, reporting relationships, and performance expectations throughout the organization.",
+      "content": "This guide serves as a reference for the organizational structure, job responsibilities, and key performance indicators for all positions within Sample Organization. It aims to clarify reporting lines, responsibilities, and performance measurement criteria to ensure operational efficiency and strategic alignment. This section introduces the purpose, scope, and application of the guide, setting the foundation for understanding roles, reporting relationships, and performance expectations throughout the organization.",
       "page_number": 1,
       "chunk_type": "heading",
       "parent_chunk_id": null,
-      "word_count": 66,
-      "metadata_json": "{\"name_ar\": \"مقدمة الدليل\", \"short_description\": \"Reference for organizational structure, job responsibilities, and KPIs.\", \"short_description_ar\": \"مرجع للهيكل التنظيمي والمهام الوظيفية ومؤشرات الأداء الرئيسية.\", \"content_ar\": \"يعمل هذا الدليل كمرجع للهيكل التنظيمي والمهام الوظيفية ومؤشرات الأداء الرئيسية لجميع الوظائف في شركة كيان المملكة. يهدف إلى توضيح خطوط الإبلاغ والمسؤوليات ومعايير قياس الأداء لضمان الكفاءة التشغيلية والتوافق الاستراتيجي. يقدم هذا القسم الغرض والنطاق وتطبيق الدليل، مما يضع الأساس لفهم الأدوار وعلاقات الإبلاغ وتوقعات الأداء في جميع أنحاء المنظمة.\", \"section_path\": [\"1. Introduction to the Guide\"], \"aliases\": [\"intro\", \"guide overview\", \"مقدمة\", \"نظرة عامة على الدليل\"], \"keywords_ar\": [\"مقدمة\", \"دليل\", \"هيكل تنظيمي\", \"مؤشرات الأداء\"], \"keywords_en\": [\"introduction\", \"guide\", \"organizational structure\", \"KPIs\"], \"connections\": [{\"target_id\": \"2\", \"relation_type\": \"semantic_related\", \"reason\": \"Links to the purpose of the guide\", \"evidence\": \"The guide explains its purpose in the next section.\", \"strength\": 1.0}, {\"target_id\": \"3\", \"relation_type\": \"semantic_related\", \"reason\": \"Links to the scope of the guide\", \"evidence\": \"The guide defines its scope in a subsequent section.\", \"strength\": 1.0}, {\"target_id\": \"5\", \"relation_type\": \"semantic_related\", \"reason\": \"Links to the top of the organizational structure\", \"evidence\": \"The guide details the structure starting with the Board.\", \"strength\": 0.9}, {\"target_id\": \"6\", \"relation_type\": \"semantic_related\", \"reason\": \"Links to the executive management layer\", \"evidence\": \"The guide details the structure after the Board.\", \"strength\": 0.9}], \"answerable_questions\": [\"What is the purpose of this guide?\", \"Who is this guide for?\", \"What does the guide cover?\"], \"not_answered_here\": [\"Specific job descriptions\", \"Detailed procedures for HR processes\", \"Company financial data\"], \"role_profile\": {\"department\": \"Organizational Management\", \"reports_to\": \"N/A\", \"manages\": [], \"responsibilities\": [\"Serves as a reference for organizational structure and responsibilities\", \"Clarifies reporting lines and performance criteria\"], \"required_qualifications\": [], \"decision_authority\": [], \"kpis_owned\": []}, \"kpis\": [], \"approval_status\": \"approved\", \"last_verified\": \"2026-07-20\", \"confidence\": \"high\"}"
+      "word_count": 65,
+      "metadata_json": "{\"name_ar\": \"مقدمة الدليل\", \"short_description\": \"Reference for organizational structure, job responsibilities, and KPIs.\", \"short_description_ar\": \"مرجع للهيكل التنظيمي والمهام الوظيفية ومؤشرات الأداء الرئيسية.\", \"content_ar\": \"يعمل هذا الدليل كمرجع للهيكل التنظيمي والمهام الوظيفية ومؤشرات الأداء الرئيسية لجميع الوظائف في المؤسسة النموذجية. يهدف إلى توضيح خطوط الإبلاغ والمسؤوليات ومعايير قياس الأداء لضمان الكفاءة التشغيلية والتوافق الاستراتيجي. يقدم هذا القسم الغرض والنطاق وتطبيق الدليل، مما يضع الأساس لفهم الأدوار وعلاقات الإبلاغ وتوقعات الأداء في جميع أنحاء المنظمة.\", \"section_path\": [\"1. Introduction to the Guide\"], \"aliases\": [\"intro\", \"guide overview\", \"مقدمة\", \"نظرة عامة على الدليل\"], \"keywords_ar\": [\"مقدمة\", \"دليل\", \"هيكل تنظيمي\", \"مؤشرات الأداء\"], \"keywords_en\": [\"introduction\", \"guide\", \"organizational structure\", \"KPIs\"], \"connections\": [{\"target_id\": \"2\", \"relation_type\": \"semantic_related\", \"reason\": \"Links to the purpose of the guide\", \"evidence\": \"The guide explains its purpose in the next section.\", \"strength\": 1.0}, {\"target_id\": \"3\", \"relation_type\": \"semantic_related\", \"reason\": \"Links to the scope of the guide\", \"evidence\": \"The guide defines its scope in a subsequent section.\", \"strength\": 1.0}, {\"target_id\": \"5\", \"relation_type\": \"semantic_related\", \"reason\": \"Links to the top of the organizational structure\", \"evidence\": \"The guide details the structure starting with the Board.\", \"strength\": 0.9}, {\"target_id\": \"6\", \"relation_type\": \"semantic_related\", \"reason\": \"Links to the executive management layer\", \"evidence\": \"The guide details the structure after the Board.\", \"strength\": 0.9}], \"answerable_questions\": [\"What is the purpose of this guide?\", \"Who is this guide for?\", \"What does the guide cover?\"], \"not_answered_here\": [\"Specific job descriptions\", \"Detailed procedures for HR processes\", \"Company financial data\"], \"role_profile\": {\"department\": \"Organizational Management\", \"reports_to\": \"N/A\", \"manages\": [], \"responsibilities\": [\"Serves as a reference for organizational structure and responsibilities\", \"Clarifies reporting lines and performance criteria\"], \"required_qualifications\": [], \"decision_authority\": [], \"kpis_owned\": []}, \"kpis\": [], \"approval_status\": \"approved\", \"last_verified\": \"2026-07-20\", \"confidence\": \"high\"}"
     },
     {
       "id": "2",
@@ -4980,12 +4980,12 @@
       "document_id": "HR-MANUAL-V1",
       "chunk_code": "3",
       "title": "Scope of Application",
-      "content": "This guide applies to all employees, departments, and functions within Kayan Al-Mamlaka Company. It serves as an official reference for organizational matters and shall be used in all administrative and operational decisions related to human resources and performance management. This section defines the boundaries of the guide's authority, confirming its mandatory application across the entire company and its use in all relevant administrative and operational contexts.",
+      "content": "This guide applies to all employees, departments, and functions within Sample Organization. It serves as an official reference for organizational matters and shall be used in all administrative and operational decisions related to human resources and performance management. This section defines the boundaries of the guide's authority, confirming its mandatory application across the entire company and its use in all relevant administrative and operational contexts.",
       "page_number": 3,
       "chunk_type": "heading",
       "parent_chunk_id": null,
-      "word_count": 66,
-      "metadata_json": "{\"name_ar\": \"نطاق التطبيق\", \"short_description\": \"Applies to all employees, departments, and functions.\", \"short_description_ar\": \"ينطبق على جميع الموظفين والإدارات والوظائف.\", \"content_ar\": \"ينطبق هذا الدليل على جميع الموظفين والإدارات والوظائف في شركة كيان المملكة. يعمل كمرجع رسمي للشؤون التنظيمية ويجب استخدامه في جميع القرارات الإدارية والتشغيلية المتعلقة بالموارد البشرية وإدارة الأداء. يحدد هذا القسم حدود سلطة الدليل، مؤكدًا تطبيقه الإلزامي في جميع أنحاء الشركة واستخدامه في جميع السياقات الإدارية والتشغيلية ذات الصلة.\", \"section_path\": [\"3. Scope of Application\"], \"aliases\": [\"scope\", \"application\", \"نطاق\", \"تطبيق\"], \"keywords_ar\": [\"نطاق\", \"تطبيق\", \"موظفين\", \"إدارات\", \"مرجع رسمي\", \"موارد بشرية\", \"إدارة أداء\"], \"keywords_en\": [\"scope\", \"application\", \"employees\", \"departments\", \"official reference\", \"human resources\", \"performance management\"], \"connections\": [{\"target_id\": \"1\", \"relation_type\": \"semantic_related\", \"reason\": \"Defines who the guide is for, building on the introduction.\", \"evidence\": \"The scope is a key part of the guide's introduction.\", \"strength\": 1.0}, {\"target_id\": \"2\", \"relation_type\": \"semantic_related\", \"reason\": \"Relates to the purpose of the guide\", \"evidence\": \"The scope enables the purpose to be achieved across the company.\", \"strength\": 0.9}, {\"target_id\": \"5\", \"relation_type\": \"semantic_related\", \"reason\": \"The scope covers the Board of Directors.\", \"evidence\": \"The guide applies to all employees and functions.\", \"strength\": 0.7}, {\"target_id\": \"6\", \"relation_type\": \"semantic_related\", \"reason\": \"The scope covers executive management.\", \"evidence\": \"The guide applies to all employees and functions.\", \"strength\": 0.7}], \"answerable_questions\": [\"Who does this guide apply to?\", \"What is the scope of the guide?\", \"Is this guide mandatory for all departments?\"], \"not_answered_here\": [\"Specific rules for subsidiaries\", \"External stakeholder policies\"], \"role_profile\": {\"department\": \"Organizational Management\", \"reports_to\": \"N/A\", \"manages\": [], \"responsibilities\": [\"Defining the application boundaries of the guide\"], \"required_qualifications\": [], \"decision_authority\": [], \"kpis_owned\": []}, \"kpis\": [], \"approval_status\": \"approved\", \"last_verified\": \"2026-07-20\", \"confidence\": \"high\"}"
+      "word_count": 65,
+      "metadata_json": "{\"name_ar\": \"نطاق التطبيق\", \"short_description\": \"Applies to all employees, departments, and functions.\", \"short_description_ar\": \"ينطبق على جميع الموظفين والإدارات والوظائف.\", \"content_ar\": \"ينطبق هذا الدليل على جميع الموظفين والإدارات والوظائف في المؤسسة النموذجية. يعمل كمرجع رسمي للشؤون التنظيمية ويجب استخدامه في جميع القرارات الإدارية والتشغيلية المتعلقة بالموارد البشرية وإدارة الأداء. يحدد هذا القسم حدود سلطة الدليل، مؤكدًا تطبيقه الإلزامي في جميع أنحاء الشركة واستخدامه في جميع السياقات الإدارية والتشغيلية ذات الصلة.\", \"section_path\": [\"3. Scope of Application\"], \"aliases\": [\"scope\", \"application\", \"نطاق\", \"تطبيق\"], \"keywords_ar\": [\"نطاق\", \"تطبيق\", \"موظفين\", \"إدارات\", \"مرجع رسمي\", \"موارد بشرية\", \"إدارة أداء\"], \"keywords_en\": [\"scope\", \"application\", \"employees\", \"departments\", \"official reference\", \"human resources\", \"performance management\"], \"connections\": [{\"target_id\": \"1\", \"relation_type\": \"semantic_related\", \"reason\": \"Defines who the guide is for, building on the introduction.\", \"evidence\": \"The scope is a key part of the guide's introduction.\", \"strength\": 1.0}, {\"target_id\": \"2\", \"relation_type\": \"semantic_related\", \"reason\": \"Relates to the purpose of the guide\", \"evidence\": \"The scope enables the purpose to be achieved across the company.\", \"strength\": 0.9}, {\"target_id\": \"5\", \"relation_type\": \"semantic_related\", \"reason\": \"The scope covers the Board of Directors.\", \"evidence\": \"The guide applies to all employees and functions.\", \"strength\": 0.7}, {\"target_id\": \"6\", \"relation_type\": \"semantic_related\", \"reason\": \"The scope covers executive management.\", \"evidence\": \"The guide applies to all employees and functions.\", \"strength\": 0.7}], \"answerable_questions\": [\"Who does this guide apply to?\", \"What is the scope of the guide?\", \"Is this guide mandatory for all departments?\"], \"not_answered_here\": [\"Specific rules for subsidiaries\", \"External stakeholder policies\"], \"role_profile\": {\"department\": \"Organizational Management\", \"reports_to\": \"N/A\", \"manages\": [], \"responsibilities\": [\"Defining the application boundaries of the guide\"], \"required_qualifications\": [], \"decision_authority\": [], \"kpis_owned\": []}, \"kpis\": [], \"approval_status\": \"approved\", \"last_verified\": \"2026-07-20\", \"confidence\": \"high\"}"
     },
     {
       "id": "4",
@@ -5914,7 +5914,7 @@
   ],
   "connections": [
     {
-      "id": "fc9ea75c-fc31-5a9d-9d53-b7b4d09d62af",
+      "id": "4a1b62c8-8fee-577e-894c-82ba05fd011e",
       "source_chunk_id": "1",
       "target_chunk_id": "2",
       "relationship_type": "semantic_related",
@@ -5922,7 +5922,7 @@
       "explanation": "Links to the purpose of the guide"
     },
     {
-      "id": "156bd1eb-de50-5f42-be35-1d7394c5e0f8",
+      "id": "9f5a3e47-dc51-5793-ba36-f629e592b0fd",
       "source_chunk_id": "1",
       "target_chunk_id": "3",
       "relationship_type": "semantic_related",
@@ -5930,7 +5930,7 @@
       "explanation": "Links to the scope of the guide"
     },
     {
-      "id": "a3bd2938-7120-5e12-af8f-8fd60828e6dd",
+      "id": "e0399e7d-6cb5-55b2-ba56-bbfd659c57fb",
       "source_chunk_id": "1",
       "target_chunk_id": "5",
       "relationship_type": "semantic_related",
@@ -5938,7 +5938,7 @@
       "explanation": "Links to the top of the organizational structure"
     },
     {
-      "id": "af03b8f9-aa88-57b8-bd38-af1457fa9327",
+      "id": "e8a65f09-057d-5c7b-8d6b-64c048d22c50",
       "source_chunk_id": "1",
       "target_chunk_id": "6",
       "relationship_type": "semantic_related",
@@ -5946,7 +5946,7 @@
       "explanation": "Links to the executive management layer"
     },
     {
-      "id": "be94b8e9-5e24-5c3c-ad8f-c568e3a9d169",
+      "id": "b4794f25-868f-5905-9cf8-9bc05c62eba7",
       "source_chunk_id": "2",
       "target_chunk_id": "1",
       "relationship_type": "semantic_related",
@@ -5954,7 +5954,7 @@
       "explanation": "Builds on the introduction to the guide"
     },
     {
-      "id": "5d4df0c9-ee5c-54a6-a6aa-11754738a5c5",
+      "id": "7822e616-6586-565e-9b0c-89626a46e83f",
       "source_chunk_id": "2",
       "target_chunk_id": "3",
       "relationship_type": "semantic_related",
@@ -5962,7 +5962,7 @@
       "explanation": "Links to the scope of the guide"
     },
     {
-      "id": "734e597a-3c9b-5ef5-b9dd-da01b13f1219",
+      "id": "d87c76ad-b3ce-5c32-bb12-5644b3582ea5",
       "source_chunk_id": "2",
       "target_chunk_id": "5",
       "relationship_type": "semantic_related",
@@ -5970,7 +5970,7 @@
       "explanation": "The guide defines the structure starting with the Board."
     },
     {
-      "id": "09f959fe-cf85-53e4-9df9-8877b28579bc",
+      "id": "325fe93b-05ff-50bf-b429-947b5683d4e1",
       "source_chunk_id": "2",
       "target_chunk_id": "6",
       "relationship_type": "semantic_related",
@@ -5978,7 +5978,7 @@
       "explanation": "The guide defines the executive management layer."
     },
     {
-      "id": "8c9594da-75b2-515a-a08a-059b5233c62f",
+      "id": "22a72a6e-304a-58cf-898d-0875e3e6d721",
       "source_chunk_id": "3",
       "target_chunk_id": "1",
       "relationship_type": "semantic_related",
@@ -5986,7 +5986,7 @@
       "explanation": "Defines who the guide is for, building on the introduction."
     },
     {
-      "id": "4e935df3-bdf7-59b3-b3fd-7efcdb5dc89e",
+      "id": "67915e72-7ad3-561d-aa33-2f29943a07de",
       "source_chunk_id": "3",
       "target_chunk_id": "2",
       "relationship_type": "semantic_related",
@@ -5994,7 +5994,7 @@
       "explanation": "Relates to the purpose of the guide"
     },
     {
-      "id": "7cffd762-7766-5ce3-9222-a132a08a7cdf",
+      "id": "869e7eeb-5bdd-5e75-8102-47471c5f2660",
       "source_chunk_id": "3",
       "target_chunk_id": "5",
       "relationship_type": "semantic_related",
@@ -6002,7 +6002,7 @@
       "explanation": "The scope covers the Board of Directors."
     },
     {
-      "id": "1810a0b4-1ab8-5148-ba63-9622a1e3877f",
+      "id": "fd7a8574-450e-5854-841d-5e63c87a93c0",
       "source_chunk_id": "3",
       "target_chunk_id": "6",
       "relationship_type": "semantic_related",
@@ -6010,7 +6010,7 @@
       "explanation": "The scope covers executive management."
     },
     {
-      "id": "f59f8bf5-458c-5fe0-951c-052625909979",
+      "id": "022092a4-6c3b-5682-9432-61f005994ef5",
       "source_chunk_id": "4",
       "target_chunk_id": "16",
       "relationship_type": "semantic_related",
@@ -6018,7 +6018,7 @@
       "explanation": "The escalation matrix is a key part of the administrative structure."
     },
     {
-      "id": "280a7491-24d9-5f9c-b65c-319a938a4d40",
+      "id": "3eb3036e-faba-56cd-a1c1-455849baca63",
       "source_chunk_id": "4",
       "target_chunk_id": "5",
       "relationship_type": "escalates_to",
@@ -6026,7 +6026,7 @@
       "explanation": "The CEO escalates to the Board of Directors."
     },
     {
-      "id": "8783fa84-758f-5b18-9715-99f0ab0cc67a",
+      "id": "b0b3f8f9-bbd7-56a3-aa7f-7188b07dfb55",
       "source_chunk_id": "4",
       "target_chunk_id": "6.1",
       "relationship_type": "escalates_to",
@@ -6034,7 +6034,7 @@
       "explanation": "High-impact issues are escalated to the CEO."
     },
     {
-      "id": "5e64f796-a504-595e-ba56-c948f2d6fcd2",
+      "id": "dd008ff7-6beb-59cd-8680-7fc08f88f71c",
       "source_chunk_id": "4",
       "target_chunk_id": "8.1",
       "relationship_type": "collaborates_with",
@@ -6042,7 +6042,7 @@
       "explanation": "PMO is involved in cost, time, and risk-related issues."
     },
     {
-      "id": "acc88d80-fa2a-5812-997d-d6ad8cb4dbd3",
+      "id": "8803148a-81ae-53df-803e-3a9e97ef1670",
       "source_chunk_id": "4",
       "target_chunk_id": "9.1",
       "relationship_type": "collaborates_with",
@@ -6050,7 +6050,7 @@
       "explanation": "Legal is involved in contract and risk-related issues."
     },
     {
-      "id": "0cba76a7-c2e3-52ce-9f08-5e6117858840",
+      "id": "6dbd9cf1-24af-5b35-8487-a016c0feaaee",
       "source_chunk_id": "4",
       "target_chunk_id": "11.1",
       "relationship_type": "collaborates_with",
@@ -6058,7 +6058,7 @@
       "explanation": "Finance is involved in cost-related issues."
     },
     {
-      "id": "eea05c02-c0e9-5e62-8b86-bd009aa9f358",
+      "id": "94210e3b-e3f8-59e1-bf4d-b761aa318614",
       "source_chunk_id": "4",
       "target_chunk_id": "7.1",
       "relationship_type": "collaborates_with",
@@ -6066,7 +6066,7 @@
       "explanation": "QHSE is involved in safety and quality issues."
     },
     {
-      "id": "bc8de6e2-3e61-5677-af4a-b11ff097133f",
+      "id": "3513e5ff-f318-5c05-aad3-c618fa25abed",
       "source_chunk_id": "5",
       "target_chunk_id": "5.1",
       "relationship_type": "parent_child",
@@ -6074,7 +6074,7 @@
       "explanation": "This heading is the parent section for detailed Board information."
     },
     {
-      "id": "d59a5cdf-52c2-5b2f-a293-e081d6b36f64",
+      "id": "e6607719-c0a2-5e95-bcb7-ef2d8e269e79",
       "source_chunk_id": "5",
       "target_chunk_id": "6.1",
       "relationship_type": "manages",
@@ -6082,7 +6082,7 @@
       "explanation": "The Board appoints and evaluates the CEO."
     },
     {
-      "id": "3705a558-05ed-54eb-acd0-b5d60a6fa8ed",
+      "id": "21e1c0df-77a9-5013-8f63-f4a1ae6b10f4",
       "source_chunk_id": "5.1",
       "target_chunk_id": "5",
       "relationship_type": "parent_child",
@@ -6090,7 +6090,7 @@
       "explanation": "This is the parent section for the Board."
     },
     {
-      "id": "1dd02f51-d713-50c2-a8a0-ca539f20e558",
+      "id": "0354e8d7-2aa6-5fbf-8ef7-9455c1689a14",
       "source_chunk_id": "5.1",
       "target_chunk_id": "6.1",
       "relationship_type": "manages",
@@ -6098,7 +6098,7 @@
       "explanation": "The Board appoints and evaluates the CEO."
     },
     {
-      "id": "c3cde60a-56bf-5fd0-8900-d5e0f44e980b",
+      "id": "baddc560-5fff-57be-977b-8edb47ffd8bf",
       "source_chunk_id": "6",
       "target_chunk_id": "6.1",
       "relationship_type": "parent_child",
@@ -6106,7 +6106,7 @@
       "explanation": "This heading is the parent section for detailed CEO information."
     },
     {
-      "id": "ff2f03e3-c1b4-5bb3-be90-02f2d41f5ae8",
+      "id": "04dd5c98-5939-5074-af19-58ede451264f",
       "source_chunk_id": "6",
       "target_chunk_id": "5.1",
       "relationship_type": "reports_to",
@@ -6114,7 +6114,7 @@
       "explanation": "Executive management, led by the CEO, reports to the Board."
     },
     {
-      "id": "2cb8aa37-ebdb-56aa-8453-d4cf3afd8dec",
+      "id": "f977e182-ce58-5fea-89a3-3920197d787d",
       "source_chunk_id": "6.1",
       "target_chunk_id": "6",
       "relationship_type": "parent_child",
@@ -6122,7 +6122,7 @@
       "explanation": "This is the parent section for Executive Management."
     },
     {
-      "id": "69660c33-c800-5b22-b657-d79b19903bfc",
+      "id": "69773ea4-4b79-5d68-b904-31da7799441e",
       "source_chunk_id": "6.1",
       "target_chunk_id": "5.1",
       "relationship_type": "reports_to",
@@ -6130,7 +6130,7 @@
       "explanation": "The CEO reports to the Board."
     },
     {
-      "id": "3e3b65ba-41b0-5feb-9e5f-e73f9837cf24",
+      "id": "cfc47ead-26de-56da-9739-366ecda9fe9d",
       "source_chunk_id": "6.1",
       "target_chunk_id": "7.1",
       "relationship_type": "manages",
@@ -6138,7 +6138,7 @@
       "explanation": "The CEO oversees the QHSE Manager."
     },
     {
-      "id": "08c64859-88a6-5152-856a-cda1ffb7cb41",
+      "id": "4a56fd57-6d7d-5354-a6e4-1f206e730099",
       "source_chunk_id": "6.1",
       "target_chunk_id": "8.1",
       "relationship_type": "manages",
@@ -6146,7 +6146,7 @@
       "explanation": "The CEO oversees the PMO Manager."
     },
     {
-      "id": "49c84f54-cf98-5114-b609-850da6337cc6",
+      "id": "77cdc0a3-e1f3-5d20-87a1-5ff280fa7094",
       "source_chunk_id": "6.1",
       "target_chunk_id": "9.1",
       "relationship_type": "manages",
@@ -6154,7 +6154,7 @@
       "explanation": "The CEO oversees the Legal Manager."
     },
     {
-      "id": "9e108efa-300f-57c9-927f-b719c5adca30",
+      "id": "532ac7ed-fb05-5385-8f9b-fd04d118b116",
       "source_chunk_id": "6.1",
       "target_chunk_id": "10.1",
       "relationship_type": "manages",
@@ -6162,7 +6162,7 @@
       "explanation": "The CEO oversees the Business Development Manager."
     },
     {
-      "id": "b81c87d5-0c88-5998-bc2d-c23b0f4c0325",
+      "id": "420dce6c-5aaa-5395-b7d0-0939c855ea1d",
       "source_chunk_id": "6.1",
       "target_chunk_id": "11.1",
       "relationship_type": "manages",
@@ -6170,7 +6170,7 @@
       "explanation": "The CEO oversees the Finance Director."
     },
     {
-      "id": "c98e8ade-eced-5cda-956f-62a15362a051",
+      "id": "43358da4-e74e-5ce3-b9f9-280dbefa3090",
       "source_chunk_id": "6.1",
       "target_chunk_id": "12.1",
       "relationship_type": "manages",
@@ -6178,7 +6178,7 @@
       "explanation": "The CEO oversees the HR Manager."
     },
     {
-      "id": "e8436f38-5981-5b06-ab11-3ef8df56201d",
+      "id": "c4ca64df-7f17-58a9-9f5c-959d62b72300",
       "source_chunk_id": "6.1",
       "target_chunk_id": "13.1",
       "relationship_type": "manages",
@@ -6186,7 +6186,7 @@
       "explanation": "The CEO oversees the Operations Manager."
     },
     {
-      "id": "5508d8a9-effe-51d5-881c-903dba7a7ff7",
+      "id": "1536ee0e-30f3-5538-b3d8-09afaa40aeb9",
       "source_chunk_id": "6.1",
       "target_chunk_id": "14.1",
       "relationship_type": "manages",
@@ -6194,7 +6194,7 @@
       "explanation": "The CEO oversees the Project Management Manager."
     },
     {
-      "id": "9001708d-5a5d-511e-8d60-5873714432b6",
+      "id": "b0d59695-dc75-5047-9223-38cf56861840",
       "source_chunk_id": "7",
       "target_chunk_id": "7.1",
       "relationship_type": "parent_child",
@@ -6202,7 +6202,7 @@
       "explanation": "This heading is the parent section for the QHSE department."
     },
     {
-      "id": "6cc9e67f-f94d-543b-8893-ae31d7a43f0c",
+      "id": "efa15af9-f9db-5f50-b523-d39dbf47835d",
       "source_chunk_id": "7",
       "target_chunk_id": "6.1",
       "relationship_type": "reports_to",
@@ -6210,7 +6210,7 @@
       "explanation": "The QHSE department reports to the CEO."
     },
     {
-      "id": "5c2eec28-8c2b-508f-bd88-6cbd2aba26c9",
+      "id": "0a622f67-b396-57a2-ae65-f4afe878a873",
       "source_chunk_id": "7.1",
       "target_chunk_id": "7",
       "relationship_type": "parent_child",
@@ -6218,7 +6218,7 @@
       "explanation": "This is the parent section for QHSE."
     },
     {
-      "id": "be5cbd35-294b-55b0-ac97-39a8de687a43",
+      "id": "3879210b-0a5a-507f-9d95-edcfd5cdfaaf",
       "source_chunk_id": "7.1",
       "target_chunk_id": "6.1",
       "relationship_type": "reports_to",
@@ -6226,7 +6226,7 @@
       "explanation": "The QHSE Manager reports to the CEO."
     },
     {
-      "id": "ff2a6713-3a26-5dc1-b230-24c7c5d7e9b3",
+      "id": "f62dd231-3225-5d0e-960e-9419e11029a1",
       "source_chunk_id": "7.1",
       "target_chunk_id": "7.2",
       "relationship_type": "manages",
@@ -6234,7 +6234,7 @@
       "explanation": "The QHSE Manager supervises the QA/QC Officer."
     },
     {
-      "id": "cb7c69b6-3f7b-597d-9cc1-05a3ad242d66",
+      "id": "726bd4ff-2098-555e-b78e-c50d537b376b",
       "source_chunk_id": "7.1",
       "target_chunk_id": "7.3",
       "relationship_type": "manages",
@@ -6242,7 +6242,7 @@
       "explanation": "The QHSE Manager supervises the HSE Officer."
     },
     {
-      "id": "edd57345-0622-52ed-b48e-45d889640581",
+      "id": "89216ce7-7cb6-5880-8ffb-9c7cbbc15ec5",
       "source_chunk_id": "7.2",
       "target_chunk_id": "7.1",
       "relationship_type": "reports_to",
@@ -6250,7 +6250,7 @@
       "explanation": "The QA/QC Officer reports to the QHSE Manager."
     },
     {
-      "id": "2f1ec287-9257-5ee3-82d0-affc6f395c5a",
+      "id": "62c2b2d5-34a4-51b5-92a1-d7030ff263a0",
       "source_chunk_id": "7.2",
       "target_chunk_id": "14.5",
       "relationship_type": "collaborates_with",
@@ -6258,7 +6258,7 @@
       "explanation": "The QA/QC Officer works with Project Managers."
     },
     {
-      "id": "c2b5e787-e137-5454-98f6-bf8918faa609",
+      "id": "2e01778e-c5a5-57a1-9495-85db303c268a",
       "source_chunk_id": "7.2",
       "target_chunk_id": "14.7",
       "relationship_type": "collaborates_with",
@@ -6266,7 +6266,7 @@
       "explanation": "The QA/QC Officer works with Execution Teams."
     },
     {
-      "id": "3b4305cf-10cd-5a88-bfa7-9ff1668c9e7c",
+      "id": "e9054d60-e2cc-5583-b9d5-1727df3559e3",
       "source_chunk_id": "7.2",
       "target_chunk_id": "14.8",
       "relationship_type": "collaborates_with",
@@ -6274,7 +6274,7 @@
       "explanation": "The QA/QC Officer works with Engineering."
     },
     {
-      "id": "5fb21012-7fb2-5048-98dc-952b24db7459",
+      "id": "3538dec4-e933-5d85-a833-626358876c92",
       "source_chunk_id": "7.2",
       "target_chunk_id": "13.2",
       "relationship_type": "collaborates_with",
@@ -6282,7 +6282,7 @@
       "explanation": "The QA/QC Officer works with Procurement."
     },
     {
-      "id": "d7ddcd8e-7f96-5875-9810-42993b5c9e4b",
+      "id": "19eccb81-88b4-5a9b-8458-049ad6be51b4",
       "source_chunk_id": "7.3",
       "target_chunk_id": "7.1",
       "relationship_type": "reports_to",
@@ -6290,7 +6290,7 @@
       "explanation": "The HSE Officer reports to the QHSE Manager."
     },
     {
-      "id": "1d3f8cbf-59ec-589a-b3fd-2acad6d252e2",
+      "id": "1df7adc9-45dd-544e-bf11-f96b4f9124e5",
       "source_chunk_id": "7.3",
       "target_chunk_id": "14.5",
       "relationship_type": "collaborates_with",
@@ -6298,7 +6298,7 @@
       "explanation": "The HSE Officer works with Project Managers."
     },
     {
-      "id": "1f71d14d-0335-5d72-a111-81d636192bdc",
+      "id": "d072e383-8da3-5513-8734-44a7f772a4c1",
       "source_chunk_id": "7.3",
       "target_chunk_id": "14.7",
       "relationship_type": "collaborates_with",
@@ -6306,7 +6306,7 @@
       "explanation": "The HSE Officer works with Execution Teams."
     },
     {
-      "id": "7999e1b0-239b-5b38-bdcc-abe93142575d",
+      "id": "5f1518b7-3b62-52fc-92a2-3d760fde88fc",
       "source_chunk_id": "7.3",
       "target_chunk_id": "13.1",
       "relationship_type": "collaborates_with",
@@ -6314,7 +6314,7 @@
       "explanation": "The HSE Officer works with Operations."
     },
     {
-      "id": "e9e24dad-75a4-57ec-8627-faa603548db6",
+      "id": "b76c150c-5517-5049-8046-7de46f15f861",
       "source_chunk_id": "7.3",
       "target_chunk_id": "12.1",
       "relationship_type": "collaborates_with",
@@ -6322,7 +6322,7 @@
       "explanation": "The HSE Officer works with Human Resources."
     },
     {
-      "id": "3e844736-9800-50f1-8fee-acd0ead766cf",
+      "id": "ad4c9f4b-0001-5f78-9762-e9f59b853427",
       "source_chunk_id": "8",
       "target_chunk_id": "8.1",
       "relationship_type": "parent_child",
@@ -6330,7 +6330,7 @@
       "explanation": "This heading is the parent section for the PMO."
     },
     {
-      "id": "1055f1e0-261c-5d6a-86f3-f671239f68ed",
+      "id": "a0b0a445-38c7-5a0c-ac89-db2bf6c76c63",
       "source_chunk_id": "8",
       "target_chunk_id": "6.1",
       "relationship_type": "reports_to",
@@ -6338,7 +6338,7 @@
       "explanation": "The PMO reports to the CEO."
     },
     {
-      "id": "bde0297a-a2ce-55e4-b1c5-1ab04e25fd9d",
+      "id": "8ec1946f-72c7-5483-8191-9081a0a5c874",
       "source_chunk_id": "8.1",
       "target_chunk_id": "8",
       "relationship_type": "parent_child",
@@ -6346,7 +6346,7 @@
       "explanation": "This is the parent section for the PMO."
     },
     {
-      "id": "c06c2a74-5440-5c9f-899a-9ade38769f4b",
+      "id": "07dd959b-100e-53c8-ab6a-27f98d5bdb3d",
       "source_chunk_id": "8.1",
       "target_chunk_id": "6.1",
       "relationship_type": "reports_to",
@@ -6354,7 +6354,7 @@
       "explanation": "The PMO Manager reports to the CEO."
     },
     {
-      "id": "aace876c-26f4-558e-a640-dfc5b5b66ddf",
+      "id": "39ce4ec8-c760-5f6d-9a2f-d210adae0fd7",
       "source_chunk_id": "8.1",
       "target_chunk_id": "8.2",
       "relationship_type": "manages",
@@ -6362,7 +6362,7 @@
       "explanation": "The PMO Manager supervises the Planning Officer."
     },
     {
-      "id": "644eda51-e498-5d8e-b742-2799b3e94d04",
+      "id": "6d05789d-4e68-53f9-80f2-c743c8314b7d",
       "source_chunk_id": "8.1",
       "target_chunk_id": "8.3",
       "relationship_type": "manages",
@@ -6370,7 +6370,7 @@
       "explanation": "The PMO Manager supervises the Cost Control Officer."
     },
     {
-      "id": "4fc2073a-7d2b-5a70-a7b3-03272dba4340",
+      "id": "43d11447-9486-5c75-a063-57a9604820c8",
       "source_chunk_id": "8.1",
       "target_chunk_id": "8.4",
       "relationship_type": "manages",
@@ -6378,7 +6378,7 @@
       "explanation": "The PMO Manager supervises the Reporting Officer."
     },
     {
-      "id": "11ba0edb-4ea1-5b20-91ea-87a53f0a27c4",
+      "id": "b91b089c-5661-5edf-bdb2-8f99d64f0d67",
       "source_chunk_id": "8.1",
       "target_chunk_id": "8.5",
       "relationship_type": "manages",
@@ -6386,7 +6386,7 @@
       "explanation": "The PMO Manager supervises the Risk Management Officer."
     },
     {
-      "id": "612e953c-b2d6-568b-8551-4e5766388973",
+      "id": "ba60f643-e31d-5c51-8efb-e1806df0f692",
       "source_chunk_id": "8.1",
       "target_chunk_id": "8.6",
       "relationship_type": "manages",
@@ -6394,7 +6394,7 @@
       "explanation": "The PMO Manager supervises the Claims Officer."
     },
     {
-      "id": "dddc41ec-fc7e-5151-ac25-ba97e5715260",
+      "id": "82ac3064-8e49-5546-8aa4-9a69c3207de7",
       "source_chunk_id": "8.1",
       "target_chunk_id": "11.1",
       "relationship_type": "collaborates_with",
@@ -6402,7 +6402,7 @@
       "explanation": "The PMO coordinates with Finance."
     },
     {
-      "id": "43895339-a163-5810-bd8d-10222a0f4bb0",
+      "id": "e422d068-45a1-510f-abcb-132058354d73",
       "source_chunk_id": "8.1",
       "target_chunk_id": "9.1",
       "relationship_type": "collaborates_with",
@@ -6410,7 +6410,7 @@
       "explanation": "The PMO coordinates with Legal."
     },
     {
-      "id": "6b2744d1-d300-56b3-b9ea-43265d8874de",
+      "id": "73b09956-a217-5a7f-bf36-09fd979964fc",
       "source_chunk_id": "8.1",
       "target_chunk_id": "13.1",
       "relationship_type": "collaborates_with",
@@ -6418,7 +6418,7 @@
       "explanation": "The PMO coordinates with Operations."
     },
     {
-      "id": "034036dc-0a2c-5c13-9bd6-821477d75a7b",
+      "id": "4faa1403-48e9-5d72-a50b-80f6c8dfb8f9",
       "source_chunk_id": "8.2",
       "target_chunk_id": "8.1",
       "relationship_type": "reports_to",
@@ -6426,7 +6426,7 @@
       "explanation": "The Planning Officer reports to the PMO Manager."
     },
     {
-      "id": "cb8e4b85-fb8f-567d-b5d1-0f718e0929ba",
+      "id": "15a346d0-e0a7-5ff7-b98f-94ffe59244ad",
       "source_chunk_id": "8.2",
       "target_chunk_id": "8.6",
       "relationship_type": "collaborates_with",
@@ -6434,7 +6434,7 @@
       "explanation": "The Planning Officer works with the Claims Officer."
     },
     {
-      "id": "abb81928-dce5-59ea-94e0-911a25486e48",
+      "id": "f53b2ca3-997e-5af9-a369-2697390ace9b",
       "source_chunk_id": "8.2",
       "target_chunk_id": "14.5",
       "relationship_type": "collaborates_with",
@@ -6442,7 +6442,7 @@
       "explanation": "The Planning Officer works with Project Managers."
     },
     {
-      "id": "7f4133d5-7d7a-5b33-83c5-ec1de37485ae",
+      "id": "cc251813-0393-5280-bc22-f1d6d657de6b",
       "source_chunk_id": "8.3",
       "target_chunk_id": "8.1",
       "relationship_type": "reports_to",
@@ -6450,7 +6450,7 @@
       "explanation": "The Cost Control Officer reports to the PMO Manager."
     },
     {
-      "id": "4476b60e-397f-5b3a-a11e-540e12eaa266",
+      "id": "51fe545e-fd84-578f-a897-795f6d672a28",
       "source_chunk_id": "8.3",
       "target_chunk_id": "11.1",
       "relationship_type": "collaborates_with",
@@ -6458,7 +6458,7 @@
       "explanation": "The Cost Control Officer coordinates with Finance."
     },
     {
-      "id": "a404b7dc-04a3-5c69-b6dc-a40295951574",
+      "id": "3fd8e320-0876-5de9-8038-46a2cfdf8cf8",
       "source_chunk_id": "8.3",
       "target_chunk_id": "11.4",
       "relationship_type": "collaborates_with",
@@ -6466,7 +6466,7 @@
       "explanation": "The Cost Control Officer works with Project Accounts."
     },
     {
-      "id": "4bb43014-c04f-588b-996d-d7241d053308",
+      "id": "9ee62876-0651-59cb-b2ff-75f93a7f41b6",
       "source_chunk_id": "8.4",
       "target_chunk_id": "8.1",
       "relationship_type": "reports_to",
@@ -6474,7 +6474,7 @@
       "explanation": "The Reporting Officer reports to the PMO Manager."
     },
     {
-      "id": "e1ffe529-954b-5580-95f7-e87f9ee50118",
+      "id": "c9e1358d-a71e-54cf-a9ba-5a54d80a71e7",
       "source_chunk_id": "8.4",
       "target_chunk_id": "6.1",
       "relationship_type": "collaborates_with",
@@ -6482,7 +6482,7 @@
       "explanation": "The Reporting Officer prepares summaries for the CEO."
     },
     {
-      "id": "ef10d297-da07-580d-b86f-49ce63e835d8",
+      "id": "c7aa4ad4-eeed-5e5d-bf5f-5c3192a5e540",
       "source_chunk_id": "8.4",
       "target_chunk_id": "14.5",
       "relationship_type": "collaborates_with",
@@ -6490,7 +6490,7 @@
       "explanation": "The Reporting Officer collects data from project managers."
     },
     {
-      "id": "b1a7f52e-ef1a-59a5-962b-9d6595e2bea0",
+      "id": "4b0a7494-f5c5-59b5-ae95-5faf87dff71e",
       "source_chunk_id": "8.5",
       "target_chunk_id": "8.1",
       "relationship_type": "reports_to",
@@ -6498,7 +6498,7 @@
       "explanation": "The Risk Management Officer reports to the PMO Manager."
     },
     {
-      "id": "23a3ca18-ed1c-5c97-922d-baaa3640166d",
+      "id": "2ece2161-fc65-569e-afc3-1f9944cc53e8",
       "source_chunk_id": "8.5",
       "target_chunk_id": "9.1",
       "relationship_type": "collaborates_with",
@@ -6506,7 +6506,7 @@
       "explanation": "Risk Management works with Legal on contractual risks."
     },
     {
-      "id": "84458345-8dd8-5063-b197-17a00cd08650",
+      "id": "3fe2313e-80c2-50e8-b024-0dcb5482b9a5",
       "source_chunk_id": "8.5",
       "target_chunk_id": "11.1",
       "relationship_type": "collaborates_with",
@@ -6514,7 +6514,7 @@
       "explanation": "Risk Management works with Finance on financial risks."
     },
     {
-      "id": "38f43a23-47de-5b2b-9dea-8a02543cd22a",
+      "id": "4ca84ef4-b38c-5c11-89d6-d8ef84b3d2b7",
       "source_chunk_id": "8.6",
       "target_chunk_id": "8.1",
       "relationship_type": "reports_to",
@@ -6522,7 +6522,7 @@
       "explanation": "The Claims Officer reports to the PMO Manager."
     },
     {
-      "id": "0884ec35-4346-58af-af5d-a60aeed11c66",
+      "id": "f69d0220-9bc9-549e-a887-8d3e590f52e3",
       "source_chunk_id": "8.6",
       "target_chunk_id": "8.2",
       "relationship_type": "collaborates_with",
@@ -6530,7 +6530,7 @@
       "explanation": "The Claims Officer works with Planning."
     },
     {
-      "id": "25db1b94-dd75-56a5-8846-c16831fa9b7e",
+      "id": "9180b379-51c1-5476-802a-1f9caa5ebf44",
       "source_chunk_id": "8.6",
       "target_chunk_id": "8.3",
       "relationship_type": "collaborates_with",
@@ -6538,7 +6538,7 @@
       "explanation": "The Claims Officer works with Cost Control."
     },
     {
-      "id": "3b9288a9-eb64-521d-b8af-bcd15887a121",
+      "id": "800ffa66-b5a5-5d11-86ea-7d16d6fa3edb",
       "source_chunk_id": "8.6",
       "target_chunk_id": "9.1",
       "relationship_type": "collaborates_with",
@@ -6546,7 +6546,7 @@
       "explanation": "The Claims Officer works with Legal."
     },
     {
-      "id": "69731241-1e81-5473-9cbe-dfbaccf8c753",
+      "id": "685c255f-0275-5589-91b8-a7d949a1a25a",
       "source_chunk_id": "9",
       "target_chunk_id": "9.1",
       "relationship_type": "parent_child",
@@ -6554,7 +6554,7 @@
       "explanation": "This heading is the parent section for Legal and Contracts."
     },
     {
-      "id": "f585f725-246f-5f90-b299-8255a483f604",
+      "id": "eb9935c9-e3b9-5b6f-b3e3-793df5987c9b",
       "source_chunk_id": "9",
       "target_chunk_id": "6.1",
       "relationship_type": "reports_to",
@@ -6562,7 +6562,7 @@
       "explanation": "Legal reports to the CEO."
     },
     {
-      "id": "33867266-8d1d-546c-95e2-de81d01a51c3",
+      "id": "76fb1823-ecf0-5670-8881-8e1078aa82a2",
       "source_chunk_id": "9.1",
       "target_chunk_id": "9",
       "relationship_type": "parent_child",
@@ -6570,7 +6570,7 @@
       "explanation": "This is the parent section for Legal and Contracts."
     },
     {
-      "id": "3cadb009-050e-588c-8a43-c00133b11ee8",
+      "id": "75def124-48a0-5771-a378-a834f11cf98e",
       "source_chunk_id": "9.1",
       "target_chunk_id": "6.1",
       "relationship_type": "reports_to",
@@ -6578,7 +6578,7 @@
       "explanation": "The Legal Manager reports to the CEO."
     },
     {
-      "id": "57d0cd18-ca6f-5858-9810-579e45373eec",
+      "id": "227bcaf1-161d-5086-a955-0e9fd0f2a187",
       "source_chunk_id": "9.1",
       "target_chunk_id": "9.2",
       "relationship_type": "manages",
@@ -6586,7 +6586,7 @@
       "explanation": "The Legal Manager supervises Legal Administration."
     },
     {
-      "id": "57dcd21c-8f85-56c1-947d-79111a2c84f6",
+      "id": "9309d1b0-7e1b-5cb3-aca9-633fdc25e301",
       "source_chunk_id": "9.1",
       "target_chunk_id": "9.3",
       "relationship_type": "manages",
@@ -6594,7 +6594,7 @@
       "explanation": "The Legal Manager supervises Contracts Management."
     },
     {
-      "id": "934faaaf-f755-586a-916d-a3fe4e0ea142",
+      "id": "076eed6f-d4a1-5367-97b2-3426740105d6",
       "source_chunk_id": "9.1",
       "target_chunk_id": "8.1",
       "relationship_type": "collaborates_with",
@@ -6602,7 +6602,7 @@
       "explanation": "Legal collaborates with PMO on claims."
     },
     {
-      "id": "4068becd-a6c6-501b-b802-f7cbf7f0d61f",
+      "id": "a9275b2b-a96c-59c6-870d-b4d215006e8b",
       "source_chunk_id": "9.1",
       "target_chunk_id": "8.6",
       "relationship_type": "collaborates_with",
@@ -6610,7 +6610,7 @@
       "explanation": "Legal collaborates with Claims Officer."
     },
     {
-      "id": "f6011113-e1da-5391-afaf-297f40cd42a3",
+      "id": "0dd4183c-1c58-599e-bae0-6e042e4afd18",
       "source_chunk_id": "9.2",
       "target_chunk_id": "9.1",
       "relationship_type": "reports_to",
@@ -6618,7 +6618,7 @@
       "explanation": "The Legal Administration Officer reports to the Legal Manager."
     },
     {
-      "id": "7ddd0b0e-8f0c-5f0c-b171-7ee98ca1a42f",
+      "id": "eace4bff-18c3-545c-b344-66a11525786e",
       "source_chunk_id": "9.3",
       "target_chunk_id": "9.1",
       "relationship_type": "reports_to",
@@ -6626,7 +6626,7 @@
       "explanation": "The Contract Management Officer reports to the Legal Manager."
     },
     {
-      "id": "bce3f67e-6ec1-565e-832d-df10888c5179",
+      "id": "3b9a46f1-4ec8-50c1-8830-58a047e60ea4",
       "source_chunk_id": "9.3",
       "target_chunk_id": "8.1",
       "relationship_type": "collaborates_with",
@@ -6634,7 +6634,7 @@
       "explanation": "Contract Management works with PMO."
     },
     {
-      "id": "c2eb5813-ebe3-5408-aa85-eb58e0fa15d7",
+      "id": "ba06f2a2-71ee-5a95-9f4f-8724534c8ce7",
       "source_chunk_id": "9.3",
       "target_chunk_id": "8.6",
       "relationship_type": "collaborates_with",
@@ -6642,7 +6642,7 @@
       "explanation": "Contract Management works with Claims."
     },
     {
-      "id": "1195d90c-5440-5b27-9fbe-f9c79baba43d",
+      "id": "65c00a2e-56a5-5a91-99b6-e499d73779e6",
       "source_chunk_id": "10",
       "target_chunk_id": "10.1",
       "relationship_type": "parent_child",
@@ -6650,7 +6650,7 @@
       "explanation": "This heading is the parent section for Business Development."
     },
     {
-      "id": "6e0070e6-c9b1-5218-aa97-64d07ae23964",
+      "id": "b1bc7ec4-5fb6-5ce6-8924-d94122327391",
       "source_chunk_id": "10",
       "target_chunk_id": "6.1",
       "relationship_type": "reports_to",
@@ -6658,7 +6658,7 @@
       "explanation": "Business Development reports to the CEO."
     },
     {
-      "id": "e78cde45-a40b-5d38-a2b0-4ef4a66a33bc",
+      "id": "049fa971-6a49-5148-b12c-b9b9ca9a6796",
       "source_chunk_id": "10.1",
       "target_chunk_id": "10",
       "relationship_type": "parent_child",
@@ -6666,7 +6666,7 @@
       "explanation": "This is the parent section for Business Development."
     },
     {
-      "id": "b8e2514e-1e13-503a-aa96-6af53d03e10b",
+      "id": "94239a4c-8011-5390-918b-108c90bca725",
       "source_chunk_id": "10.1",
       "target_chunk_id": "6.1",
       "relationship_type": "reports_to",
@@ -6674,7 +6674,7 @@
       "explanation": "The BD Manager reports to the CEO."
     },
     {
-      "id": "27631e0a-c8c0-5842-bf04-6d6232da9e76",
+      "id": "5e5cbade-1481-5492-ae18-627eaad722ed",
       "source_chunk_id": "10.1",
       "target_chunk_id": "10.2",
       "relationship_type": "manages",
@@ -6682,7 +6682,7 @@
       "explanation": "The BD Manager supervises Pricing and Tenders."
     },
     {
-      "id": "afd4c65f-2418-52a1-8cd4-5136a76faa52",
+      "id": "4a3d9d00-9e52-5e96-9414-bd5ba0777f30",
       "source_chunk_id": "10.1",
       "target_chunk_id": "10.3",
       "relationship_type": "manages",
@@ -6690,7 +6690,7 @@
       "explanation": "The BD Manager supervises Tenders Study."
     },
     {
-      "id": "b0733119-6413-5c82-b11c-9de46423402d",
+      "id": "9bb6ac29-8e18-5510-b4cd-ab27cff6555f",
       "source_chunk_id": "10.1",
       "target_chunk_id": "10.4",
       "relationship_type": "manages",
@@ -6698,7 +6698,7 @@
       "explanation": "The BD Manager supervises Pricing."
     },
     {
-      "id": "124920ef-a129-53c8-a7d2-91dcbca8837f",
+      "id": "9dc0dd16-2c71-5679-8eeb-3bc519f162a4",
       "source_chunk_id": "10.1",
       "target_chunk_id": "10.5",
       "relationship_type": "manages",
@@ -6706,7 +6706,7 @@
       "explanation": "The BD Manager supervises Technical Proposals."
     },
     {
-      "id": "1f8ffb8f-cd5f-5aab-b8dd-6a000cbe617a",
+      "id": "05a49761-2e10-54ae-821d-f31e9e308f17",
       "source_chunk_id": "10.1",
       "target_chunk_id": "10.6",
       "relationship_type": "manages",
@@ -6714,7 +6714,7 @@
       "explanation": "The BD Manager supervises Market Analysis."
     },
     {
-      "id": "36a48cb9-79c9-50e2-b539-6d21d504b1d3",
+      "id": "675f1085-de8c-5afd-ad03-ed5c9e481a61",
       "source_chunk_id": "10.1",
       "target_chunk_id": "10.7",
       "relationship_type": "manages",
@@ -6722,7 +6722,7 @@
       "explanation": "The BD Manager supervises Relationship Management."
     },
     {
-      "id": "139e0bbf-8516-5b68-98be-0c2a6c0e0963",
+      "id": "17acfdae-3668-5751-a6b3-84f0e93e6e72",
       "source_chunk_id": "10.1",
       "target_chunk_id": "10.8",
       "relationship_type": "manages",
@@ -6730,7 +6730,7 @@
       "explanation": "The BD Manager supervises Government Tenders."
     },
     {
-      "id": "376f5bd1-2147-5cfb-93cb-01fa7debf3eb",
+      "id": "f032471a-7672-543c-8d1a-b763cc2d4ef8",
       "source_chunk_id": "10.1",
       "target_chunk_id": "14.8",
       "relationship_type": "collaborates_with",
@@ -6738,7 +6738,7 @@
       "explanation": "BD coordinates with Engineering on proposals."
     },
     {
-      "id": "9e616be7-8cb3-509a-a190-47c1f47f2fcd",
+      "id": "f60291b7-a8b3-5b37-a124-4d5b04683d69",
       "source_chunk_id": "10.1",
       "target_chunk_id": "11.1",
       "relationship_type": "collaborates_with",
@@ -6746,7 +6746,7 @@
       "explanation": "BD coordinates with Finance on proposals."
     },
     {
-      "id": "b531a636-ed1d-5ef6-91e9-f64737a98d00",
+      "id": "5a1c7bc6-abd6-53c2-9c41-9ec09b76a57b",
       "source_chunk_id": "10.1",
       "target_chunk_id": "13.1",
       "relationship_type": "collaborates_with",
@@ -6754,7 +6754,7 @@
       "explanation": "BD coordinates with Operations on proposals."
     },
     {
-      "id": "e0bf9454-d413-5f57-bbd3-bc4c1c6176ec",
+      "id": "34bd368a-f4ca-50d4-8243-82c03812c250",
       "source_chunk_id": "10.2",
       "target_chunk_id": "10.1",
       "relationship_type": "reports_to",
@@ -6762,7 +6762,7 @@
       "explanation": "The Pricing and Tenders Officer reports to the BD Manager."
     },
     {
-      "id": "07a760fd-5487-5cae-a7be-ac62e62e469d",
+      "id": "2de8c903-d89b-555a-8a73-ba4932f3e4e4",
       "source_chunk_id": "10.2",
       "target_chunk_id": "10.3",
       "relationship_type": "collaborates_with",
@@ -6770,7 +6770,7 @@
       "explanation": "Works with Tenders Study Officer."
     },
     {
-      "id": "35d7d802-196c-58ed-aee4-98e48d8d9bba",
+      "id": "59365c86-f9fd-5e46-a5a0-5fcad4d5ad9a",
       "source_chunk_id": "10.2",
       "target_chunk_id": "10.4",
       "relationship_type": "collaborates_with",
@@ -6778,7 +6778,7 @@
       "explanation": "Works with Pricing Officer."
     },
     {
-      "id": "bf00715f-4acf-5469-b31d-64c776dea633",
+      "id": "17c13721-c3f1-5d5a-9a69-3cef86d27a48",
       "source_chunk_id": "10.2",
       "target_chunk_id": "9.1",
       "relationship_type": "collaborates_with",
@@ -6786,7 +6786,7 @@
       "explanation": "Works with Legal."
     },
     {
-      "id": "ea8ca743-a432-5b53-b709-cafa50906de5",
+      "id": "faea97bd-3bd3-59fb-91be-b86616a89675",
       "source_chunk_id": "10.2",
       "target_chunk_id": "11.1",
       "relationship_type": "collaborates_with",
@@ -6794,7 +6794,7 @@
       "explanation": "Works with Finance."
     },
     {
-      "id": "e023a795-2abc-5e51-be31-75721dba10d4",
+      "id": "cb908ce9-0482-5d02-8d77-ec8f0bb69d9b",
       "source_chunk_id": "10.3",
       "target_chunk_id": "10.1",
       "relationship_type": "reports_to",
@@ -6802,7 +6802,7 @@
       "explanation": "The Tenders Study Officer reports to the BD Manager."
     },
     {
-      "id": "0ac04ac0-78c6-5fb6-bec4-ec6c3a7b84dc",
+      "id": "1c75322b-14e0-5f4e-b0cb-86c666cd89f5",
       "source_chunk_id": "10.3",
       "target_chunk_id": "10.2",
       "relationship_type": "collaborates_with",
@@ -6810,7 +6810,7 @@
       "explanation": "Works with Pricing and Tenders."
     },
     {
-      "id": "d592b4dc-e964-5a51-aeb6-d09355cf92f6",
+      "id": "85e99b23-d973-5597-a721-9806519172e9",
       "source_chunk_id": "10.3",
       "target_chunk_id": "10.8",
       "relationship_type": "collaborates_with",
@@ -6818,7 +6818,7 @@
       "explanation": "Works with Government Tenders Monitoring."
     },
     {
-      "id": "5170f8f4-71ed-5122-aa1e-95bdaa7be6e6",
+      "id": "67487c25-eb13-5af5-b3c2-e04f4092cbd8",
       "source_chunk_id": "10.4",
       "target_chunk_id": "10.1",
       "relationship_type": "reports_to",
@@ -6826,7 +6826,7 @@
       "explanation": "The Pricing Officer reports to the BD Manager."
     },
     {
-      "id": "419e9a3e-5910-5df8-bb02-92ad6051263c",
+      "id": "5d00061a-8689-586d-9155-7cec4f10bde9",
       "source_chunk_id": "10.4",
       "target_chunk_id": "10.2",
       "relationship_type": "collaborates_with",
@@ -6834,7 +6834,7 @@
       "explanation": "Works with Tenders Management."
     },
     {
-      "id": "d5359343-7773-5eae-ae86-2cdd8bc9b286",
+      "id": "807e9fa9-ef90-5ce4-9b34-b644424f78ea",
       "source_chunk_id": "10.4",
       "target_chunk_id": "11.1",
       "relationship_type": "collaborates_with",
@@ -6842,7 +6842,7 @@
       "explanation": "Works with Finance on margins."
     },
     {
-      "id": "a8b6d2a9-7c9c-5052-9043-76fb3463ae0f",
+      "id": "97f0fcba-93a2-598a-93ac-16137f3a0f9b",
       "source_chunk_id": "10.4",
       "target_chunk_id": "13.2",
       "relationship_type": "collaborates_with",
@@ -6850,7 +6850,7 @@
       "explanation": "Works with Procurement on material costs."
     },
     {
-      "id": "48c66b7e-99a4-51c9-8fd8-c1f57970604d",
+      "id": "4933eff2-3328-5330-94a1-08ba81aa414e",
       "source_chunk_id": "10.5",
       "target_chunk_id": "10.1",
       "relationship_type": "reports_to",
@@ -6858,7 +6858,7 @@
       "explanation": "The Technical Proposals Officer reports to the BD Manager."
     },
     {
-      "id": "65ad995c-783e-5458-ac39-7fed93af5f08",
+      "id": "cc455038-be64-5a37-9240-054e9004e254",
       "source_chunk_id": "10.5",
       "target_chunk_id": "14.8",
       "relationship_type": "collaborates_with",
@@ -6866,7 +6866,7 @@
       "explanation": "Works with Engineering on technical inputs."
     },
     {
-      "id": "452d0d38-037b-5942-89d1-8a92d79468a5",
+      "id": "12029588-8424-520c-b637-ca0a85177873",
       "source_chunk_id": "10.5",
       "target_chunk_id": "7.1",
       "relationship_type": "collaborates_with",
@@ -6874,7 +6874,7 @@
       "explanation": "Works with QHSE on quality and safety plans."
     },
     {
-      "id": "00b8f7a1-d6ae-5cca-b95c-4d3cdf428a3d",
+      "id": "14a5125e-9246-5058-b7f5-61d91cd19ca4",
       "source_chunk_id": "10.5",
       "target_chunk_id": "13.1",
       "relationship_type": "collaborates_with",
@@ -6882,7 +6882,7 @@
       "explanation": "Works with Operations on resource plans."
     },
     {
-      "id": "57de24fd-0faf-5b86-8c7b-7877fbf659ad",
+      "id": "ef32d1a7-579e-5ffb-8659-cdca1b44d8cc",
       "source_chunk_id": "10.6",
       "target_chunk_id": "10.1",
       "relationship_type": "reports_to",
@@ -6890,7 +6890,7 @@
       "explanation": "The Market Analysis Officer reports to the BD Manager."
     },
     {
-      "id": "1515a9a7-e086-5294-bcb1-e80a5f6e302c",
+      "id": "c3ba8554-5419-5628-bc49-3b6a12eccc2a",
       "source_chunk_id": "10.6",
       "target_chunk_id": "10.8",
       "relationship_type": "collaborates_with",
@@ -6898,7 +6898,7 @@
       "explanation": "Works with Government Tenders Monitoring."
     },
     {
-      "id": "a8ad64f0-8004-55a5-a721-8ccab3f630b9",
+      "id": "8aa49e7e-3a93-59ac-b101-049543109d02",
       "source_chunk_id": "10.7",
       "target_chunk_id": "10.1",
       "relationship_type": "reports_to",
@@ -6906,7 +6906,7 @@
       "explanation": "The Relationship Management Officer reports to the BD Manager."
     },
     {
-      "id": "b1a0a0d6-5d6d-5022-8621-9658866c3954",
+      "id": "9689f692-ad2c-5f97-894f-b4d8007b2d0f",
       "source_chunk_id": "10.7",
       "target_chunk_id": "14.1",
       "relationship_type": "collaborates_with",
@@ -6914,7 +6914,7 @@
       "explanation": "Works with Project Management on client satisfaction."
     },
     {
-      "id": "aa8e9a08-e259-5b3c-b92f-576d12a03c3a",
+      "id": "60b6c0ea-61f3-5cbd-96ba-7db60bff8ecd",
       "source_chunk_id": "10.8",
       "target_chunk_id": "10.1",
       "relationship_type": "reports_to",
@@ -6922,7 +6922,7 @@
       "explanation": "The Government Tenders Officer reports to the BD Manager."
     },
     {
-      "id": "774837ad-a44f-507c-ab11-60dbbe431f66",
+      "id": "56a922ff-951c-5699-9aaa-34fb97b0d9d8",
       "source_chunk_id": "10.8",
       "target_chunk_id": "10.3",
       "relationship_type": "collaborates_with",
@@ -6930,7 +6930,7 @@
       "explanation": "Works with Tenders Study Officer."
     },
     {
-      "id": "638ac369-9d6a-5aae-804f-3ad2cd5ffb84",
+      "id": "74a12e14-59af-5a66-8677-379080eed14a",
       "source_chunk_id": "11",
       "target_chunk_id": "11.1",
       "relationship_type": "parent_child",
@@ -6938,7 +6938,7 @@
       "explanation": "This heading is the parent section for Finance."
     },
     {
-      "id": "a008c63f-9264-590e-9ed0-a71be00a1662",
+      "id": "f2a831e8-1ab5-51ba-8bae-f0e07921e8ec",
       "source_chunk_id": "11",
       "target_chunk_id": "6.1",
       "relationship_type": "reports_to",
@@ -6946,7 +6946,7 @@
       "explanation": "Finance reports to the CEO."
     },
     {
-      "id": "bf959a12-98f2-56e0-8fb6-89f8e117595b",
+      "id": "d610693e-0ed6-5af7-9221-2809829ef54a",
       "source_chunk_id": "11.1",
       "target_chunk_id": "11",
       "relationship_type": "parent_child",
@@ -6954,7 +6954,7 @@
       "explanation": "This is the parent section for Finance."
     },
     {
-      "id": "e6c5e209-3a1e-5cc0-9aa6-778b51ab12fa",
+      "id": "391f22fd-fa77-5dd8-b83b-6970a81a41d9",
       "source_chunk_id": "11.1",
       "target_chunk_id": "6.1",
       "relationship_type": "reports_to",
@@ -6962,7 +6962,7 @@
       "explanation": "The Finance Director reports to the CEO."
     },
     {
-      "id": "37388aab-ed81-5719-b4c0-03a6091c0b50",
+      "id": "5a15dc40-137b-5458-a36c-2367534d5be4",
       "source_chunk_id": "11.1",
       "target_chunk_id": "11.2",
       "relationship_type": "manages",
@@ -6970,7 +6970,7 @@
       "explanation": "The Finance Director supervises the Accounts Manager."
     },
     {
-      "id": "46f131f8-48d2-5b4e-b42c-f255813771aa",
+      "id": "082cc854-d256-54dd-9c44-9c1ceebeb226",
       "source_chunk_id": "11.1",
       "target_chunk_id": "11.3",
       "relationship_type": "manages",
@@ -6978,7 +6978,7 @@
       "explanation": "The Finance Director supervises General Accounts."
     },
     {
-      "id": "1633f3af-2806-5489-b3d1-63bbeb5d04a2",
+      "id": "fe3f62da-5df5-5824-aa08-e49c2c9e9b69",
       "source_chunk_id": "11.1",
       "target_chunk_id": "11.4",
       "relationship_type": "manages",
@@ -6986,7 +6986,7 @@
       "explanation": "The Finance Director supervises Project Accounts."
     },
     {
-      "id": "ec773851-7935-5bee-ae7b-57296ae48a93",
+      "id": "3cb7d927-6d9d-567a-9d3f-78c04a8f593d",
       "source_chunk_id": "11.1",
       "target_chunk_id": "11.5",
       "relationship_type": "manages",
@@ -6994,7 +6994,7 @@
       "explanation": "The Finance Director supervises Treasury."
     },
     {
-      "id": "d0dba0cd-b739-552e-8c3c-a5308773a3e0",
+      "id": "7d423002-b3ba-56a1-b6a6-a9450d47c57a",
       "source_chunk_id": "11.1",
       "target_chunk_id": "11.6",
       "relationship_type": "manages",
@@ -7002,7 +7002,7 @@
       "explanation": "The Finance Director supervises Credit."
     },
     {
-      "id": "d44c6830-c8b6-511a-9386-e14e24d2e5fd",
+      "id": "4df82294-1fdc-5aa8-87d7-e93f46195987",
       "source_chunk_id": "11.1",
       "target_chunk_id": "8.1",
       "relationship_type": "collaborates_with",
@@ -7010,7 +7010,7 @@
       "explanation": "Finance collaborates with PMO."
     },
     {
-      "id": "d2ba0ac1-20fd-585a-88e5-2c40cc2fb30f",
+      "id": "8b6877fa-9418-5829-b9c8-226d80ef5b47",
       "source_chunk_id": "11.1",
       "target_chunk_id": "8.3",
       "relationship_type": "collaborates_with",
@@ -7018,7 +7018,7 @@
       "explanation": "Finance collaborates with Cost Control."
     },
     {
-      "id": "db664973-1859-58c4-92a1-ee60254096d5",
+      "id": "b1e3c1d2-d0c3-54bd-ba6f-d42a0e28ccd0",
       "source_chunk_id": "11.1",
       "target_chunk_id": "10.1",
       "relationship_type": "collaborates_with",
@@ -7026,7 +7026,7 @@
       "explanation": "Finance collaborates with BD."
     },
     {
-      "id": "05f06c4e-ca00-50bf-800e-96c84d421e8c",
+      "id": "d7c6ce4b-b110-5b8d-a246-c0d818196360",
       "source_chunk_id": "11.2",
       "target_chunk_id": "11.1",
       "relationship_type": "reports_to",
@@ -7034,7 +7034,7 @@
       "explanation": "The Accounts Manager reports to the Finance Director."
     },
     {
-      "id": "f939fc01-8b1b-5bf2-ba66-694000d03022",
+      "id": "028d29dc-4897-5297-8a18-b6800f0302ea",
       "source_chunk_id": "11.2",
       "target_chunk_id": "11.3",
       "relationship_type": "manages",
@@ -7042,7 +7042,7 @@
       "explanation": "The Accounts Manager supervises the General Accounts Accountant."
     },
     {
-      "id": "d8bb0c92-83c6-5eee-a190-49075034deb5",
+      "id": "c4ed095c-8265-531a-a570-93b51a9dccf3",
       "source_chunk_id": "11.2",
       "target_chunk_id": "11.4",
       "relationship_type": "manages",
@@ -7050,7 +7050,7 @@
       "explanation": "The Accounts Manager supervises the Project Accounts Accountant."
     },
     {
-      "id": "2d786980-9bcf-582d-a3a0-6f69af1eba01",
+      "id": "166442a6-2a3c-569a-80a3-d9948791ddc7",
       "source_chunk_id": "11.3",
       "target_chunk_id": "11.2",
       "relationship_type": "reports_to",
@@ -7058,7 +7058,7 @@
       "explanation": "The General Accounts Accountant reports to the Accounts Manager."
     },
     {
-      "id": "f4d9da82-05d0-596c-8460-25e743b86e1a",
+      "id": "6bd1bcde-98ff-5039-8e1d-a8ea7bd68226",
       "source_chunk_id": "11.4",
       "target_chunk_id": "11.2",
       "relationship_type": "reports_to",
@@ -7066,7 +7066,7 @@
       "explanation": "The Project Accounts Accountant reports to the Accounts Manager."
     },
     {
-      "id": "d9035f51-6fc4-5857-ab0a-56e0498fceea",
+      "id": "93eb0d34-5319-5250-ac1e-e6179a54db3a",
       "source_chunk_id": "11.4",
       "target_chunk_id": "8.3",
       "relationship_type": "collaborates_with",
@@ -7074,7 +7074,7 @@
       "explanation": "Works with Cost Control."
     },
     {
-      "id": "bb44fea6-1a05-53a2-a21d-040c3940650e",
+      "id": "119d1b48-b451-56ee-a0ea-d01385f3aa3c",
       "source_chunk_id": "11.4",
       "target_chunk_id": "14.1",
       "relationship_type": "collaborates_with",
@@ -7082,7 +7082,7 @@
       "explanation": "Works with Project Management."
     },
     {
-      "id": "8c19dd8a-f451-5c7c-a309-621331bde38b",
+      "id": "c2b8b98c-b35c-555a-a537-d2b58f665446",
       "source_chunk_id": "11.5",
       "target_chunk_id": "11.1",
       "relationship_type": "reports_to",
@@ -7090,7 +7090,7 @@
       "explanation": "The Treasury Officer reports to the Finance Director."
     },
     {
-      "id": "d65aa2d5-b12b-5e66-b9a8-ee4432033b8c",
+      "id": "e4424448-8421-52e1-828a-479c66bf0bdb",
       "source_chunk_id": "11.6",
       "target_chunk_id": "11.1",
       "relationship_type": "reports_to",
@@ -7098,7 +7098,7 @@
       "explanation": "The Credit Manager reports to the Finance Director."
     },
     {
-      "id": "8e41f6e1-9391-5748-8acc-b666dc375064",
+      "id": "4b9995fd-4ed7-514b-9420-46aaf4dcd396",
       "source_chunk_id": "11.6",
       "target_chunk_id": "11.5",
       "relationship_type": "collaborates_with",
@@ -7106,7 +7106,7 @@
       "explanation": "Works with Treasury on liquidity."
     },
     {
-      "id": "2691c2c2-7cf5-5dbe-9149-64c714265ceb",
+      "id": "a87513f2-67f8-5385-99f4-468cf6c58522",
       "source_chunk_id": "11.6",
       "target_chunk_id": "9.1",
       "relationship_type": "collaborates_with",
@@ -7114,7 +7114,7 @@
       "explanation": "Works with Legal on guarantees."
     },
     {
-      "id": "d6277e5d-f44d-5966-8404-57f1276f6979",
+      "id": "a192aaf8-821c-58d8-a47a-5dc3d97e20db",
       "source_chunk_id": "11.6",
       "target_chunk_id": "14.1",
       "relationship_type": "collaborates_with",
@@ -7122,7 +7122,7 @@
       "explanation": "Works with Project Management on guarantees."
     },
     {
-      "id": "83d3fdae-5f2a-5a32-b172-c264db266709",
+      "id": "e914bc98-23ed-5217-a495-154e498b9396",
       "source_chunk_id": "12",
       "target_chunk_id": "12.1",
       "relationship_type": "parent_child",
@@ -7130,7 +7130,7 @@
       "explanation": "This heading is the parent section for HR."
     },
     {
-      "id": "d64b1139-79db-57ad-a61b-d759e43c4313",
+      "id": "195ddd00-6504-5706-b93e-a666004e1c0d",
       "source_chunk_id": "12",
       "target_chunk_id": "6.1",
       "relationship_type": "reports_to",
@@ -7138,7 +7138,7 @@
       "explanation": "HR reports to the CEO."
     },
     {
-      "id": "c45866ac-9439-5e99-a0ad-964cb7cb8660",
+      "id": "2856682a-2b7d-5d63-b28e-fac56a913ebf",
       "source_chunk_id": "12.1",
       "target_chunk_id": "12",
       "relationship_type": "parent_child",
@@ -7146,7 +7146,7 @@
       "explanation": "This is the parent section for HR."
     },
     {
-      "id": "b4e7a3d2-d089-570b-8a4a-f6aaf8e6b5a0",
+      "id": "534ef770-98c1-5b87-a78d-2f03641de388",
       "source_chunk_id": "12.1",
       "target_chunk_id": "6.1",
       "relationship_type": "reports_to",
@@ -7154,7 +7154,7 @@
       "explanation": "The HR Manager reports to the CEO."
     },
     {
-      "id": "916d3082-05f5-5fe1-b31e-fa2bede4d05b",
+      "id": "8d128bbd-3b57-5e72-94c1-167699f8514c",
       "source_chunk_id": "12.1",
       "target_chunk_id": "12.2",
       "relationship_type": "manages",
@@ -7162,7 +7162,7 @@
       "explanation": "The HR Manager supervises Payroll."
     },
     {
-      "id": "cdeb4420-60a2-5d25-94c4-8949c69ee6b8",
+      "id": "25ccc44d-f2bc-5459-a675-62eecf780ce2",
       "source_chunk_id": "12.1",
       "target_chunk_id": "12.3",
       "relationship_type": "manages",
@@ -7170,7 +7170,7 @@
       "explanation": "The HR Manager supervises Recruitment."
     },
     {
-      "id": "687b0a09-77a5-53b4-b5e1-e8b4ab75e580",
+      "id": "8d3f3fe0-0eea-5162-89fa-a3723c1a2b19",
       "source_chunk_id": "12.1",
       "target_chunk_id": "12.4",
       "relationship_type": "manages",
@@ -7178,7 +7178,7 @@
       "explanation": "The HR Manager supervises Training."
     },
     {
-      "id": "1ecd3f46-2dce-56ca-bcd9-d437d5e5cdbd",
+      "id": "f4a2c1d9-d28c-5150-84ff-f63637653482",
       "source_chunk_id": "12.1",
       "target_chunk_id": "12.5",
       "relationship_type": "manages",
@@ -7186,7 +7186,7 @@
       "explanation": "The HR Manager supervises Employee Affairs."
     },
     {
-      "id": "95bd8d68-bc47-5241-97a3-3fce1bce3c3c",
+      "id": "179b4041-9082-552f-86a5-663a5fc08078",
       "source_chunk_id": "12.1",
       "target_chunk_id": "12.6",
       "relationship_type": "manages",
@@ -7194,7 +7194,7 @@
       "explanation": "The HR Manager supervises Employee Relations."
     },
     {
-      "id": "626bf3ee-2f0d-54ae-8191-26ee6e07c524",
+      "id": "1b9d0ec8-a77d-5886-9770-1da0b6644f9a",
       "source_chunk_id": "12.1",
       "target_chunk_id": "12.7",
       "relationship_type": "manages",
@@ -7202,7 +7202,7 @@
       "explanation": "The HR Manager supervises Saudization."
     },
     {
-      "id": "9e30c963-fbaa-56fc-9977-fb5c4cf40d07",
+      "id": "f23df1e8-9528-591d-9f2a-c92dba15286d",
       "source_chunk_id": "12.1",
       "target_chunk_id": "12.8",
       "relationship_type": "manages",
@@ -7210,7 +7210,7 @@
       "explanation": "The HR Manager supervises Benefits."
     },
     {
-      "id": "d687d1c9-2c4f-5b28-9fcf-0807881d9bb2",
+      "id": "780ebe79-c101-5141-96c0-8dc8492af9fe",
       "source_chunk_id": "12.2",
       "target_chunk_id": "12.1",
       "relationship_type": "reports_to",
@@ -7218,7 +7218,7 @@
       "explanation": "The Payroll Officer reports to the HR Manager."
     },
     {
-      "id": "1dfe8be2-2245-5d62-8d67-7f5b6a0edbf1",
+      "id": "dba7393d-e6b8-513c-ae87-8e98a346e9e7",
       "source_chunk_id": "12.2",
       "target_chunk_id": "11.1",
       "relationship_type": "collaborates_with",
@@ -7226,7 +7226,7 @@
       "explanation": "The Payroll Officer coordinates with Finance."
     },
     {
-      "id": "136e3f29-0a37-5a23-807d-9fcdf894af5f",
+      "id": "22c748c6-29c2-553e-bc09-6c7b5a721023",
       "source_chunk_id": "12.3",
       "target_chunk_id": "12.1",
       "relationship_type": "reports_to",
@@ -7234,7 +7234,7 @@
       "explanation": "The Recruitment Officer reports to the HR Manager."
     },
     {
-      "id": "47ac6f9f-e043-549d-aba5-a2167f9fd682",
+      "id": "3fa9bc32-a1c2-57e9-9ae9-0365b02360ed",
       "source_chunk_id": "12.4",
       "target_chunk_id": "12.1",
       "relationship_type": "reports_to",
@@ -7242,7 +7242,7 @@
       "explanation": "The Training Officer reports to the HR Manager."
     },
     {
-      "id": "57b83b40-a5cd-5f74-8cc0-f8e197f06226",
+      "id": "98d29b0c-7a6a-5ace-a127-47deb912cf9d",
       "source_chunk_id": "12.5",
       "target_chunk_id": "12.1",
       "relationship_type": "reports_to",
@@ -7250,7 +7250,7 @@
       "explanation": "The Employee Affairs Officer reports to the HR Manager."
     },
     {
-      "id": "1935df88-612d-5797-a1b4-7642ca74e42f",
+      "id": "c2878164-138a-5cd4-a602-52781880c325",
       "source_chunk_id": "12.6",
       "target_chunk_id": "12.1",
       "relationship_type": "reports_to",
@@ -7258,7 +7258,7 @@
       "explanation": "The Employee Relations Officer reports to the HR Manager."
     },
     {
-      "id": "27e6b0ba-81c2-5f22-9605-c8af4ab32222",
+      "id": "4188325a-4465-5a41-8747-49ff4ef125df",
       "source_chunk_id": "12.7",
       "target_chunk_id": "12.1",
       "relationship_type": "reports_to",
@@ -7266,7 +7266,7 @@
       "explanation": "The Saudization Officer reports to the HR Manager."
     },
     {
-      "id": "10e591b5-7a08-532f-a81a-002f7025ebe2",
+      "id": "05528cb0-1b5b-5808-84bb-ebaf45aaf884",
       "source_chunk_id": "12.8",
       "target_chunk_id": "12.1",
       "relationship_type": "reports_to",
@@ -7274,7 +7274,7 @@
       "explanation": "The Benefits Officer reports to the HR Manager."
     },
     {
-      "id": "2ee6cceb-d7f0-5ee1-8452-8c80f0f0f920",
+      "id": "5fa5e2a5-47e7-5020-878a-e66782ba8333",
       "source_chunk_id": "12.8",
       "target_chunk_id": "12.2",
       "relationship_type": "collaborates_with",
@@ -7282,7 +7282,7 @@
       "explanation": "Works with Payroll."
     },
     {
-      "id": "8780b81e-d179-53ff-952a-dcf5fe613276",
+      "id": "23b13bb8-c182-53af-a648-c7952fd71fa2",
       "source_chunk_id": "13",
       "target_chunk_id": "13.1",
       "relationship_type": "parent_child",
@@ -7290,7 +7290,7 @@
       "explanation": "This heading is the parent section for Operations."
     },
     {
-      "id": "a131467a-ca55-5ece-8735-2537cbc310ac",
+      "id": "f18e0567-bfaf-51df-ba01-7ee1dc550faa",
       "source_chunk_id": "13",
       "target_chunk_id": "6.1",
       "relationship_type": "reports_to",
@@ -7298,7 +7298,7 @@
       "explanation": "Operations reports to the CEO."
     },
     {
-      "id": "aeb4bdad-9665-5313-825e-f845a926bbd7",
+      "id": "9085821a-3209-5294-aa8f-ea1a80a56746",
       "source_chunk_id": "13.1",
       "target_chunk_id": "13",
       "relationship_type": "parent_child",
@@ -7306,7 +7306,7 @@
       "explanation": "This is the parent section for Operations."
     },
     {
-      "id": "ee618729-082e-58eb-af27-7bdb92bbf51d",
+      "id": "bed616cb-2dd5-5cd4-92fd-ac5aed128c9b",
       "source_chunk_id": "13.1",
       "target_chunk_id": "6.1",
       "relationship_type": "reports_to",
@@ -7314,7 +7314,7 @@
       "explanation": "The Operations Manager reports to the CEO."
     },
     {
-      "id": "07295fe6-a448-5cbd-9f36-e25ed9348c8c",
+      "id": "ebae1995-3c19-590b-9077-05fcfb365047",
       "source_chunk_id": "13.1",
       "target_chunk_id": "13.2",
       "relationship_type": "manages",
@@ -7322,7 +7322,7 @@
       "explanation": "The Operations Manager supervises Procurement."
     },
     {
-      "id": "737b4b53-d364-58fe-949a-65398fb89f5b",
+      "id": "d256b963-fec3-555d-b34a-b8f8da33fa44",
       "source_chunk_id": "13.1",
       "target_chunk_id": "13.6",
       "relationship_type": "manages",
@@ -7330,7 +7330,7 @@
       "explanation": "The Operations Manager supervises Equipment and Maintenance."
     },
     {
-      "id": "90f91f86-4005-5c10-be0f-11d6aedcd0a5",
+      "id": "fd2bb2bd-fd32-5436-9c8f-ea43d7765372",
       "source_chunk_id": "13.1",
       "target_chunk_id": "13.7",
       "relationship_type": "manages",
@@ -7338,7 +7338,7 @@
       "explanation": "The Operations Manager supervises IT."
     },
     {
-      "id": "213d8814-26e6-5efc-ad33-5fee70c31c12",
+      "id": "b6ed0ca7-b747-544b-bbd5-dcae3e9ccbd6",
       "source_chunk_id": "13.1",
       "target_chunk_id": "14.1",
       "relationship_type": "collaborates_with",
@@ -7346,7 +7346,7 @@
       "explanation": "Operations collaborates with Project Management."
     },
     {
-      "id": "1fcb4553-083f-5634-a6d1-e907c5c4238f",
+      "id": "5924b6cc-7d90-5b0a-b5bd-fdd36821a053",
       "source_chunk_id": "13.2",
       "target_chunk_id": "13.1",
       "relationship_type": "reports_to",
@@ -7354,7 +7354,7 @@
       "explanation": "The Procurement Manager reports to the Operations Manager."
     },
     {
-      "id": "eca698c3-e48e-548f-ab19-8398c74d402d",
+      "id": "7620ae4e-2e55-500c-91b9-7a5ec84a6217",
       "source_chunk_id": "13.2",
       "target_chunk_id": "13.3",
       "relationship_type": "manages",
@@ -7362,7 +7362,7 @@
       "explanation": "The Procurement Manager supervises Procurement Officer."
     },
     {
-      "id": "52f7cf4a-dcba-5bad-bf1f-315f6038ecd9",
+      "id": "7a82ed55-0812-5d34-a1d3-b9e01698fc54",
       "source_chunk_id": "13.2",
       "target_chunk_id": "13.4",
       "relationship_type": "manages",
@@ -7370,7 +7370,7 @@
       "explanation": "The Procurement Manager supervises Warehouse Officer."
     },
     {
-      "id": "225d1030-823b-5d38-8e3f-84d823d17e75",
+      "id": "d54fdef1-498c-5db0-90f4-aeccbdc27743",
       "source_chunk_id": "13.2",
       "target_chunk_id": "13.5",
       "relationship_type": "manages",
@@ -7378,7 +7378,7 @@
       "explanation": "The Procurement Manager supervises Logistics Officer."
     },
     {
-      "id": "889181e9-2ac7-5f2f-b695-94709e70ab6d",
+      "id": "673bde11-a7ee-525d-8198-e3227ee3b2b9",
       "source_chunk_id": "13.2",
       "target_chunk_id": "14.1",
       "relationship_type": "collaborates_with",
@@ -7386,7 +7386,7 @@
       "explanation": "Works with Project Management."
     },
     {
-      "id": "2e904a63-e3b6-5660-8070-8cce326a880a",
+      "id": "64915581-9c5d-5bbe-b248-252df727295b",
       "source_chunk_id": "13.2",
       "target_chunk_id": "11.1",
       "relationship_type": "collaborates_with",
@@ -7394,7 +7394,7 @@
       "explanation": "Works with Finance."
     },
     {
-      "id": "258027db-4734-5608-b5cb-d656eb578d0d",
+      "id": "7cde7bd6-f239-5c30-a954-dda17696b21c",
       "source_chunk_id": "13.3",
       "target_chunk_id": "13.2",
       "relationship_type": "reports_to",
@@ -7402,7 +7402,7 @@
       "explanation": "The Procurement Officer reports to the Procurement Manager."
     },
     {
-      "id": "31d5fffb-c259-540e-b37b-09dd4142e812",
+      "id": "7896a267-80c6-5596-9bee-be6b32bc1680",
       "source_chunk_id": "13.4",
       "target_chunk_id": "13.2",
       "relationship_type": "reports_to",
@@ -7410,7 +7410,7 @@
       "explanation": "The Warehouse Officer reports to the Procurement Manager."
     },
     {
-      "id": "4e557695-cefe-54db-a063-c43a42ebf754",
+      "id": "cb2f43d3-070b-5e5c-8cd5-fa8dac9e9578",
       "source_chunk_id": "13.5",
       "target_chunk_id": "13.2",
       "relationship_type": "reports_to",
@@ -7418,7 +7418,7 @@
       "explanation": "The Logistics Officer reports to the Procurement Manager."
     },
     {
-      "id": "f7e09d89-1d83-54b7-83f1-ef2ece3f1a7a",
+      "id": "752b88e1-0a0f-5bd0-a3ca-78480a11875e",
       "source_chunk_id": "13.6",
       "target_chunk_id": "13.1",
       "relationship_type": "reports_to",
@@ -7426,7 +7426,7 @@
       "explanation": "The Equipment Manager reports to the Operations Manager."
     },
     {
-      "id": "d1b23050-9edb-5cc8-a00e-9dde235feded",
+      "id": "0305c8dc-6c1c-556f-a82a-7c64350982ba",
       "source_chunk_id": "13.6",
       "target_chunk_id": "14.1",
       "relationship_type": "collaborates_with",
@@ -7434,7 +7434,7 @@
       "explanation": "Works with Project Management."
     },
     {
-      "id": "88acd08a-5db0-5024-aefd-75443da4e8a9",
+      "id": "19ef31da-c480-5a08-bff7-52a5c0ff8322",
       "source_chunk_id": "13.7",
       "target_chunk_id": "13.1",
       "relationship_type": "reports_to",
@@ -7442,7 +7442,7 @@
       "explanation": "The IT Manager reports to the Operations Manager."
     },
     {
-      "id": "cb3fcaa2-1024-515d-a990-946310b70c44",
+      "id": "e3dba556-622e-52a8-b963-f211f88262c7",
       "source_chunk_id": "13.7",
       "target_chunk_id": "13.8",
       "relationship_type": "manages",
@@ -7450,7 +7450,7 @@
       "explanation": "The IT Manager supervises Systems."
     },
     {
-      "id": "45a89698-0045-5877-9f96-6906688df0aa",
+      "id": "ee8f9a65-9b31-558b-b16b-9988acc77e11",
       "source_chunk_id": "13.7",
       "target_chunk_id": "13.9",
       "relationship_type": "manages",
@@ -7458,7 +7458,7 @@
       "explanation": "The IT Manager supervises Cybersecurity."
     },
     {
-      "id": "d9e883cb-d40d-5f68-9a27-f84bd09b8b62",
+      "id": "48f1d25f-a497-5db7-9363-5b747f296930",
       "source_chunk_id": "13.7",
       "target_chunk_id": "13.10",
       "relationship_type": "manages",
@@ -7466,7 +7466,7 @@
       "explanation": "The IT Manager supervises Technical Support."
     },
     {
-      "id": "2df80e77-0eab-5d7a-a889-dd1d415188e3",
+      "id": "275233cb-0fc6-5561-b028-3a1041afc0dd",
       "source_chunk_id": "13.8",
       "target_chunk_id": "13.7",
       "relationship_type": "reports_to",
@@ -7474,7 +7474,7 @@
       "explanation": "The Systems Officer reports to the IT Manager."
     },
     {
-      "id": "f0bcc35e-4edf-582a-82fc-d43f927b0354",
+      "id": "a3041f20-4538-576e-9c69-931b61aa46ab",
       "source_chunk_id": "13.9",
       "target_chunk_id": "13.7",
       "relationship_type": "reports_to",
@@ -7482,7 +7482,7 @@
       "explanation": "The Cybersecurity Officer reports to the IT Manager."
     },
     {
-      "id": "6a45813a-a4bc-599c-9287-01afddc6040b",
+      "id": "76ed0345-8205-5a06-ac68-580a1d72e566",
       "source_chunk_id": "13.10",
       "target_chunk_id": "13.7",
       "relationship_type": "reports_to",
@@ -7490,7 +7490,7 @@
       "explanation": "The Technical Support Officer reports to the IT Manager."
     },
     {
-      "id": "abbccba0-4434-5c1a-af51-17ec1eafa208",
+      "id": "68eeafa8-83af-5dca-9f1c-9814203b3ba0",
       "source_chunk_id": "14",
       "target_chunk_id": "14.1",
       "relationship_type": "parent_child",
@@ -7498,7 +7498,7 @@
       "explanation": "This heading is the parent section for Project Management."
     },
     {
-      "id": "766d2860-c232-5d9a-a78c-db85a07449cd",
+      "id": "0c6512ab-c17e-5bd6-a648-d0e9454c07b0",
       "source_chunk_id": "14",
       "target_chunk_id": "6.1",
       "relationship_type": "reports_to",
@@ -7506,7 +7506,7 @@
       "explanation": "Project Management reports to the CEO."
     },
     {
-      "id": "64e004f9-a642-5cd0-9042-238b473b040f",
+      "id": "7131fe8a-52bf-567d-bcf6-6e6332337eb1",
       "source_chunk_id": "14.1",
       "target_chunk_id": "14",
       "relationship_type": "parent_child",
@@ -7514,7 +7514,7 @@
       "explanation": "This is the parent section for Project Management."
     },
     {
-      "id": "2332db8b-9207-58ff-8a62-36c5cd5ad0ec",
+      "id": "fc5f0dcf-831f-582a-bbb5-d1884ccff1af",
       "source_chunk_id": "14.1",
       "target_chunk_id": "6.1",
       "relationship_type": "reports_to",
@@ -7522,7 +7522,7 @@
       "explanation": "The PM Manager reports to the CEO."
     },
     {
-      "id": "cc5f04a4-1de7-5ef2-a483-3b909de964c8",
+      "id": "db830a85-4df4-51de-83d8-d093fbe48119",
       "source_chunk_id": "14.1",
       "target_chunk_id": "14.2",
       "relationship_type": "manages",
@@ -7530,7 +7530,7 @@
       "explanation": "The PM Manager supervises the Water Sector Manager."
     },
     {
-      "id": "5c4827c5-ff8d-5870-8d5e-bca8af1524cc",
+      "id": "32e8a8eb-725e-53f6-a063-7e1bf2636f3b",
       "source_chunk_id": "14.1",
       "target_chunk_id": "14.3",
       "relationship_type": "manages",
@@ -7538,7 +7538,7 @@
       "explanation": "The PM Manager supervises the Energy Sector Manager."
     },
     {
-      "id": "bf4300a3-cf83-51d3-93bd-1a7518b6f7f7",
+      "id": "beeafe02-326b-5ddd-866a-44754452ca4f",
       "source_chunk_id": "14.1",
       "target_chunk_id": "14.4",
       "relationship_type": "manages",
@@ -7546,7 +7546,7 @@
       "explanation": "The PM Manager supervises the Oil and Gas Sector Manager."
     },
     {
-      "id": "4dca7348-4d4c-5a9a-a5a4-c3352c50bcce",
+      "id": "c8a34ae7-3295-5527-bf24-181ce905074f",
       "source_chunk_id": "14.1",
       "target_chunk_id": "14.8",
       "relationship_type": "manages",
@@ -7554,7 +7554,7 @@
       "explanation": "The PM Manager supervises the Engineering and Design Manager."
     },
     {
-      "id": "b3416ce1-c1fc-545e-acb9-666090dc8b6b",
+      "id": "20e9ce32-57c4-56d9-b3bb-617ec7dd4d01",
       "source_chunk_id": "14.1",
       "target_chunk_id": "8.1",
       "relationship_type": "collaborates_with",
@@ -7562,7 +7562,7 @@
       "explanation": "Works with PMO."
     },
     {
-      "id": "506e38de-01fe-58dd-87ad-b82757822626",
+      "id": "89596f7d-9300-5935-9463-354114ba51ae",
       "source_chunk_id": "14.1",
       "target_chunk_id": "13.1",
       "relationship_type": "collaborates_with",
@@ -7570,7 +7570,7 @@
       "explanation": "Works with Operations."
     },
     {
-      "id": "8dee6da7-c8ed-5cbb-becd-e77f7d98d339",
+      "id": "328d33b0-ef8d-5f9d-a482-e2691e710864",
       "source_chunk_id": "14.2",
       "target_chunk_id": "14.1",
       "relationship_type": "reports_to",
@@ -7578,7 +7578,7 @@
       "explanation": "The Water Sector Manager reports to the PM Manager."
     },
     {
-      "id": "177e7061-5c2a-59b8-8925-e4c6f93cbd8c",
+      "id": "89b912f2-ec8e-56d4-8d06-a51edde2f268",
       "source_chunk_id": "14.2",
       "target_chunk_id": "14.5",
       "relationship_type": "manages",
@@ -7586,7 +7586,7 @@
       "explanation": "The Water Sector Manager supervises Project Managers."
     },
     {
-      "id": "4ebc6e5a-7564-5f15-a051-47317f868919",
+      "id": "7ec4524d-c5a2-5ee7-ac05-7fca3621ee9c",
       "source_chunk_id": "14.2",
       "target_chunk_id": "14.6",
       "relationship_type": "manages",
@@ -7594,7 +7594,7 @@
       "explanation": "The Water Sector Manager supervises Projects Managers."
     },
     {
-      "id": "8c982963-a40c-5887-8528-d1f9d86a10b9",
+      "id": "42710537-a7fd-5620-9550-bb1fadc10e1d",
       "source_chunk_id": "14.3",
       "target_chunk_id": "14.1",
       "relationship_type": "reports_to",
@@ -7602,7 +7602,7 @@
       "explanation": "The Energy Sector Manager reports to the PM Manager."
     },
     {
-      "id": "4afb4dab-07f1-5382-9818-b04cec6ceb89",
+      "id": "75a9326f-495d-50b0-a9e0-b4c7012f2a1e",
       "source_chunk_id": "14.3",
       "target_chunk_id": "14.5",
       "relationship_type": "manages",
@@ -7610,7 +7610,7 @@
       "explanation": "The Energy Sector Manager supervises Project Managers."
     },
     {
-      "id": "f40d00a9-091c-5355-b985-83ea609cbead",
+      "id": "af16f867-1d7e-50d6-ad7f-6ee550f78d77",
       "source_chunk_id": "14.3",
       "target_chunk_id": "14.6",
       "relationship_type": "manages",
@@ -7618,7 +7618,7 @@
       "explanation": "The Energy Sector Manager supervises Projects Managers."
     },
     {
-      "id": "0b217679-11d0-5382-9c8d-d353a600d2db",
+      "id": "a6ace8c0-7d42-55f2-b114-b6aca3a390b7",
       "source_chunk_id": "14.4",
       "target_chunk_id": "14.1",
       "relationship_type": "reports_to",
@@ -7626,7 +7626,7 @@
       "explanation": "The Oil and Gas Sector Manager reports to the PM Manager."
     },
     {
-      "id": "91ec2d97-1315-53ea-ba95-71c0ea73cc91",
+      "id": "909d0439-18f0-5804-8f52-6a288178c8ba",
       "source_chunk_id": "14.4",
       "target_chunk_id": "14.5",
       "relationship_type": "manages",
@@ -7634,7 +7634,7 @@
       "explanation": "The Oil and Gas Sector Manager supervises Project Managers."
     },
     {
-      "id": "deae487b-d2e8-5633-867c-86e6e03b2d90",
+      "id": "431fc7f4-a056-5695-b8a7-f83aec637e19",
       "source_chunk_id": "14.4",
       "target_chunk_id": "14.6",
       "relationship_type": "manages",
@@ -7642,7 +7642,7 @@
       "explanation": "The Oil and Gas Sector Manager supervises Projects Managers."
     },
     {
-      "id": "182c69c0-7e8e-535d-aad9-64872025924e",
+      "id": "338d0666-c4ae-50c2-9321-f396bc00e3ad",
       "source_chunk_id": "14.5",
       "target_chunk_id": "14.1",
       "relationship_type": "reports_to",
@@ -7650,7 +7650,7 @@
       "explanation": "The Project Manager reports to the PM Manager or Sector Manager."
     },
     {
-      "id": "bf2cd306-4c69-5a5e-9a39-9ca4c6d5d919",
+      "id": "9dbb6e9f-9ce6-5483-9252-2f8f4ea13309",
       "source_chunk_id": "14.5",
       "target_chunk_id": "14.2",
       "relationship_type": "reports_to",
@@ -7658,7 +7658,7 @@
       "explanation": "The Project Manager reports to the Water Sector Manager."
     },
     {
-      "id": "db63a642-f229-5b80-90a7-42622cd41862",
+      "id": "a49b407f-99df-5075-8085-f3fa35515ec6",
       "source_chunk_id": "14.5",
       "target_chunk_id": "14.3",
       "relationship_type": "reports_to",
@@ -7666,7 +7666,7 @@
       "explanation": "The Project Manager reports to the Energy Sector Manager."
     },
     {
-      "id": "984388a4-d1d9-5685-ae3c-11b16548fa62",
+      "id": "f8bcb228-d1ba-547c-b1de-2100f6657ffa",
       "source_chunk_id": "14.5",
       "target_chunk_id": "14.4",
       "relationship_type": "reports_to",
@@ -7674,7 +7674,7 @@
       "explanation": "The Project Manager reports to the Oil and Gas Sector Manager."
     },
     {
-      "id": "c1fa8eda-3bd7-5e60-a506-080d22c2fea8",
+      "id": "eb9744b0-43f9-52ab-9848-2b4ed9a500fb",
       "source_chunk_id": "14.5",
       "target_chunk_id": "14.7",
       "relationship_type": "manages",
@@ -7682,7 +7682,7 @@
       "explanation": "The Project Manager supervises Execution Teams."
     },
     {
-      "id": "7a2365db-ed9c-52da-b2c2-8aa05277dc5e",
+      "id": "8476ece1-db09-527f-a249-90d383146873",
       "source_chunk_id": "14.5",
       "target_chunk_id": "8.1",
       "relationship_type": "collaborates_with",
@@ -7690,7 +7690,7 @@
       "explanation": "Works with PMO."
     },
     {
-      "id": "02ee0370-b759-5c9e-a564-aa557ea350b4",
+      "id": "167c9e0a-eb8c-5d4f-8ab1-07f7625587ae",
       "source_chunk_id": "14.5",
       "target_chunk_id": "13.1",
       "relationship_type": "collaborates_with",
@@ -7698,7 +7698,7 @@
       "explanation": "Works with Operations."
     },
     {
-      "id": "7dd3fa10-c82b-591a-ad27-fb0b79945300",
+      "id": "9727597f-aa70-5ef1-9989-9241ab8cb9b6",
       "source_chunk_id": "14.6",
       "target_chunk_id": "14.1",
       "relationship_type": "reports_to",
@@ -7706,7 +7706,7 @@
       "explanation": "The Projects Manager reports to the PM Manager or Sector Manager."
     },
     {
-      "id": "65e052da-86e9-5937-bb4b-cdcc68ae36e8",
+      "id": "8ad7cb1f-2433-515b-9187-e920cf65ee0e",
       "source_chunk_id": "14.6",
       "target_chunk_id": "14.2",
       "relationship_type": "reports_to",
@@ -7714,7 +7714,7 @@
       "explanation": "The Projects Manager reports to the Water Sector Manager."
     },
     {
-      "id": "e8b7c918-df4a-5b15-b5a9-198504c099cd",
+      "id": "43f4071c-f638-5ffd-bef1-d0927e7ce210",
       "source_chunk_id": "14.6",
       "target_chunk_id": "14.3",
       "relationship_type": "reports_to",
@@ -7722,7 +7722,7 @@
       "explanation": "The Projects Manager reports to the Energy Sector Manager."
     },
     {
-      "id": "927fb60d-025a-5061-8e77-5ff60109a031",
+      "id": "225385f4-ef47-558c-82d6-f1f313eb63b0",
       "source_chunk_id": "14.6",
       "target_chunk_id": "14.4",
       "relationship_type": "reports_to",
@@ -7730,7 +7730,7 @@
       "explanation": "The Projects Manager reports to the Oil and Gas Sector Manager."
     },
     {
-      "id": "675a6b46-c10f-525e-ab69-bf96f59e1aca",
+      "id": "ebd6cabc-e783-51da-968d-71e55b644f60",
       "source_chunk_id": "14.6",
       "target_chunk_id": "14.7",
       "relationship_type": "manages",
@@ -7738,7 +7738,7 @@
       "explanation": "The Projects Manager supervises Execution Teams."
     },
     {
-      "id": "ab97b834-1b9c-5ad4-8e49-3c6e348a6747",
+      "id": "a180c6d6-f362-55c2-803c-45b4a6e1c2de",
       "source_chunk_id": "14.6",
       "target_chunk_id": "14.5",
       "relationship_type": "collaborates_with",
@@ -7746,7 +7746,7 @@
       "explanation": "Works with Project Managers."
     },
     {
-      "id": "6a9ff813-e114-540e-b15e-82fb4b3e6c21",
+      "id": "76334c73-c8a7-5f12-a386-c2f93162940f",
       "source_chunk_id": "14.7",
       "target_chunk_id": "14.5",
       "relationship_type": "reports_to",
@@ -7754,7 +7754,7 @@
       "explanation": "Execution Teams report to the Project Manager."
     },
     {
-      "id": "e846ba0e-bcb9-5156-8b57-423185d075b2",
+      "id": "e2302c4f-a526-5c26-b95b-fceadc8ebdec",
       "source_chunk_id": "14.7",
       "target_chunk_id": "14.6",
       "relationship_type": "reports_to",
@@ -7762,7 +7762,7 @@
       "explanation": "Execution Teams report to the Projects Manager."
     },
     {
-      "id": "35ca7e29-3d90-570c-a59e-fa64878a4aba",
+      "id": "3965cb25-44dd-54ff-80ba-d383efe70cbf",
       "source_chunk_id": "14.7",
       "target_chunk_id": "15.3",
       "relationship_type": "reports_to",
@@ -7770,7 +7770,7 @@
       "explanation": "Execution Teams report to the Site Supervisor."
     },
     {
-      "id": "ed9ce258-6c80-54bc-87a7-4f5d2a8e77e7",
+      "id": "986b1211-8dda-51b7-b95b-d127f32eaad0",
       "source_chunk_id": "14.7",
       "target_chunk_id": "15.1",
       "relationship_type": "collaborates_with",
@@ -7778,7 +7778,7 @@
       "explanation": "Execution Teams work with Site Engineer."
     },
     {
-      "id": "e777b672-91cb-53c4-a439-44c9816e7be4",
+      "id": "8863a22a-1950-5a70-af9b-2835ecaa87e3",
       "source_chunk_id": "14.7",
       "target_chunk_id": "7.2",
       "relationship_type": "collaborates_with",
@@ -7786,7 +7786,7 @@
       "explanation": "Execution Teams work with QA/QC."
     },
     {
-      "id": "58f6a6d3-2654-5474-8ada-bacf0f3cc459",
+      "id": "5694a312-9b4a-5642-b428-695c76f728b2",
       "source_chunk_id": "14.8",
       "target_chunk_id": "14.1",
       "relationship_type": "reports_to",
@@ -7794,7 +7794,7 @@
       "explanation": "The Engineering Manager reports to the PM Manager."
     },
     {
-      "id": "d86f519c-0ed7-5329-b825-e02111062c16",
+      "id": "7c61e0a1-7db2-55cf-8724-f8599f14e6c8",
       "source_chunk_id": "14.8",
       "target_chunk_id": "10.1",
       "relationship_type": "collaborates_with",
@@ -7802,7 +7802,7 @@
       "explanation": "Works with BD on proposals."
     },
     {
-      "id": "e2233826-f843-51e4-8f26-7669e2f3d4ac",
+      "id": "da3587e3-a64a-530e-82ff-5e3d28673299",
       "source_chunk_id": "14.8",
       "target_chunk_id": "10.5",
       "relationship_type": "collaborates_with",
@@ -7810,7 +7810,7 @@
       "explanation": "Works with Technical Proposals."
     },
     {
-      "id": "95f895f2-e322-5744-9ca4-308fb33a88a2",
+      "id": "76f68b58-f3ab-501e-b365-68fe592db68e",
       "source_chunk_id": "15",
       "target_chunk_id": "14.1",
       "relationship_type": "collaborates_with",
@@ -7818,7 +7818,7 @@
       "explanation": "Support functions assist Project Management."
     },
     {
-      "id": "d1904dc4-2ff9-5c09-b06e-8aa2ef1ac1d7",
+      "id": "eaa79572-a8b4-508a-9d72-61938de9ea79",
       "source_chunk_id": "15.1",
       "target_chunk_id": "14.5",
       "relationship_type": "reports_to",
@@ -7826,7 +7826,7 @@
       "explanation": "The Site Engineer reports to the Project Manager."
     },
     {
-      "id": "cc294753-fc83-5c1a-804f-16a252e56e9b",
+      "id": "e881623b-49d0-5540-bb95-82dc6da900eb",
       "source_chunk_id": "15.1",
       "target_chunk_id": "15.3",
       "relationship_type": "reports_to",
@@ -7834,7 +7834,7 @@
       "explanation": "The Site Engineer reports to the Site Supervisor."
     },
     {
-      "id": "9fe7f8ff-7a18-59a7-b7da-e14142e69cc5",
+      "id": "c8f05c32-09c8-514d-b056-17b96d39b4b4",
       "source_chunk_id": "15.1",
       "target_chunk_id": "15.2",
       "relationship_type": "collaborates_with",
@@ -7842,7 +7842,7 @@
       "explanation": "Works with the Office Engineer."
     },
     {
-      "id": "25a0f580-9192-5db8-abe9-1cd417de548c",
+      "id": "2954871f-4727-5b52-a730-35d9e08e5e5e",
       "source_chunk_id": "15.1",
       "target_chunk_id": "7.2",
       "relationship_type": "collaborates_with",
@@ -7850,7 +7850,7 @@
       "explanation": "Works with QA/QC."
     },
     {
-      "id": "b105c062-ea04-50ac-91af-7de936d0aec8",
+      "id": "e1fddc76-0bb8-5827-9a2b-ee0083ffc979",
       "source_chunk_id": "15.2",
       "target_chunk_id": "14.5",
       "relationship_type": "reports_to",
@@ -7858,7 +7858,7 @@
       "explanation": "The Office Engineer reports to the Project Manager."
     },
     {
-      "id": "d942cba3-473f-52a5-afbd-525f72ec995b",
+      "id": "726b1c1d-4cb8-57f0-8485-1bb06eae421f",
       "source_chunk_id": "15.2",
       "target_chunk_id": "14.8",
       "relationship_type": "reports_to",
@@ -7866,7 +7866,7 @@
       "explanation": "The Office Engineer reports to the Engineering Manager."
     },
     {
-      "id": "597fb285-587d-5ec5-b7b4-02b58f8eba95",
+      "id": "de70718b-a30d-550b-92d1-55921fcb31a4",
       "source_chunk_id": "15.2",
       "target_chunk_id": "15.1",
       "relationship_type": "collaborates_with",
@@ -7874,7 +7874,7 @@
       "explanation": "Works with the Site Engineer."
     },
     {
-      "id": "5d1a2c07-4031-5516-9fba-47a0d5e4db6e",
+      "id": "583ace7b-6e24-50db-84ae-5e86167cfbd5",
       "source_chunk_id": "15.3",
       "target_chunk_id": "14.5",
       "relationship_type": "reports_to",
@@ -7882,7 +7882,7 @@
       "explanation": "The Site Supervisor reports to the Project Manager."
     },
     {
-      "id": "22781d63-d5fe-5147-b4c0-10d751f4b6a5",
+      "id": "782b7c01-bff4-50b2-8f36-746d0ccec089",
       "source_chunk_id": "15.3",
       "target_chunk_id": "15.1",
       "relationship_type": "collaborates_with",
@@ -7890,7 +7890,7 @@
       "explanation": "Works with the Site Engineer."
     },
     {
-      "id": "54a246bf-9347-5d80-a4aa-64ea47efd48c",
+      "id": "3b8569e3-5cb0-52a1-8731-d279784b0fb6",
       "source_chunk_id": "15.3",
       "target_chunk_id": "7.2",
       "relationship_type": "collaborates_with",
@@ -7898,7 +7898,7 @@
       "explanation": "Works with QA/QC."
     },
     {
-      "id": "583ffc7c-8c4e-5d39-ab67-392ff3306c15",
+      "id": "9a2cf18c-e3aa-557d-ae18-28a3ec77c234",
       "source_chunk_id": "15.3",
       "target_chunk_id": "15.4",
       "relationship_type": "collaborates_with",
@@ -7906,7 +7906,7 @@
       "explanation": "Works with Document Controller."
     },
     {
-      "id": "6ffa9769-e75c-555c-ae28-4f289cf2eab9",
+      "id": "f9c6d6c2-1df2-5957-9829-d19d94ff3dfa",
       "source_chunk_id": "15.3",
       "target_chunk_id": "15.8",
       "relationship_type": "manages",
@@ -7914,7 +7914,7 @@
       "explanation": "Manages workers."
     },
     {
-      "id": "8d72a609-b27e-5845-b87b-a94a95794a64",
+      "id": "1a9c9dff-73c1-5313-bbe8-c6d55ceb3b42",
       "source_chunk_id": "15.4",
       "target_chunk_id": "14.5",
       "relationship_type": "reports_to",
@@ -7922,7 +7922,7 @@
       "explanation": "The Document Controller reports to the Project Manager."
     },
     {
-      "id": "9451ab20-2c98-52a5-8c4e-0f6d96ad3278",
+      "id": "881ad237-ac61-52d6-bccb-2037c7fc4d2f",
       "source_chunk_id": "15.4",
       "target_chunk_id": "15.3",
       "relationship_type": "collaborates_with",
@@ -7930,7 +7930,7 @@
       "explanation": "Works with Site Supervisor."
     },
     {
-      "id": "d536c4f1-a8c8-53c4-b7d2-1bb7c36e07f7",
+      "id": "85dad894-bc88-5fe7-a0ec-795bd7cab4c4",
       "source_chunk_id": "15.5",
       "target_chunk_id": "14.5",
       "relationship_type": "reports_to",
@@ -7938,7 +7938,7 @@
       "explanation": "The Field HSE Officer reports to the Project Manager."
     },
     {
-      "id": "eaaa29c5-4186-50d2-9a22-35131aef8acc",
+      "id": "ec77eb23-6f20-5eb9-b58f-ff430fd5bbc4",
       "source_chunk_id": "15.5",
       "target_chunk_id": "7.1",
       "relationship_type": "reports_to",
@@ -7946,7 +7946,7 @@
       "explanation": "The Field HSE Officer reports to the QHSE Manager."
     },
     {
-      "id": "764f3112-6a85-506e-a0ed-0eaabb388d70",
+      "id": "136c3ef8-a2ea-5fcd-8bb8-297ecfaa49ce",
       "source_chunk_id": "15.5",
       "target_chunk_id": "7.3",
       "relationship_type": "collaborates_with",
@@ -7954,7 +7954,7 @@
       "explanation": "Works with the HSE Officer."
     },
     {
-      "id": "16fddfe9-27e2-5dcf-beba-d4e631fd1c0c",
+      "id": "e5fe4e56-cf54-5a83-a115-2d3539c13acc",
       "source_chunk_id": "15.6",
       "target_chunk_id": "15.3",
       "relationship_type": "reports_to",
@@ -7962,7 +7962,7 @@
       "explanation": "The Driver reports to the Site Supervisor."
     },
     {
-      "id": "73558d67-3f27-5116-84e4-6656969c7959",
+      "id": "cbcfaec9-90fc-54b0-a1c0-8984c1200ef4",
       "source_chunk_id": "15.6",
       "target_chunk_id": "13.6",
       "relationship_type": "reports_to",
@@ -7970,7 +7970,7 @@
       "explanation": "The Driver reports to the Equipment Manager."
     },
     {
-      "id": "8012865e-c74c-5f3c-b16c-7155c2e18a06",
+      "id": "a438d4b3-0430-54fe-a74b-721ad50aee0b",
       "source_chunk_id": "15.7",
       "target_chunk_id": "15.3",
       "relationship_type": "reports_to",
@@ -7978,7 +7978,7 @@
       "explanation": "The Technician reports to the Site Supervisor."
     },
     {
-      "id": "271f0c46-b656-52c7-9f3e-5499e4cc004b",
+      "id": "222be0d0-2228-56df-90da-e5731dff4422",
       "source_chunk_id": "15.7",
       "target_chunk_id": "15.1",
       "relationship_type": "reports_to",
@@ -7986,7 +7986,7 @@
       "explanation": "The Technician reports to the Site Engineer."
     },
     {
-      "id": "6799d1cb-c014-555d-861f-923aafdc273d",
+      "id": "fc6de054-e957-5c30-8126-3e52567dfd8f",
       "source_chunk_id": "15.8",
       "target_chunk_id": "15.3",
       "relationship_type": "reports_to",
@@ -7994,7 +7994,7 @@
       "explanation": "The Worker reports to the Site Supervisor."
     },
     {
-      "id": "8bf53dc1-b3e9-543b-8667-f040b0fc0089",
+      "id": "dc5ca51b-b457-55f6-9bf6-446d8f03ef25",
       "source_chunk_id": "16",
       "target_chunk_id": "5.1",
       "relationship_type": "reports_to",
@@ -8002,7 +8002,7 @@
       "explanation": "CEO reports to the Board."
     },
     {
-      "id": "332b9f26-f94f-5a46-82fc-6158dbe7935f",
+      "id": "1ef2b726-b417-580e-8c85-8b822240d3eb",
       "source_chunk_id": "16",
       "target_chunk_id": "6.1",
       "relationship_type": "reports_to",
@@ -8010,7 +8010,7 @@
       "explanation": "CEO is the top of executive reporting."
     },
     {
-      "id": "2e78ff53-dd66-5d3c-8aa3-3de59469c850",
+      "id": "e7bd86d7-0b55-5de9-b402-c564b033131e",
       "source_chunk_id": "16",
       "target_chunk_id": "7.1",
       "relationship_type": "reports_to",
@@ -8018,7 +8018,7 @@
       "explanation": "QHSE Manager reports to CEO."
     },
     {
-      "id": "7885d247-14f4-5930-8f54-c4484569898f",
+      "id": "a4a1f2ad-abf8-5d63-89d4-65d592321431",
       "source_chunk_id": "16",
       "target_chunk_id": "8.1",
       "relationship_type": "reports_to",
@@ -8026,7 +8026,7 @@
       "explanation": "PMO Manager reports to CEO."
     },
     {
-      "id": "df6f19f5-7ec9-58f6-947f-30f66a38479b",
+      "id": "0501486c-adfe-50d4-97eb-9d4c863ceb6d",
       "source_chunk_id": "16",
       "target_chunk_id": "9.1",
       "relationship_type": "reports_to",
@@ -8034,7 +8034,7 @@
       "explanation": "Legal Manager reports to CEO."
     },
     {
-      "id": "d5113549-6b61-54e1-ad0d-12d95bd3dc75",
+      "id": "49cf8f19-ee6e-5beb-a0f1-7011cb9ee1a1",
       "source_chunk_id": "16",
       "target_chunk_id": "10.1",
       "relationship_type": "reports_to",
@@ -8042,7 +8042,7 @@
       "explanation": "BD Manager reports to CEO."
     },
     {
-      "id": "6f079fd5-6183-5ffe-9510-761fddfe094b",
+      "id": "8f3b671c-f715-5339-ae64-e694702eb12c",
       "source_chunk_id": "16",
       "target_chunk_id": "11.1",
       "relationship_type": "reports_to",
@@ -8050,7 +8050,7 @@
       "explanation": "Finance Director reports to CEO."
     },
     {
-      "id": "6b8f0526-99fe-5567-81c4-45eb83225574",
+      "id": "9de2e71e-e36f-59da-856e-d0956d3b9191",
       "source_chunk_id": "16",
       "target_chunk_id": "12.1",
       "relationship_type": "reports_to",
@@ -8058,7 +8058,7 @@
       "explanation": "HR Manager reports to CEO."
     },
     {
-      "id": "aac8de4c-8a8b-5f65-90c8-7d3bf3a3b2d8",
+      "id": "d5814811-2d22-5d79-9fdd-5b0e2dd80a15",
       "source_chunk_id": "16",
       "target_chunk_id": "13.1",
       "relationship_type": "reports_to",
@@ -8066,7 +8066,7 @@
       "explanation": "Operations Manager reports to CEO."
     },
     {
-      "id": "8954ee44-b260-58ba-bd14-c4bac06f96c7",
+      "id": "84ba31d4-cf3a-5509-b4ce-3173a278f26d",
       "source_chunk_id": "16",
       "target_chunk_id": "14.1",
       "relationship_type": "reports_to",
@@ -8074,7 +8074,7 @@
       "explanation": "PM Manager reports to CEO."
     },
     {
-      "id": "57d79768-413b-596b-8a34-7724825e40ee",
+      "id": "6d2b9771-1f51-5978-bbf5-b629a5d823f3",
       "source_chunk_id": "17",
       "target_chunk_id": "8",
       "relationship_type": "semantic_related",
@@ -8082,7 +8082,7 @@
       "explanation": "Recommendations about the PMO."
     },
     {
-      "id": "3354a8d3-db08-52ba-9ed1-0c7ea644611e",
+      "id": "42941712-6081-528b-aee8-c9fe3faed971",
       "source_chunk_id": "17",
       "target_chunk_id": "14",
       "relationship_type": "semantic_related",
@@ -8090,7 +8090,7 @@
       "explanation": "Recommendations about Project Management."
     },
     {
-      "id": "2127511f-c379-5421-bf8a-067cf48bf123",
+      "id": "1dd02484-1755-59c0-bcec-c0fdc3ec40de",
       "source_chunk_id": "17",
       "target_chunk_id": "11",
       "relationship_type": "collaborates_with",
@@ -8098,7 +8098,7 @@
       "explanation": "Recommend coordination between PMO and Finance."
     },
     {
-      "id": "c61d534f-df17-58df-862e-4550d8a0b4cf",
+      "id": "265219c8-cfc8-5fd0-850d-e33de2d3160f",
       "source_chunk_id": "17",
       "target_chunk_id": "9",
       "relationship_type": "collaborates_with",
@@ -8106,7 +8106,7 @@
       "explanation": "Recommend coordination between PMO and Legal."
     },
     {
-      "id": "3c608a95-a0c1-55cb-bff4-de52d10672bc",
+      "id": "a27976af-fef2-5dd8-8f36-f3dc9e575100",
       "source_chunk_id": "17",
       "target_chunk_id": "10",
       "relationship_type": "collaborates_with",
@@ -8114,7 +8114,7 @@
       "explanation": "Recommend coordination between BD and other departments."
     },
     {
-      "id": "a8ce3c89-a189-56f3-8e8c-0a51a0161d09",
+      "id": "682f5064-692c-5dcc-9180-b1762b629ffc",
       "source_chunk_id": "17",
       "target_chunk_id": "7",
       "relationship_type": "collaborates_with",
@@ -8122,7 +8122,7 @@
       "explanation": "Recommend coordination between QHSE and other departments."
     },
     {
-      "id": "cc947b80-8f8e-51f9-8c7c-8f4a10083391",
+      "id": "b1850bf6-2d50-5f86-ae66-bc2710865177",
       "source_chunk_id": "17",
       "target_chunk_id": "13",
       "relationship_type": "collaborates_with",
@@ -8130,7 +8130,7 @@
       "explanation": "Recommend coordination between QHSE and Operations."
     },
     {
-      "id": "c8c4301d-5f79-59e2-b908-6610a7c55686",
+      "id": "fd243a46-a675-5820-b7c7-70172ecdc4e1",
       "source_chunk_id": "18",
       "target_chunk_id": "5",
       "relationship_type": "approves",
@@ -8138,7 +8138,7 @@
       "explanation": "The Board of Directors approves the guide."
     },
     {
-      "id": "63e4d53a-5392-55bd-b1c0-d424c01d37f4",
+      "id": "ac30f068-aa79-5b36-91fc-839d4c908a5c",
       "source_chunk_id": "18",
       "target_chunk_id": "6.1",
       "relationship_type": "approves",

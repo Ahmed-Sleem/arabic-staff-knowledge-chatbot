@@ -68,7 +68,7 @@
 
 - **Gap ID + One-line description:** GAP-INIT-04 — Created GitHub repo `Ahmed-Sleem/arabic-staff-knowledge-chatbot`, wrote story-driven `README.md`, and pushed initial governance structure.
 - **Files touched:**
-  - `README.md` (created with story-driven genesis of Kayan Al-Mamlaka HR assistant, strict technical stack, and directory layout)
+  - `README.md` (created with story-driven genesis of Sample Organization HR assistant, strict technical stack, and directory layout)
   - `.gitignore` (created)
   - `_working_docs/AGENT_RULES.md` & `uploads/AGENT_RULES copy 2.md` (masked secret tokens `${GITHUB_PAT}` to pass GitHub push protection)
 - **Tests added:** API verification and git remote push validation.
@@ -165,12 +165,12 @@
 
 ---
 
-## 2026-07-19 — GAP-ASKC-08 & GAP-ASKC-06: Next.js 15 Cyrkil 3-Panel GUI with Obsidian Graph & Dynamic API Key Modal
+## 2026-07-19 — GAP-ASKC-08 & GAP-ASKC-06: Next.js 15 GPR 3-Panel GUI with Obsidian Graph & Dynamic API Key Modal
 
-- **Gap ID + One-line description:** GAP-ASKC-08/06 — Implemented standalone Next.js 15 App Router Cyrkil frontend (`src/frontend/`) featuring 3-panel split workspace, AR/EN bilingual direct toggle, Data Panel dual-view (`Files` vs `Obsidian Graph View` with live SSE `centerAt` / `zoomToFit` panning & `#9BE36B` node glowing), and dynamic API key settings modal.
+- **Gap ID + One-line description:** GAP-ASKC-08/06 — Implemented standalone Next.js 15 App Router GPR frontend (`src/frontend/`) featuring 3-panel split workspace, AR/EN bilingual direct toggle, Data Panel dual-view (`Files` vs `Obsidian Graph View` with live SSE `centerAt` / `zoomToFit` panning & `#9BE36B` node glowing), and dynamic API key settings modal.
 - **Files touched:**
   - `src/frontend/package.json`, `tsconfig.json`, `next.config.js` (created with API rewrites `http://127.0.0.1:8000/api/v1/:path*` and secure `next@^15.2.0`)
-  - `src/frontend/app/globals.css` (created exact Cyrkil design tokens, glass panels, resizable variables `--left-width: 280px` / `--data-width: 400px`, and `.light-mode` overrides)
+  - `src/frontend/app/globals.css` (created exact GPR design tokens, glass panels, resizable variables `--left-width: 280px` / `--data-width: 400px`, and `.light-mode` overrides)
   - `src/frontend/context/AppContext.tsx` (created global state for `language: "ar"|"en"`, `theme: "dark"|"light"`, `apiKey`, `selectedDocIds`, `activeGraphNodeIds`, and bilingual `translations`)
   - `src/frontend/components/Header.tsx` & `ApiKeyModal.tsx` (created top bar with direct language switch `🌐 عربي|English`, theme toggle, and `🔑 Add API Key` modal persisting custom keys to `localStorage` and passing via `X-LLM-API-Key` headers)
   - `src/frontend/components/LeftPanel.tsx` (created conversation stack with search filter and quick prompt suggestions)
@@ -205,7 +205,7 @@
 - **Self-check answers:**
   - **a) Is the gap fully fixed?** Yes, users can register and authenticate via a secure two-factor email OTP workflow without hardcoded credentials (`Rule 22`).
   - **b) Is everything wired and ready for production?** Yes, `GET /api/v1/auth/me` validates the `Authorization: Bearer <session_token>` header against `SessionORM` inside persistent storage.
-  - **c) Is my test really validating that?** Yes, `test_full_auth_lifecycle` registers a unique staff account (`ahmed_staff_{time}@cyrkil.com`), verifies Argon2id password check, inspects the 6-digit OTP code (`dev_otp_preview`), submits Step 2 verification, receives the 64-byte session token, and successfully fetches the user profile using the Bearer header.
+  - **c) Is my test really validating that?** Yes, `test_full_auth_lifecycle` registers a unique staff account (`ahmed_staff_{time}@gpr.com`), verifies Argon2id password check, inspects the 6-digit OTP code (`dev_otp_preview`), submits Step 2 verification, receives the 64-byte session token, and successfully fetches the user profile using the Bearer header.
 
 ---
 
@@ -258,7 +258,7 @@
 - **Gap ID + One-line description:** GAP-ASKC-11 — Researched and verified GPR repository compatibility with **Back4App Containers (`containers.back4app.com`)**, replaced SnapDeploy documentation in `README.md` with explicit, step-by-step Back4App deployment instructions (`Option 1: All-in-One Root Dockerfile vs Option 2: Separate gpr-api and gpr-web microservices`), and verified `$PORT` dynamic binding across all container profiles. Diagnosed and fixed Back4App Kaniko build failure (`failed to get fileinfo for /public: no such file or directory`) by creating `src/frontend/public/favicon.svg` (`orbital atom logo`) and enforcing `RUN mkdir -p public` across `Dockerfile` and `src/frontend/Dockerfile`.
 - **Files touched:**
   - `README.md` (removed SnapDeploy specific instructions and added comprehensive Back4App Containers continuous delivery section)
-  - `src/frontend/public/favicon.svg` & `.gitkeep` (created clean Cyrkil brand logo so git tracks `public/` directory across container builds)
+  - `src/frontend/public/favicon.svg` & `.gitkeep` (created clean GPR brand logo so git tracks `public/` directory across container builds)
   - `Dockerfile` & `src/frontend/Dockerfile` (added `RUN mkdir -p public` across builder and runner stages to guarantee 100% Kaniko build safety)
   - `_working_docs/AUDIT_AND_TODO.md`, `IMPLEMENTATION_LOG.md`, `CHANGELOG.md`, `NEXT_SESSIONS_ROADMAP.md` (updated)
 - **Tests added:** Full regression suite execution (`pytest` and `npm run build`).
@@ -728,3 +728,12 @@
 - Updated README Product Preview from a single screenshot into a clean, compact gallery: one hero screenshot, a short main-state table, and a collapsible "More interface states" section to avoid clutter.
 - Screenshot assets were renamed by state: welcome light, grounded answer light, source card, dark answer, dark chat/map overview, split map, water manager map focus, streaming map focus, and focused graph cluster.
 - Verification: README asset references all resolve; workspace secret scan found 0 configured findings.
+
+## 2026-07-23 session 45 — Brand-agnostic public cleanup
+
+- Removed project/product-facing references to sample customer/design-process names so GPR is presented as a general, reusable, brand-agnostic RAG workspace.
+- Reframed bundled organizational data as sample placeholder data, not a real customer deployment.
+- Sanitized active sample JSON and regenerated `curated_knowledge_graph.json` with generic `Sample Organization` / `المؤسسة النموذجية` wording.
+- Updated README Data Curation Workflow to explicitly document the included curation/rebuild code: `build_curated_knowledge.py`, `seed_curated.py`, `universal_pipeline.py`, and `llm_semantic_analyzer.py`.
+- Updated active prompts/identity copy and deployment docs from product-specific wording to generic GPR wording.
+- Verification: brand grep for removed names returned 0 matches across active repo text; backend suite passed `28 passed in 37.23s`; frontend build compiled successfully; secret scan found 0 configured findings; `git diff --check` passed.

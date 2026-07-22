@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # Universal All-in-One Container Entrypoint (`docker-entrypoint.sh`).
-# Starts FastAPI backend (`127.0.0.1:8000`) in background and Next.js 15 Cyrkil GUI (`0.0.0.0:${PORT:-3000}`) in foreground.
+# Starts FastAPI backend (`127.0.0.1:8000`) in background and Next.js 15 GPR GUI (`0.0.0.0:${PORT:-3000}`) in foreground.
 # All terminal messages are strictly English.
 #
 
@@ -37,7 +37,7 @@ echo "[GPR INFO] Verifying workspace document index status..."
 DOC_COUNT=$(curl -s http://127.0.0.1:8000/api/v1/documents | grep -o '"id":' | wc -l || echo "0")
 echo "[GPR INFO] Current active documents in workspace database: ${DOC_COUNT} (Golden 80-node dataset HR-MANUAL-V1 pre-verified by background task)."
 
-# 4. Start Next.js 15 Cyrkil GUI in foreground bound to 0.0.0.0 on dynamic $PORT
-echo "[GPR INFO] Launching Next.js 15 Cyrkil GUI on 0.0.0.0:${PORT:-3000}..."
+# 4. Start Next.js 15 GPR GUI in foreground bound to 0.0.0.0 on dynamic $PORT
+echo "[GPR INFO] Launching Next.js 15 GPR GUI on 0.0.0.0:${PORT:-3000}..."
 cd /app/src/frontend
 exec node_modules/.bin/next start -H 0.0.0.0 -p ${PORT:-3000}

@@ -8,7 +8,7 @@
 
 ### Product
 
-GPR is a no-login, device-based grounded knowledge workspace for the Kayan Al-Mamlaka / Cyrkil organizational manual.
+GPR is a no-login, device-based grounded knowledge workspace for the Sample Organization / GPR organizational manual.
 
 ### Backend
 
