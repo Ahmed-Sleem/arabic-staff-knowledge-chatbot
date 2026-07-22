@@ -623,3 +623,12 @@
 - Updated ingestion prompt generation to use the new versioned prompt builder.
 - Added `test_prompts.py` covering prompt security/citation/schema requirements and control parser behavior.
 - Verification: prompt/chat targeted tests `7 passed in 1.18s`; full backend suite `26 passed in 37.76s`; secret scan found 0 configured findings.
+
+## 2026-07-22 session 36 — GAP-GPR-46 true backend provider-delta streaming
+
+- Added shared provider helpers for internal completion calls and final-answer streaming deltas.
+- Implemented native Gemini `streamGenerateContent?alt=sse` parser and OpenAI-compatible delta forwarding.
+- Updated online agent path to emit backend `delta` events from actual provider chunks and production `error` events on provider failures instead of local fallback answers.
+- Added no-buffer SSE headers to chat streaming responses.
+- Added provider parser and chat stream header contract tests.
+- Verification: targeted streaming tests `4 passed in 1.16s`; full backend suite `28 passed in 36.85s`; secret scan found 0 configured findings.

@@ -860,3 +860,34 @@
   - **a) Is the gap fully fixed?** Yes. Production prompt text is now centralized/versioned, the online navigation path uses strict JSON control decisions, final-answer prompts include citation/language/refusal rules, and retrieved context is explicitly delimited as untrusted data.
   - **b) Is everything wired and ready for production?** Yes for prompt/control hardening. The online OpenAI-compatible ReAct path imports and uses the new prompt builders; Gemini true streaming conversion remains scheduled for GAP-GPR-46.
   - **c) Is my test really validating that?** Yes. The tests assert prompt safety/citation/schema clauses and verify that free-text control tags are rejected while strict JSON control decisions are accepted.
+
+---
+
+## 2026-07-22 — GAP-GPR-46: True Provider-Delta Backend Streaming
+
+- **Gap ID + one-line description:** GAP-GPR-46 — Reworked backend provider streaming so production final answers forward actual provider-delivered deltas, including native Gemini SSE chunks, and added no-buffer SSE headers.
+- **Files touched:**
+  - `src/backend/services/provider_clients.py` — added `complete_chat_text`, `stream_chat_deltas`, Gemini message conversion, native Gemini `streamGenerateContent?alt=sse` streaming parser, OpenAI-compatible delta streaming, and Gemini text-part extraction helper.
+  - `src/backend/agent/react_agent.py` — online agent path now uses provider helpers for internal control completion and final answer delta streaming, emits `event: delta` with exact provider chunks, and returns production `error` events instead of falling into local/manual fallback on provider failure.
+  - `src/backend/api/chat.py` — added no-buffer SSE headers: `Cache-Control: no-cache, no-transform`, `Connection: keep-alive`, and `X-Accel-Buffering: no`.
+  - `src/backend/tests/test_provider_clients.py` — added deterministic Gemini text-part parser test.
+  - `src/backend/tests/test_chat_stream_contract.py` — added SSE no-buffer header contract test.
+  - `_working_docs/AUDIT_AND_TODO.md` — marked GAP-GPR-46 closed with verification evidence.
+- **Tests added/updated:**
+  - Added `src/backend/tests/test_provider_clients.py`.
+  - Added `src/backend/tests/test_chat_stream_contract.py`.
+- **How I verified:**
+  - Syntax check:
+    - `PYTHONPATH=. python -m py_compile services/provider_clients.py agent/react_agent.py api/chat.py tests/test_provider_clients.py tests/test_chat_stream_contract.py`
+  - Targeted streaming/contract tests:
+    - `GPR_VAULT_MASTER_KEY=<test-key> GPR_COOKIE_SECURE=false PYTHONPATH=. pytest -q tests/test_provider_clients.py tests/test_chat_stream_contract.py tests/test_react_agent.py`
+    - Result: `4 passed in 1.16s`.
+  - Full backend suite:
+    - `GPR_VAULT_MASTER_KEY=<test-key> GPR_COOKIE_SECURE=false PYTHONPATH=. pytest -q tests/`
+    - Result: `28 passed in 36.85s`.
+  - Secret scan:
+    - Workspace text scan for configured PAT/provider/PEM/admin-password patterns found `0` findings, excluding deliberate dummy key-shaped backend test fixtures and tracked JSON data files.
+- **Self-check answers:**
+  - **a) Is the gap fully fixed?** Yes for backend streaming. OpenAI-compatible providers stream actual SDK deltas, Gemini uses native SSE `streamGenerateContent`, and production provider failures emit typed error events rather than fake local answers.
+  - **b) Is everything wired and ready for production?** Yes for backend. `react_agent.py` uses shared provider helpers and `api/chat.py` returns no-buffer SSE headers. Frontend support for `delta` events is intentionally next in GAP-GPR-47.
+  - **c) Is my test really validating that?** Yes. Tests verify Gemini text extraction, HTTP no-buffer stream headers, and existing chat stream behavior; full backend regression stayed green.

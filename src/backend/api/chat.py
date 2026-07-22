@@ -141,4 +141,12 @@ async def stream_chat(
             err_msg = json.dumps({"error": str(e)}, ensure_ascii=False)
             yield f"event: error\ndata: {err_msg}\n\n"
 
-    return StreamingResponse(event_generator(), media_type="text/event-stream")
+    return StreamingResponse(
+        event_generator(),
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache, no-transform",
+            "Connection": "keep-alive",
+            "X-Accel-Buffering": "no",
+        },
+    )

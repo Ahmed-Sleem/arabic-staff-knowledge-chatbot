@@ -20,10 +20,12 @@ try:
     from ..models.orm import ChunkORM, DocumentORM
     from .tools import execute_agent_tool
     from .prompts import build_final_answer_messages, build_navigation_control_prompt, parse_control_decision
+    from ..services.provider_clients import complete_chat_text, stream_chat_deltas
 except ImportError:
     from models.orm import ChunkORM, DocumentORM
     from agent.tools import execute_agent_tool
     from agent.prompts import build_final_answer_messages, build_navigation_control_prompt, parse_control_decision
+    from services.provider_clients import complete_chat_text, stream_chat_deltas
 
 try:
     from openai import AsyncOpenAI
@@ -235,27 +237,16 @@ async def run_agent_stream(
 
     is_pytest = os.getenv("PYTEST_CURRENT_TEST") is not None
 
-    if provider == "gemini" and api_key and not is_pytest:
-        try:
-            async for event in _stream_gemini_native(
-                api_key=api_key,
-                model=model,
-                message=message,
-                history=history,
-                workflow_cycles=workflow_cycles,
-                toc_summary_str=toc_summary_str,
-                chunks_map=chunks_map,
-                is_ar=is_ar
-            ):
-                yield event
-            return
-        except Exception as gem_err:
-            print(f"[GPR WARN] Gemini native stream exception: {gem_err}. Falling back to standard loop...")
-
     # -------------------------------------------------------------
     # OFFLINE / LOCAL STRUCTURAL FALLBACK (Pytest / No Key)
     # -------------------------------------------------------------
-    if is_pytest or AsyncOpenAI is None or not api_key:
+    if not is_pytest and not api_key:
+        yield {"event": "error", "data": json.dumps({"error": "No encrypted API key profile is available for this device."}, ensure_ascii=False)}
+        return
+    if not is_pytest and AsyncOpenAI is None and provider != "gemini":
+        yield {"event": "error", "data": json.dumps({"error": "OpenAI-compatible client dependency is unavailable on the server."}, ensure_ascii=False)}
+        return
+    if is_pytest:
         msg_clean = message.lower().strip()
         greetings = ["hi", "hello", "hey", "مرحبا", "أهلا", "السلام عليكم", "مرحباً", "صباح الخير", "مساء الخير", "كيف حالك", "how are you"]
         identity_qs = ["who are you", "who are you?", "what is this", "what do you do", "من انت", "من أنت", "ما هو هذا النظام", "عرفني بنفسك", "what are you"]
@@ -340,13 +331,6 @@ async def run_agent_stream(
     # -------------------------------------------------------------
     # ONLINE MULTI-CYCLE TOC NAVIGATION LOOP (Groq / DeepSeek / OpenAI / Gemini)
     # -------------------------------------------------------------
-    base_url = (
-        "https://generativelanguage.googleapis.com/v1beta/openai/" if provider == "gemini"
-        else ("https://api.groq.com/openai/v1" if provider == "groq"
-        else ("https://api.openai.com/v1" if provider == "openai" else "https://api.deepseek.com"))
-    )
-    client = AsyncOpenAI(api_key=api_key, base_url=base_url)
-
     inspected_node_ids = set()
     accumulated_node_ids = []
     inspected_contexts: List[Dict[str, Any]] = []
@@ -368,16 +352,8 @@ async def run_agent_stream(
             history=history,
             chunks=inspected_contexts,
         )
-        stream_resp = await client.chat.completions.create(
-            model=model,
-            messages=final_messages,
-            temperature=0.1,
-            stream=True
-        )
-        async for stream_chunk in stream_resp:
-            delta_str = stream_chunk.choices[0].delta.content or ""
-            if delta_str:
-                yield {"event": "token", "data": json.dumps({"token": delta_str}, ensure_ascii=False)}
+        async for delta_str in stream_chat_deltas(provider, model, api_key, final_messages, temperature=0.1):
+            yield {"event": "delta", "data": json.dumps({"content": delta_str}, ensure_ascii=False)}
         yield {"event": "done", "data": "completed"}
 
     try:
@@ -418,13 +394,14 @@ async def run_agent_stream(
                     "content": f"Already inspected context metadata: {json.dumps(inspected_contexts, ensure_ascii=False)[:3000]}"
                 })
 
-            response = await client.chat.completions.create(
-                model=model,
-                messages=control_messages,
+            msg_content = (await complete_chat_text(
+                provider,
+                model,
+                api_key,
+                control_messages,
                 temperature=0,
                 max_tokens=220,
-            )
-            msg_content = (response.choices[0].message.content or "").strip()
+            )).strip()
             try:
                 decision = parse_control_decision(msg_content)
             except ValueError:
@@ -468,6 +445,9 @@ async def run_agent_stream(
         yield {"event": "done", "data": "completed"}
 
     except Exception as e:
+        if not is_pytest:
+            yield {"event": "error", "data": json.dumps({"error": f"Provider streaming error ({provider}/{model}): {str(e)[:240]}"}, ensure_ascii=False)}
+            return
         print(f"[GPR WARN] Online Multi-Cycle loop failed ({provider}/{model}): {e}. Executing local fallback...")
         msg_clean = message.lower().strip()
         greetings = ["hi", "hello", "hey", "مرحبا", "أهلا", "السلام عليكم", "مرحباً", "صباح الخير", "مساء الخير", "كيف حالك", "how are you"]
