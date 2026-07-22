@@ -17,7 +17,7 @@ interface ExtendedTurn extends ConversationTurn {
 export const ChatPanel: React.FC = () => {
   const {
     conversations, activeConversationId, addTurnToConversation,
-    apiKey, savedApiKeys, apiProvider, apiModel, language, selectedDocIds, setActiveGraphNodeIds, setInspectingNodeId, deviceId, workflowCycles, t
+    savedApiKeys, activeApiKeyId, apiProvider, apiModel, language, selectedDocIds, setActiveGraphNodeIds, setInspectingNodeId, deviceId, workflowCycles, setIsSettingsOpen, t
   } = useApp();
 
   const [inputMessage, setInputMessage] = useState("");
@@ -61,12 +61,13 @@ export const ChatPanel: React.FC = () => {
     if (e) e.preventDefault();
     if (!inputMessage.trim() || isStreaming) return;
 
-    const activeKey = apiKey || (savedApiKeys && savedApiKeys.length > 0 ? savedApiKeys[0].key : "");
-    if (!activeKey || !activeKey.trim()) {
+    const activeProfileId = activeApiKeyId || (savedApiKeys && savedApiKeys.length > 0 ? savedApiKeys[0].id : null);
+    if (!activeProfileId) {
       alert(language === "ar"
-        ? "⚠️ يرجى إضافة وتفعيل مفتاح API أولاً (من شريط العنوان بالأعلى [ 🔑 Add API Key ]) قبل إرسال الرسالة."
-        : "⚠️ Please connect and activate an API key first (from the top header [ 🔑 Add API Key ]) before sending a message."
+        ? "يرجى إضافة وتفعيل ملف مفتاح API مشفر أولاً من الإعدادات قبل إرسال الرسالة."
+        : "Please add and activate an encrypted API key profile from Settings before sending a message."
       );
+      setIsSettingsOpen(true);
       return;
     }
 
@@ -93,7 +94,7 @@ export const ChatPanel: React.FC = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-LLM-API-Key": activeKey,
+          "X-LLM-Profile-ID": activeProfileId,
           "X-LLM-Provider": apiProvider || "deepseek",
           "X-LLM-Model": apiModel || "deepseek-chat",
           "X-App-Language": language,

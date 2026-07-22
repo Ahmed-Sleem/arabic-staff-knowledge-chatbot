@@ -7,11 +7,9 @@
  */
 import React, { useState } from "react";
 import { useApp } from "../context/AppContext";
-import { SettingsModal } from "./SettingsModal";
 
 export const Header: React.FC = () => {
-  const { language, setLanguage, theme, setTheme, apiKey } = useApp();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { language, setLanguage, theme, setTheme, setIsSettingsOpen } = useApp();
   const [isRightPanelClosed, setIsRightPanelClosed] = useState(false);
 
   const toggleRightPanel = () => {
@@ -65,7 +63,7 @@ export const Header: React.FC = () => {
             className="tool-btn"
             id="apiKeyBtn"
             type="button"
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => setIsSettingsOpen(true)}
             aria-label="Settings and API models"
             title={language === "ar" ? "الإعدادات ومراحل الاسترجاع ومفاتيح API" : "Settings, Workflow Cycles & API Keys"}
             style={{ width: "36px", height: "36px", borderRadius: "10px", padding: 0, justifyContent: "center", gap: 0 }}
@@ -100,7 +98,6 @@ export const Header: React.FC = () => {
         </div>
       </header>
 
-      <SettingsModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   );
 };

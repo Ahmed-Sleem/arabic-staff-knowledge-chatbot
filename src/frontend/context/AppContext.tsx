@@ -2,8 +2,8 @@
 
 /**
  * WHY: Master Global Workspace State (`AppContext.tsx`).
- * Manages device identification without login (`deviceId`), multi-key API profiles (`savedApiKeys`),
- * persistent per-device conversation history, UI language (`AR/EN`), theme (`Dark/Light`), and active scope.
+ * Manages no-login device memory, encrypted server-side API-key vault metadata,
+ * persistent per-device conversations, UI language/theme, graph state, and global modals.
  */
 import React, { createContext, useContext, useState, useEffect, useRef, ReactNode } from "react";
 import { GlobalModals } from "../components/GlobalModals";
@@ -40,8 +40,18 @@ export interface SavedApiKey {
   label: string;
   provider: "deepseek" | "groq" | "openai" | "gemini";
   model: string;
+  key_hint?: string;
+  is_active: boolean;
+  created_at?: string;
+  updated_at?: string;
+  last_used_at?: string | null;
+}
+
+export interface NewApiKeyProfile {
+  label: string;
+  provider: "deepseek" | "groq" | "openai" | "gemini";
+  model: string;
   key: string;
-  createdAt: string;
 }
 
 interface AppContextType {
@@ -50,8 +60,6 @@ interface AppContextType {
   setLanguage: (lang: "ar" | "en") => void;
   theme: "dark" | "light";
   setTheme: (theme: "dark" | "light") => void;
-  apiKey: string;
-  setApiKey: (key: string) => void;
   apiProvider: "deepseek" | "groq" | "openai" | "gemini";
   setApiProvider: (provider: "deepseek" | "groq" | "openai" | "gemini") => void;
   apiModel: string;
@@ -60,9 +68,11 @@ interface AppContextType {
   setWorkflowCycles: (cycles: number) => void;
   savedApiKeys: SavedApiKey[];
   activeApiKeyId: string | null;
-  addSavedApiKey: (keyObj: Omit<SavedApiKey, "id" | "createdAt">) => void;
-  deleteSavedApiKey: (id: string) => void;
-  selectSavedApiKey: (id: string) => void;
+  refreshVaultProfiles: () => Promise<void>;
+  addSavedApiKey: (keyObj: NewApiKeyProfile) => Promise<void>;
+  deleteSavedApiKey: (id: string) => Promise<void>;
+  selectSavedApiKey: (id: string) => Promise<void>;
+  vaultError: string | null;
   isSettingsOpen: boolean;
   setIsSettingsOpen: (open: boolean) => void;
   inspectingNodeId: string | null;
@@ -97,27 +107,30 @@ const translations: Record<string, Record<"ar" | "en", string>> = {
   save: { ar: "حفظ وتفعيل", en: "Save & Activate" },
   cancel: { ar: "إلغاء", en: "Cancel" },
   api_key_placeholder: { ar: "أدخل مفتاح DeepSeek أو Groq أو OpenAI أو Google Gemini (sk-... / gsk_... / AIza...)", en: "Enter DeepSeek, Groq, OpenAI, or Google Gemini API Key (sk-... / gsk_... / AIza...)" },
-  api_key_desc: { ar: "يتم حفظ المفاتيح والملفات الشخصية بأمان في جهازك وترتبط بهويتك الدلالية لاستدعاء النماذج وتوليد الخريطة.", en: "Key profiles are stored safely on this device and bound to your device identity to power grounded retrieval." },
+  api_key_desc: { ar: "يتم حفظ المفاتيح مشفرة على الخادم ومربوطة بهذا الجهاز بدون تسجيل دخول.", en: "Key profiles are encrypted server-side and bound to this no-login device." },
   select_doc_hint: { ar: "انقر لتحديد النطاق:", en: "Click to scope chat:" },
   no_docs: { ar: "لا توجد مستندات مؤسسية مفهرسة حتى الآن.", en: "No official workspace documents indexed yet." },
   ready: { ar: "جاهز ومفهرس", en: "Ready & Indexed" },
   processing: { ar: "جاري الفهرسة...", en: "Processing..." },
-  inspecting_chunks: { ar: "🔍 جاري استرجاع وفحص المقاطع في الخريطة...", en: "🔍 Inspecting chunks on graph view..." }
+  inspecting_chunks: { ar: "جاري استرجاع وفحص المقاطع في الخريطة...", en: "Inspecting chunks on graph view..." }
 };
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
+const isProvider = (value: unknown): value is "deepseek" | "groq" | "openai" | "gemini" =>
+  value === "deepseek" || value === "groq" || value === "openai" || value === "gemini";
+
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [deviceId, setDeviceId] = useState<string>("dev_default");
   const [isReady, setIsReady] = useState<boolean>(false);
-  const [language, setLanguageState] = useState<"ar" | "en">("ar");
+  const [language, setLanguageState] = useState<"ar" | "en">("en");
   const [theme, setThemeState] = useState<"dark" | "light">("dark");
-  const [apiKey, setApiKeyState] = useState<string>("");
   const [apiProvider, setApiProviderState] = useState<"deepseek" | "groq" | "openai" | "gemini">("deepseek");
   const [apiModel, setApiModelState] = useState<string>("deepseek-chat");
   const [workflowCycles, setWorkflowCyclesState] = useState<number>(3);
   const [savedApiKeys, setSavedApiKeys] = useState<SavedApiKey[]>([]);
   const [activeApiKeyId, setActiveApiKeyId] = useState<string | null>(null);
+  const [vaultError, setVaultError] = useState<string | null>(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
   const [inspectingNodeId, setInspectingNodeId] = useState<string | null>(null);
   const [inspectingNode, setInspectingNode] = useState<any | null>(null);
@@ -127,7 +140,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const [conversations, setConversations] = useState<Conversation[]>([
     {
       id: "default_conv",
-      title: "محادثة استفسار في الدليل المؤسسي",
+      title: "New Grounded Query",
       created_at: new Date().toISOString(),
       turns: []
     }
@@ -136,98 +149,175 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
   const hasLoadedFromStorage = useRef<boolean>(false);
 
-  // Load device ID, language, theme, saved API keys, and device conversations on boot
-  useEffect(() => {
-    let devId = localStorage.getItem("gpr_device_id");
-    if (!devId) {
-      devId = `dev_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`;
-      localStorage.setItem("gpr_device_id", devId);
+  const applyActiveProfileMetadata = (profiles: SavedApiKey[], activeId: string | null) => {
+    const activeProfile = profiles.find(profile => profile.id === activeId) || profiles.find(profile => profile.is_active) || profiles[0];
+    if (activeProfile) {
+      setActiveApiKeyId(activeProfile.id);
+      setApiProviderState(activeProfile.provider);
+      setApiModelState(activeProfile.model);
+    } else {
+      setActiveApiKeyId(null);
     }
-    setDeviceId(devId);
+  };
 
-    const savedLang = (localStorage.getItem("gpr_language") as "ar" | "en") || "en";
-    const savedTheme = (localStorage.getItem("gpr_theme") as "dark" | "light") || "dark";
-    const savedCycles = parseInt(localStorage.getItem(`gpr_workflow_cycles_${devId}`) || "3", 10);
-    setLanguageState(savedLang);
-    setThemeState(savedTheme);
-    if (savedCycles >= 1 && savedCycles <= 6) setWorkflowCyclesState(savedCycles);
-    document.documentElement.dir = savedLang === "ar" ? "rtl" : "ltr";
-    document.documentElement.lang = savedLang;
-    if (savedTheme === "dark") document.body.classList.add("dark-mode");
-    else document.body.classList.remove("dark-mode");
-
-    // Load saved API keys for this device
-    const keysJson = localStorage.getItem(`gpr_saved_keys_${devId}`) || localStorage.getItem("gpr_saved_keys");
-    let loadedKeys: SavedApiKey[] = [];
-    if (keysJson) {
-      try { loadedKeys = JSON.parse(keysJson); } catch (e) {}
+  const refreshVaultProfiles = async () => {
+    const res = await fetch("/api/v1/vault/profiles", { credentials: "include" });
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error(text || "Failed to load encrypted vault profiles.");
     }
+    const profiles = await res.json() as SavedApiKey[];
+    setSavedApiKeys(profiles);
+    const active = profiles.find(profile => profile.is_active) || profiles[0];
+    applyActiveProfileMetadata(profiles, active ? active.id : null);
+  };
 
-    // Check if there's a legacy single key that needs migrating into a saved profile
-    const legacyKey = localStorage.getItem("gpr_llm_api_key") || "";
-    const legacyProvider = (localStorage.getItem("gpr_llm_provider") as any) || "deepseek";
-    const legacyModel = localStorage.getItem("gpr_llm_model") || "deepseek-chat";
+  const migrateLegacyKeysToVault = async (devId: string) => {
+    const migrationFlag = localStorage.getItem(`gpr_vault_migrated_v1_${devId}`);
+    const legacyProfiles: Array<NewApiKeyProfile & { legacyId?: string }> = [];
 
-    if (loadedKeys.length === 0 && legacyKey) {
-      const migratedProfile: SavedApiKey = {
-        id: "key_migrated_01",
-        label: `${legacyProvider.toUpperCase()} Profile (${legacyModel})`,
-        provider: legacyProvider,
-        model: legacyModel,
-        key: legacyKey,
-        createdAt: new Date().toISOString()
-      };
-      loadedKeys = [migratedProfile];
-      localStorage.setItem(`gpr_saved_keys_${devId}`, JSON.stringify(loadedKeys));
-    }
-
-    setSavedApiKeys(loadedKeys);
-    const activeKeyId = localStorage.getItem(`gpr_active_key_id_${devId}`) || (loadedKeys.length > 0 ? loadedKeys[0].id : null);
-    setActiveApiKeyId(activeKeyId);
-
-    if (activeKeyId) {
-      const activeObj = loadedKeys.find(k => k.id === activeKeyId);
-      if (activeObj) {
-        setApiKeyState(activeObj.key);
-        setApiProviderState(activeObj.provider);
-        setApiModelState(activeObj.model);
-      }
-    } else if (legacyKey) {
-      setApiKeyState(legacyKey);
-      setApiProviderState(legacyProvider);
-      setApiModelState(legacyModel);
-    }
-
-    // Load device conversations durably across browser sessions
-    const convsJson = localStorage.getItem(`gpr_conversations_${devId}`) || localStorage.getItem("gpr_conversations");
-    const activeConvId = localStorage.getItem(`gpr_active_conv_id_${devId}`) || localStorage.getItem("gpr_active_conv_id");
-    let initialConvs: Conversation[] = [
-      {
-        id: "default_conv",
-        title: savedLang === "ar" ? "محادثة استفسار في الدليل المؤسسي" : "New Grounded Query",
-        created_at: new Date().toISOString(),
-        turns: []
-      }
-    ];
-
-    if (convsJson) {
+    const collectFromJson = (jsonText: string | null) => {
+      if (!jsonText) return;
       try {
-        const parsedConvs = JSON.parse(convsJson);
-        if (Array.isArray(parsedConvs) && parsedConvs.length > 0) {
-          initialConvs = parsedConvs;
-        }
-      } catch (e) {}
+        const parsed = JSON.parse(jsonText);
+        if (!Array.isArray(parsed)) return;
+        parsed.forEach((item) => {
+          if (!item || typeof item.key !== "string" || !item.key.trim()) return;
+          const provider = isProvider(item.provider) ? item.provider : "deepseek";
+          legacyProfiles.push({
+            legacyId: typeof item.id === "string" ? item.id : undefined,
+            label: typeof item.label === "string" && item.label.trim() ? item.label.trim() : `${provider.toUpperCase()} Profile`,
+            provider,
+            model: typeof item.model === "string" && item.model.trim() ? item.model.trim() : "deepseek-chat",
+            key: item.key.trim()
+          });
+        });
+      } catch {
+        // Legacy migration is best-effort; if JSON is corrupt, keep legacy values for manual retry.
+      }
+    };
+
+    collectFromJson(localStorage.getItem(`gpr_saved_keys_${devId}`));
+    collectFromJson(localStorage.getItem("gpr_saved_keys"));
+
+    const legacySingleKey = localStorage.getItem("gpr_llm_api_key") || "";
+    if (legacySingleKey.trim()) {
+      const legacyProvider = localStorage.getItem("gpr_llm_provider");
+      const provider = isProvider(legacyProvider) ? legacyProvider : "deepseek";
+      legacyProfiles.push({
+        legacyId: "legacy_single_key",
+        label: `${provider.toUpperCase()} Legacy Profile`,
+        provider,
+        model: localStorage.getItem("gpr_llm_model") || "deepseek-chat",
+        key: legacySingleKey.trim()
+      });
     }
 
-    setConversations(initialConvs);
-    setActiveConversationId(activeConvId || (initialConvs.length > 0 ? initialConvs[0].id : "default_conv"));
+    const deduped = legacyProfiles.filter((profile, index, arr) =>
+      arr.findIndex(candidate => candidate.key === profile.key && candidate.provider === profile.provider && candidate.model === profile.model) === index
+    );
 
-    hasLoadedFromStorage.current = true;
-    setIsReady(true);
-    fetchDocuments(devId);
+    if (migrationFlag === "true" || deduped.length === 0) return;
+
+    const legacyActiveId = localStorage.getItem(`gpr_active_key_id_${devId}`);
+    let migratedCount = 0;
+    for (const [index, profile] of deduped.entries()) {
+      const activate = profile.legacyId === legacyActiveId || (!legacyActiveId && index === 0);
+      const res = await fetch("/api/v1/vault/profiles", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          label: profile.label,
+          provider: profile.provider,
+          model: profile.model,
+          api_key: profile.key,
+          activate,
+          test_before_save: false
+        })
+      });
+      if (!res.ok) {
+        throw new Error("Legacy API-key migration failed before raw browser keys could be removed.");
+      }
+      migratedCount += 1;
+    }
+
+    if (migratedCount === deduped.length) {
+      localStorage.removeItem(`gpr_saved_keys_${devId}`);
+      localStorage.removeItem("gpr_saved_keys");
+      localStorage.removeItem("gpr_llm_api_key");
+      localStorage.removeItem("gpr_llm_provider");
+      localStorage.removeItem("gpr_llm_model");
+      localStorage.removeItem(`gpr_active_key_id_${devId}`);
+      localStorage.setItem(`gpr_vault_migrated_v1_${devId}`, "true");
+    }
+  };
+
+  const initializeVault = async (devId: string) => {
+    try {
+      setVaultError(null);
+      const bootstrap = await fetch("/api/v1/vault/bootstrap", { method: "POST", credentials: "include" });
+      if (!bootstrap.ok) {
+        throw new Error(await bootstrap.text());
+      }
+      await migrateLegacyKeysToVault(devId);
+      await refreshVaultProfiles();
+    } catch (err) {
+      setVaultError(err instanceof Error ? err.message : "Encrypted vault initialization failed.");
+    }
+  };
+
+  useEffect(() => {
+    const boot = async () => {
+      let devId = localStorage.getItem("gpr_device_id");
+      if (!devId) {
+        devId = `dev_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`;
+        localStorage.setItem("gpr_device_id", devId);
+      }
+      setDeviceId(devId);
+
+      const savedLang = (localStorage.getItem("gpr_language") as "ar" | "en") || "en";
+      const savedTheme = (localStorage.getItem("gpr_theme") as "dark" | "light") || "dark";
+      const savedCycles = parseInt(localStorage.getItem(`gpr_workflow_cycles_${devId}`) || "3", 10);
+      setLanguageState(savedLang === "ar" || savedLang === "en" ? savedLang : "en");
+      setThemeState(savedTheme === "light" ? "light" : "dark");
+      if (savedCycles >= 1 && savedCycles <= 6) setWorkflowCyclesState(savedCycles);
+      document.documentElement.dir = savedLang === "ar" ? "rtl" : "ltr";
+      document.documentElement.lang = savedLang === "ar" ? "ar" : "en";
+      if (savedTheme === "dark") document.body.classList.add("dark-mode");
+      else document.body.classList.remove("dark-mode");
+
+      const convsJson = localStorage.getItem(`gpr_conversations_${devId}`) || localStorage.getItem("gpr_conversations");
+      const activeConvId = localStorage.getItem(`gpr_active_conv_id_${devId}`) || localStorage.getItem("gpr_active_conv_id");
+      let initialConvs: Conversation[] = [
+        {
+          id: "default_conv",
+          title: savedLang === "ar" ? "محادثة استفسار في الدليل المؤسسي" : "New Grounded Query",
+          created_at: new Date().toISOString(),
+          turns: []
+        }
+      ];
+
+      if (convsJson) {
+        try {
+          const parsedConvs = JSON.parse(convsJson);
+          if (Array.isArray(parsedConvs) && parsedConvs.length > 0) initialConvs = parsedConvs;
+        } catch {
+          // Keep default conversation if persisted JSON is invalid.
+        }
+      }
+
+      setConversations(initialConvs);
+      setActiveConversationId(activeConvId || (initialConvs.length > 0 ? initialConvs[0].id : "default_conv"));
+
+      await initializeVault(devId);
+      hasLoadedFromStorage.current = true;
+      setIsReady(true);
+      fetchDocuments(devId);
+    };
+    void boot();
   }, []);
 
-  // Synchronize conversations and active conversation ID to localStorage whenever updated
   useEffect(() => {
     if (!hasLoadedFromStorage.current || !isReady || !deviceId) return;
     localStorage.setItem(`gpr_conversations_${deviceId}`, JSON.stringify(conversations));
@@ -252,19 +342,12 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     else document.body.classList.remove("dark-mode");
   };
 
-  const setApiKey = (key: string) => {
-    setApiKeyState(key);
-    localStorage.setItem("gpr_llm_api_key", key);
-  };
-
   const setApiProvider = (prov: "deepseek" | "groq" | "openai" | "gemini") => {
     setApiProviderState(prov);
-    localStorage.setItem("gpr_llm_provider", prov);
   };
 
   const setApiModel = (model: string) => {
     setApiModelState(model);
-    localStorage.setItem("gpr_llm_model", model);
   };
 
   const setWorkflowCycles = (cycles: number) => {
@@ -273,56 +356,42 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     localStorage.setItem(`gpr_workflow_cycles_${deviceId}`, String(valid));
   };
 
-  const addSavedApiKey = (keyObj: Omit<SavedApiKey, "id" | "createdAt">) => {
-    const newId = `key_${Date.now()}`;
-    const newSaved: SavedApiKey = {
-      ...keyObj,
-      id: newId,
-      createdAt: new Date().toISOString()
-    };
-    const updated = [newSaved, ...savedApiKeys];
-    setSavedApiKeys(updated);
-    localStorage.setItem(`gpr_saved_keys_${deviceId}`, JSON.stringify(updated));
-    selectSavedApiKey(newId, updated);
+  const addSavedApiKey = async (keyObj: NewApiKeyProfile) => {
+    const res = await fetch("/api/v1/vault/profiles", {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        label: keyObj.label,
+        provider: keyObj.provider,
+        model: keyObj.model,
+        api_key: keyObj.key,
+        activate: true,
+        test_before_save: false
+      })
+    });
+    if (!res.ok) throw new Error(await res.text());
+    await refreshVaultProfiles();
   };
 
-  const deleteSavedApiKey = (id: string) => {
-    const updated = savedApiKeys.filter(k => k.id !== id);
-    setSavedApiKeys(updated);
-    localStorage.setItem(`gpr_saved_keys_${deviceId}`, JSON.stringify(updated));
-    if (activeApiKeyId === id) {
-      if (updated.length > 0) {
-        selectSavedApiKey(updated[0].id, updated);
-      } else {
-        setActiveApiKeyId(null);
-        setApiKey("");
-        localStorage.removeItem(`gpr_active_key_id_${deviceId}`);
-      }
-    }
+  const deleteSavedApiKey = async (id: string) => {
+    const res = await fetch(`/api/v1/vault/profiles/${id}`, { method: "DELETE", credentials: "include" });
+    if (!res.ok) throw new Error(await res.text());
+    await refreshVaultProfiles();
   };
 
-  const selectSavedApiKey = (id: string, keysList = savedApiKeys) => {
-    const found = keysList.find(k => k.id === id);
-    if (found) {
-      setActiveApiKeyId(id);
-      setApiKey(found.key);
-      setApiProvider(found.provider);
-      setApiModel(found.model);
-      localStorage.setItem(`gpr_active_key_id_${deviceId}`, id);
-    }
+  const selectSavedApiKey = async (id: string) => {
+    const res = await fetch(`/api/v1/vault/profiles/${id}/activate`, { method: "POST", credentials: "include" });
+    if (!res.ok) throw new Error(await res.text());
+    await refreshVaultProfiles();
   };
 
   const fetchDocuments = async (devId = deviceId) => {
     try {
-      const res = await fetch("/api/v1/documents", {
-        headers: { "X-Device-ID": devId }
-      });
-      if (res.ok) {
-        const data = await res.json();
-        setDocuments(data);
-      }
-    } catch (e) {
-      console.error("Failed to fetch persistent documents:", e);
+      const res = await fetch("/api/v1/documents", { headers: { "X-Device-ID": devId } });
+      if (res.ok) setDocuments(await res.json());
+    } catch {
+      // Document list is non-critical during boot; the map panel can retry on mount.
     }
   };
 
@@ -345,9 +414,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         if (c.id === activeConversationId) {
           const updatedTurns = [...c.turns, turn];
           let updatedTitle = c.title;
-          if (c.turns.length === 0 && turn.role === "user") {
-            updatedTitle = turn.content.slice(0, 35) + "...";
-          }
+          if (c.turns.length === 0 && turn.role === "user") updatedTitle = turn.content.slice(0, 35) + "...";
           return { ...c, turns: updatedTurns, title: updatedTitle };
         }
         return c;
@@ -386,9 +453,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     localStorage.setItem(`gpr_conversations_${deviceId}`, JSON.stringify([defaultConv]));
   };
 
-  const t = (key: string): string => {
-    return translations[key]?.[language] || key;
-  };
+  const t = (key: string): string => translations[key]?.[language] || key;
 
   return (
     <AppContext.Provider
@@ -399,8 +464,6 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         setLanguage,
         theme,
         setTheme,
-        apiKey,
-        setApiKey,
         apiProvider,
         setApiProvider,
         apiModel,
@@ -409,9 +472,11 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         setWorkflowCycles,
         savedApiKeys,
         activeApiKeyId,
+        refreshVaultProfiles,
         addSavedApiKey,
         deleteSavedApiKey,
         selectSavedApiKey,
+        vaultError,
         isSettingsOpen,
         setIsSettingsOpen,
         inspectingNodeId,

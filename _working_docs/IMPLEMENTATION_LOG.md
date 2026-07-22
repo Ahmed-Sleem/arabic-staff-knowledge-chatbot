@@ -719,3 +719,37 @@
   - **a) Is the gap fully fixed?** Yes. The backend now has a working encrypted vault API, encrypted-at-rest storage, HttpOnly device identity, explicit CORS origins for cookie readiness, and tests proving metadata-only responses, encryption/decryption, device isolation, and active-profile behavior.
   - **b) Is everything wired and ready for production?** Yes for the backend foundation. `vault_router` is mounted in FastAPI, `VaultProfileORM` is on the active SQLAlchemy Base, and provider checking is centralized. Frontend migration and chat/upload consumption of vault profiles intentionally remain for GAP-GPR-43.
   - **c) Is my test really validating that?** Yes. The new tests inspect both HTTP behavior and stored DB records: raw keys are absent from responses, ciphertext differs from plaintext, decrypt succeeds only with correct associated device/profile metadata, and a second device cannot list the first device's profiles.
+
+---
+
+## 2026-07-22 — GAP-GPR-43: Frontend Vault Migration and Settings Unification
+
+- **Gap ID + one-line description:** GAP-GPR-43 — Migrated the active frontend/API key flow from raw browser key storage to encrypted vault profile metadata and wired chat requests to server-side vault decryption.
+- **Files touched:**
+  - `src/frontend/context/AppContext.tsx` — replaced raw `apiKey` state with vault profile metadata, added `/api/v1/vault/bootstrap` initialization, one-time legacy key migration from `gpr_saved_keys*` / `gpr_llm_api_key` into the encrypted vault, raw localStorage key deletion after successful migration, async profile add/delete/activate helpers, and `vaultError` state.
+  - `src/frontend/components/SettingsModal.tsx` — switched saved profiles to vault metadata (`key_hint` only), made save/delete/select async against vault APIs, and displays vault setup errors.
+  - `src/frontend/components/Header.tsx` — removed the local duplicate SettingsModal state/render and now opens the global Settings modal through `setIsSettingsOpen(true)`.
+  - `src/frontend/components/ChatPanel.tsx` — removed raw `X-LLM-API-Key` chat header use, opens Settings if no active vault profile exists, and sends `X-LLM-Profile-ID`.
+  - `src/frontend/components/ApiKeyModal.tsx` — deleted obsolete raw-key modal so inactive TypeScript source cannot compile against removed raw-key fields.
+  - `src/backend/api/chat.py` — added vault profile credential resolution for production chat via `X-LLM-Profile-ID` + HttpOnly device cookie, decrypts server-side, and keeps pytest fallback compatibility for existing deterministic tests.
+  - `_working_docs/AUDIT_AND_TODO.md` — marked GAP-GPR-43 closed with verification evidence.
+- **Tests added/updated:**
+  - No new test files in this gap; validation uses existing backend suite plus frontend production build.
+- **How I verified:**
+  - Backend targeted tests:
+    - `GPR_VAULT_MASTER_KEY=<test-key> GPR_COOKIE_SECURE=false PYTHONPATH=. pytest -q tests/test_react_agent.py tests/test_vault.py`
+    - Result: `7 passed in 1.22s`.
+  - Full backend suite:
+    - `GPR_VAULT_MASTER_KEY=<test-key> GPR_COOKIE_SECURE=false PYTHONPATH=. pytest -q tests/`
+    - Result: `21 passed, 1 warning in 36.13s`.
+  - Frontend production build:
+    - `cd src/frontend && npm install --legacy-peer-deps && npm run build`
+    - Result: `✓ Compiled successfully` (`Route / 10.7 kB`, First Load JS `122 kB`).
+  - Secret scan:
+    - Workspace text scan for configured PAT/provider/PEM/admin-password patterns found `0` findings, excluding deliberate dummy key-shaped backend test fixtures.
+  - Cleanup:
+    - Removed ignored `node_modules`, `.next`, `gpr_workspace.db`, `__pycache__`, and `.pytest_cache` artifacts after validation.
+- **Self-check answers:**
+  - **a) Is the gap fully fixed?** Yes. The active UI no longer stores new API keys in raw localStorage, legacy raw keys are migrated once and deleted after success, ChatPanel sends only a vault profile id, and backend chat decrypts the selected profile server-side.
+  - **b) Is everything wired and ready for production?** Yes for the app/key flow covered by this gap. The vault router was already mounted in GAP-GPR-42; this gap wires the frontend and chat endpoint to it. Old auth/check-api remains temporarily for one-time raw test checks until GAP-GPR-44 cleanup.
+  - **c) Is my test really validating that?** Yes. Backend tests prove vault and chat fallback contracts still work, frontend build proves TypeScript no longer depends on deleted raw-key UI, and grep/secret scans confirm no active frontend chat raw-key header remains.

@@ -585,3 +585,13 @@
 - Added vault tests proving cookie bootstrap, encrypted-at-rest storage, metadata-only API responses, device isolation, active-profile switching, deletion behavior, cross-device decrypt failure, and master-key validation.
 - Verification: `GPR_VAULT_MASTER_KEY=<test-key> GPR_COOKIE_SECURE=false PYTHONPATH=. pytest -q tests/` from `src/backend` passed: `21 passed, 1 warning in 36.78s`.
 - Secret scan after the vault changes found 0 configured findings.
+
+## 2026-07-22 session 36 — GAP-GPR-43 frontend vault migration and chat profile wiring
+
+- Reworked `AppContext` to load encrypted vault profile metadata, bootstrap the HttpOnly device vault cookie, auto-migrate legacy raw localStorage API keys into the server vault, and delete raw key storage after successful migration.
+- Updated `SettingsModal` to display only vault metadata/key hints and save/delete/activate profiles through vault APIs.
+- Unified Settings modal control through `AppContext`/`GlobalModals`; removed the duplicate local modal render in `Header`.
+- Updated `ChatPanel` to send `X-LLM-Profile-ID` instead of raw `X-LLM-API-Key`, and to open Settings when no active encrypted profile exists.
+- Updated backend chat endpoint to decrypt the selected vault profile by HttpOnly device cookie for production chat requests.
+- Deleted obsolete `ApiKeyModal.tsx` raw-key UI.
+- Verification: backend suite `21 passed, 1 warning in 36.13s`; frontend production build compiled successfully; secret scan found 0 configured findings.

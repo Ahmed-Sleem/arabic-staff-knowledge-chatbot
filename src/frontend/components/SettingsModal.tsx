@@ -20,7 +20,7 @@ interface SettingsModalProps {
 export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
   const {
     savedApiKeys, activeApiKeyId, addSavedApiKey, deleteSavedApiKey, selectSavedApiKey,
-    workflowCycles, setWorkflowCycles, deviceId, language, t
+    workflowCycles, setWorkflowCycles, deviceId, language, t, vaultError
   } = useApp();
 
   const [activeTab, setActiveTab] = useState<"api" | "workflow">("api");
@@ -93,22 +93,29 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose })
     }
   };
 
-  const handleSaveAndActivate = (e: React.FormEvent) => {
+  const handleSaveAndActivate = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!keyInput.trim()) return;
 
     const displayLabel = label.trim() || `${provider.toUpperCase()} Profile (${model})`;
-    addSavedApiKey({
-      label: displayLabel,
-      provider: provider,
-      model: model.trim(),
-      key: keyInput.trim()
-    });
+    try {
+      await addSavedApiKey({
+        label: displayLabel,
+        provider: provider,
+        model: model.trim(),
+        key: keyInput.trim()
+      });
 
-    setLabel("");
-    setKeyInput("");
-    setTestResult(null);
-    setShowAddForm(false);
+      setLabel("");
+      setKeyInput("");
+      setTestResult(null);
+      setShowAddForm(false);
+    } catch (err) {
+      setTestResult({
+        status: "error",
+        message: err instanceof Error ? err.message : "Failed to save encrypted vault profile."
+      });
+    }
   };
 
   return ReactDOM.createPortal(
@@ -240,6 +247,12 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose })
                 )}
               </div>
 
+              {vaultError && (
+                <div style={{ background: "rgba(239, 68, 68, 0.12)", border: "1px solid rgba(239, 68, 68, 0.35)", borderRadius: "var(--radius-sm)", padding: "8px 10px", color: "#ef4444", fontSize: "11px", fontWeight: 600 }}>
+                  {language === "ar" ? "تعذر تهيئة خزنة المفاتيح المشفرة: " : "Encrypted vault setup issue: "}{vaultError}
+                </div>
+              )}
+
               {/* Saved Keys Stack (`Point 1 - click card like radio, Point 4 - active top #1, Point 5 - red delete confirm, Point 6 - zero emojis`) */}
               {!showAddForm && (
                 <div style={{ display: "flex", flexDirection: "column", gap: "8px", overflow: "hidden" }}>
@@ -255,12 +268,12 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose })
                         const isActive = activeApiKeyId === k.id;
                         const isHovered = hoveredCardId === k.id;
                         const isConfirming = confirmDeleteId === k.id;
-                        const maskedKey = k.key.length > 8 ? `${k.key.slice(0, 4)}••••••••${k.key.slice(-4)}` : "••••••••";
+                        const maskedKey = k.key_hint ? `••••${k.key_hint}` : "Encrypted Vault";
 
                         return (
                           <div
                             key={k.id}
-                            onClick={() => selectSavedApiKey(k.id)}
+                            onClick={() => { void selectSavedApiKey(k.id); }}
                             onMouseEnter={() => setHoveredCardId(k.id)}
                             onMouseLeave={() => setHoveredCardId(null)}
                             style={{
@@ -310,7 +323,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose })
                                   </span>
                                   <button
                                     type="button"
-                                    onClick={() => deleteSavedApiKey(k.id)}
+                                    onClick={() => { void deleteSavedApiKey(k.id); setConfirmDeleteId(null); }}
                                     style={{ background: "#ef4444", color: "#fff", border: "none", borderRadius: "4px", padding: "4px 8px", fontSize: "11px", fontWeight: 700, cursor: "pointer" }}
                                   >
                                     {language === "ar" ? "نعم" : "Yes"}
@@ -359,7 +372,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose })
 
               {/* Add New Key Form (`Point 3 - text model input`) */}
               {showAddForm && (
-                <form onSubmit={handleSaveAndActivate} style={{ display: "flex", flexDirection: "column", gap: "10px", flex: 1 }}>
+                <form onSubmit={(event) => { void handleSaveAndActivate(event); }} style={{ display: "flex", flexDirection: "column", gap: "10px", flex: 1 }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                     <span style={{ fontSize: "11px", fontWeight: 700, color: "var(--text-primary)", display: "flex", alignItems: "center", gap: "6px" }}>
                       <svg viewBox="0 0 24 24" style={{ width: "14px", height: "14px", stroke: "currentColor", strokeWidth: 2.5, fill: "none" }}>
