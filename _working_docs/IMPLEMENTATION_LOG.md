@@ -1033,3 +1033,31 @@
   - **a) Is the issue fixed?** Yes. CSS now forces `#apiKeyBtn` to use the same square dimensions as the other toolbar buttons, and composer send/stop is compact rather than oversized.
   - **b) Is it wired?** Yes. The active `Header.tsx` and `ChatPanel.tsx` classes/IDs are covered by the CSS overrides.
   - **c) Does validation prove it?** Build validation proves the changed frontend compiles; visual confirmation should be done on the Railway deployment after this main push completes.
+
+---
+
+## 2026-07-22 — Main Hotfix: Map Seeding, Panel Geometry, Conversation Search, and Composer Proportions
+
+- **Description:** Fixed the live no-node map issue after Railway volume mounting, refined right-panel close direction, aligned gutters, added protected left resize behavior, updated conversation search copy, and tightened composer/send sizing.
+- **Files touched:**
+  - `Dockerfile` — copies `src/backend/data/` to `/app/seed_data/backend_data/` so Railway volumes mounted over `/app/src/backend/data` do not hide immutable seed JSON files.
+  - `src/backend/services/ingestion/build_curated_knowledge.py` — source JSON resolver now checks `/app/seed_data/backend_data` fallback.
+  - `src/backend/services/ingestion/seed_curated.py` — curated graph resolver now checks `/app/seed_data/backend_data` fallback.
+  - `src/frontend/context/AppContext.tsx` — conversation search placeholder changed to `search chats..`.
+  - `src/frontend/app/page.tsx` — added left-side resize handle and left-panel resize logic constrained to the side beside the middle panel.
+  - `src/frontend/app/globals.css` — equalized/reduced gutters, protected left panel min/default width, added left resize handle placement, flipped right-panel close animation direction, centered toolbar cluster, and refined compact composer/send button sizing.
+  - `src/frontend/components/ChatPanel.tsx` — replaced send icon with an upward arrow and streaming stop icon with a square.
+  - `_working_docs/CHANGELOG.md`, `_working_docs/IMPLEMENTATION_LOG.md` — recorded hotfix evidence.
+- **How I verified:**
+  - Frontend production build:
+    - `cd src/frontend && npm install --legacy-peer-deps && npm run build`
+    - Result: `✓ Compiled successfully` (`Route / 11.5 kB`, First Load JS `124 kB`).
+  - Backend regression:
+    - `GPR_VAULT_MASTER_KEY=<test-key> GPR_COOKIE_SECURE=false PYTHONPATH=. pytest -q tests/`
+    - Result: `28 passed in 38.96s`.
+  - Secret scan:
+    - Workspace text scan for configured PAT/provider/PEM/admin-password patterns found `0` findings.
+- **Self-check answers:**
+  - **a) Is the issue fixed?** Yes. The backend can now seed from immutable `/app/seed_data/backend_data` even when Railway volume overlays `/app/src/backend/data`; UI geometry and composer/button issues are addressed in active components/CSS.
+  - **b) Is it wired?** Yes. Dockerfile, backend path resolvers, active page/grid/components, and CSS overrides are all wired to the running app paths.
+  - **c) Does validation prove it?** Backend tests and frontend build pass. Final proof for the map requires Railway redeploy with the volume mounted, but the container path root cause has been fixed.

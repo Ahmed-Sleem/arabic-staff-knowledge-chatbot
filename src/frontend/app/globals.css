@@ -1395,3 +1395,88 @@ body.dark-mode .chat-input-area {
         flex-basis: 34px !important;
     }
 }
+
+/* Main hotfix: map seeding/UI spacing/compact composer refinements. */
+:root {
+    --gutter: 10px;
+    --left-min-width: 280px;
+    --left-width: var(--left-min-width);
+    --composer-action-size: 32px;
+    --composer-min-height: 40px;
+    --composer-max-input-height: 136px;
+}
+
+.panel-left {
+    width: var(--left-width) !important;
+    min-width: var(--left-min-width) !important;
+    max-width: var(--left-width) !important;
+}
+
+.left-resize-handle {
+    grid-column: 2 !important;
+}
+body[dir="rtl"] .left-resize-handle {
+    grid-column: 4 !important;
+}
+body[dir="rtl"] .resize-handle:not(.left-resize-handle) {
+    grid-column: 2 !important;
+}
+
+.panel-right {
+    transform-origin: left center !important;
+}
+body[dir="rtl"] .panel-right {
+    transform-origin: right center !important;
+}
+.main-window.right-panel-closed .panel-right {
+    transform: scaleX(0.92) translateX(-24px) !important;
+}
+body[dir="rtl"] .main-window.right-panel-closed .panel-right {
+    transform: scaleX(0.92) translateX(24px) !important;
+}
+
+.app-header {
+    justify-self: center;
+}
+.header-tools {
+    margin-inline: auto;
+}
+
+.chat-input-area {
+    padding: 6px 7px;
+}
+.composer-shell {
+    min-height: var(--composer-min-height);
+    align-items: flex-end;
+}
+.composer-input {
+    min-height: 32px;
+    max-height: var(--composer-max-input-height);
+    padding-block: 6px;
+    padding-inline-start: 8px;
+    padding-inline-end: calc(var(--composer-action-size) + 12px);
+    line-height: 1.4;
+}
+.composer-send {
+    width: var(--composer-action-size) !important;
+    height: var(--composer-action-size) !important;
+    min-width: var(--composer-action-size) !important;
+    inset-inline-end: 4px;
+    inset-block-end: 4px;
+    border-radius: 8px !important;
+}
+.composer-send svg {
+    width: 16px !important;
+    height: 16px !important;
+}
+.composer-send svg rect {
+    fill: currentColor;
+    stroke: none;
+}
+
+@media (max-width: 1100px) {
+    :root { --gutter: 10px; --left-width: var(--left-min-width); }
+}
+@media (max-width: 820px) {
+    :root { --gutter: 8px; --left-width: var(--left-min-width); }
+}

@@ -32,6 +32,8 @@ RUN pip install --no-cache-dir -r ./src/backend/requirements.txt
 
 # Copy Backend Code & Sample Manuals
 COPY src/backend/ ./src/backend/
+# Keep immutable seed data outside /app/src/backend/data because Railway volumes can mount over that path.
+COPY src/backend/data/ ./seed_data/backend_data/
 COPY sample_manuals/ ./sample_manuals/
 COPY docker-entrypoint.sh ./docker-entrypoint.sh
 RUN chmod +x ./docker-entrypoint.sh

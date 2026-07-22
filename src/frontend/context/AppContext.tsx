@@ -99,7 +99,7 @@ interface AppContextType {
 const translations: Record<string, Record<"ar" | "en", string>> = {
   app_title: { ar: "GPR — المساعد الداخلي الذكي للموظفين", en: "GPR — General Purpose RAG Workspace" },
   new_chat: { ar: "محادثة جديدة", en: "New Chat" },
-  search_conversations: { ar: "البحث في المحادثات...", en: "Search conversations..." },
+  search_conversations: { ar: "search chats..", en: "search chats.." },
   add_api_key: { ar: "إدارة مفاتيح API ونماذج الذكاء", en: "Multi-API Key & Model Manager" },
   files_tab: { ar: "📁 المستندات والمعرفة", en: "📁 Documents" },
   graph_tab: { ar: "🕸️ الخريطة (Map)", en: "🕸️ Map" },

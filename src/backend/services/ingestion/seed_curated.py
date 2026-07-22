@@ -23,7 +23,8 @@ def get_curated_json_path() -> str:
     candidates = [
         os.path.join(base_dir, "data", "curated_knowledge_graph.json"),
         os.path.abspath("src/backend/data/curated_knowledge_graph.json"),
-        "/app/src/backend/data/curated_knowledge_graph.json"
+        "/app/src/backend/data/curated_knowledge_graph.json",
+        "/app/seed_data/backend_data/curated_knowledge_graph.json"
     ]
     for c in candidates:
         if os.path.exists(c):

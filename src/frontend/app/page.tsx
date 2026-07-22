@@ -35,26 +35,38 @@ export default function Home() {
     return <LoadScreen />;
   }
 
-  const startResize = (e: React.MouseEvent) => {
+  const startResize = (e: React.MouseEvent, target: "left" | "right" = "right") => {
     const mainWindow = document.getElementById("mainWindow");
-    if (mainWindow && mainWindow.classList.contains("right-panel-closed")) return;
+    if (target === "right" && mainWindow && mainWindow.classList.contains("right-panel-closed")) return;
     e.preventDefault();
 
     const startX = e.clientX;
-    const rightPanel = document.getElementById("rightPanel");
-    if (!rightPanel) return;
-    const startRight = rightPanel.getBoundingClientRect().width;
+    const targetPanel = document.getElementById(target === "left" ? "leftPanel" : "rightPanel");
+    if (!targetPanel) return;
+    const startWidth = targetPanel.getBoundingClientRect().width;
     const isRtl = language === "ar";
 
     const onMouseMove = (moveEvent: MouseEvent) => {
       const deltaX = moveEvent.clientX - startX;
-      let newWidth = isRtl ? startRight + deltaX : startRight - deltaX;
-      const maxAllowed = Math.min(540, window.innerWidth - 320 - 240);
-      newWidth = Math.min(Math.max(newWidth, 240), Math.max(240, maxAllowed));
+      const leftMin = 280;
+      if (target === "left") {
+        let newWidth = isRtl ? startWidth - deltaX : startWidth + deltaX;
+        const maxAllowed = Math.min(420, Math.max(leftMin, window.innerWidth - 420));
+        newWidth = Math.min(Math.max(newWidth, leftMin), maxAllowed);
+        targetPanel.style.width = `${newWidth}px`;
+        targetPanel.style.minWidth = `${newWidth}px`;
+        targetPanel.style.maxWidth = `${newWidth}px`;
+        document.documentElement.style.setProperty("--left-width", `${newWidth}px`);
+        return;
+      }
 
-      rightPanel.style.width = `${newWidth}px`;
-      rightPanel.style.minWidth = `${newWidth}px`;
-      rightPanel.style.maxWidth = `${newWidth}px`;
+      let newWidth = isRtl ? startWidth + deltaX : startWidth - deltaX;
+      const maxAllowed = Math.min(540, window.innerWidth - 320 - 240);
+      newWidth = Math.min(Math.max(newWidth, 290), Math.max(290, maxAllowed));
+
+      targetPanel.style.width = `${newWidth}px`;
+      targetPanel.style.minWidth = `${newWidth}px`;
+      targetPanel.style.maxWidth = `${newWidth}px`;
       document.documentElement.style.setProperty("--right-width", `${newWidth}px`);
     };
 
@@ -109,6 +121,16 @@ export default function Home() {
       {/* Header Bar — floating buttons right below the left panel (Row 5 / Col 1) */}
       <Header />
 
+      {/* Left Resize Handle — only side of left panel beside the middle panel */}
+      <div
+        className="resize-handle left-resize-handle"
+        data-target="left"
+        role="separator"
+        aria-orientation="vertical"
+        aria-label="Resize conversation panel"
+        onMouseDown={(event) => startResize(event, "left")}
+      />
+
       {/* Center Panel — Chat Workspace (Row 1 / Col 3) */}
       <div className="panel panel-center" id="centerPanel" role="main" aria-label="AI chat workspace">
         <ChatPanel />
@@ -121,7 +143,7 @@ export default function Home() {
         role="separator"
         aria-orientation="vertical"
         aria-label="Resize document panel"
-        onMouseDown={startResize}
+        onMouseDown={(event) => startResize(event, "right")}
       />
 
       {/* Right Panel — Map / Knowledge Graph View (Row 1 / Col 5) */}

@@ -24,6 +24,7 @@ def _candidate_paths(filename: str) -> List[str]:
         os.path.abspath(os.path.join("uploads", filename)),
         os.path.abspath(os.path.join("src", "backend", "data", filename)),
         os.path.join("/app", "src", "backend", "data", filename),
+        os.path.join("/app", "seed_data", "backend_data", filename),
     ]
 
 

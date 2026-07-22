@@ -674,3 +674,14 @@
 - Fixed header Settings button so it remains a true round-square icon button matching adjacent toolbar buttons instead of stretching into a wide rectangle.
 - Reduced and refined composer send/stop button sizing to a compact ChatGPT/Claude-style 34px round-square while preserving the existing monochrome design language and bottom-right anchoring.
 - Verification: frontend production build compiled successfully (`Route / 11.3 kB`, First Load JS `124 kB`).
+
+## 2026-07-22 session 38 — Main hotfix: map seeding, layout consistency, composer proportions
+
+- Fixed live Railway map empty-state root cause when a volume is mounted over `/app/src/backend/data`: root Docker image now copies immutable backend data to `/app/seed_data/backend_data`, and curated source/graph path resolution can seed from that location when the mounted data directory starts empty.
+- Changed conversation search placeholder to `search chats..`.
+- Added a left resize handle on the side between the left panel and middle panel, with default/min left width protected at 280px so the search and two action buttons stay visible.
+- Made left/middle and middle/right gutters consistent and reduced desktop gutter to 10px.
+- Changed right-panel close animation direction by flipping the transform origin/translation.
+- Reduced composer/input height and send button size again for better ChatGPT/Claude-like proportions; changed send icon to an upward arrow and streaming stop icon to a square.
+- Re-centered the toolbar/settings button cluster under the left panel via consistent fixed button widths and center alignment.
+- Verification: frontend production build compiled successfully; backend suite passed `28 passed in 38.96s`; workspace secret scan found 0 configured findings.
