@@ -1,34 +1,89 @@
 # Next Sessions Roadmap
 
-**Architectural Guide for Future Sessions per Rule 29 Context Recovery Protocol.**
-Read this file on every session start or context reset.
+**Read on every session start after `AGENT_RULES.md`, `AUDIT_AND_TODO.md`, `IMPLEMENTATION_LOG.md`, and recent `CHANGELOG.md`.**
 
 ---
 
-## Current Architecture & Project Status
+## Current GPR Architecture — 2026-07-22
 
-### The Project: GPR — General Purpose RAG & Grounded Knowledge Workspace
-- **Goal:** Build an enterprise-grade, bilingual (`AR / EN`) internal knowledge platform and chatbot for Kayan Al-Mamlaka Company (`شركة كيان المملكة كاك`) and Cyrkil customers.
-- **System Architecture:**
-  1. **Relational RAG Backend (`src/backend/`):** FastAPI + Async SQLAlchemy (`models/orm.py`, `db/repositories.py`). Ingests multi-format documents (`PDF`, `DOCX`, `TXT`, `MD`) cleanly without vector DB embeddings. Extracts full complete self-contained semantic units (~250-450 words each) via `llm_semantic_analyzer.py` calling Groq/DeepSeek dynamically or high-fidelity pre-indexer (`parse_hr_pdf.py`). Persistent storage (`data/gpr_workspace.db`) survives restarts until explicit user deletion.
-  2. **Streaming ReAct Agent (`src/backend/agent/react_agent.py`):** ReAct agent across Groq/DeepSeek/OpenAI with 4 universal tools (`search_chunks`, `get_table`, `get_chunk_relations`, `get_document_toc`). Emits live SSE camera events (`agent_search` / `active_node_ids`) before token generation and enforces strict AR/EN inline citations (`[المصدر: القسم X.Y]`).
-  3. **Next.js 15 Cyrkil 3-Panel GUI (`src/frontend/`):** Monochrome Black & White liquid frosted glass aesthetic (`#020202` / `#FFFFFF` with `backdrop-filter: blur(24px)`), orbital atom favicon (`favicon.svg`) and header logo (`Header.tsx`), active conversation stack, full-panel drag-and-drop file overlay (`FilesView.tsx`), API Key guard (`NoApiKeyModal`), live cancelable analysis progress card (`AbortController`), and preloaded high-speed `ObsidianGraphView.tsx` (`warmupTicks={80}`, `cooldownTicks={40}`).
-  4. **Dynamic API Key & Provider Modal (`ApiKeyModal.tsx` & `auth.py check-api`):** Staff select provider (`DeepSeek`, `Groq`, `OpenAI Compatible`) and model (`llama-3.3-70b-versatile`, `deepseek-chat`), input `sk-...` / `gsk_...`, and test connection with **`[ ⚡ Test API Connection ]` check button**.
-  5. **Continuous Deployment (`Railway` & `VPS`):** Root `Dockerfile` (Universal All-in-One build), `docker-entrypoint.sh`, `docker-compose.yml`, `start.sh`, `.dockerignore`, `.gitignore`.
+### Product
 
-- **Phases Completed:** Phase 1 (Requirements), Phase 2 (11 Topic Deep-Dives), Phase 3 (Universal Backend Ingestion, DB Schema & Streaming API), & Phase 4 (Next.js 15 Cyrkil GUI, Obsidian Graph View & 2-Step Auth). All implementation gaps (`GAP-ASKC-01` $\rightarrow$ `GAP-ASKC-13`) are **100% CLOSED AND VERIFIED**.
+GPR is a no-login, device-based grounded knowledge workspace for the Kayan Al-Mamlaka / Cyrkil organizational manual.
+
+### Backend
+
+- FastAPI + Async SQLAlchemy.
+- SQLite by default, optional PostgreSQL via `DATABASE_URL`.
+- Active routers:
+  - `/api/v1/vault` — encrypted device API-key vault.
+  - `/api/v1/chat` — SSE streaming chat.
+  - `/api/v1/documents` — document/graph APIs; upload remains API-supported and must use vault profile keys for LLM-assisted ingestion.
+- API-key model:
+  - raw keys are encrypted server-side with AES-256-GCM.
+  - master key: `GPR_VAULT_MASTER_KEY`.
+  - device identity: HttpOnly `gpr_device_secret` cookie.
+  - chat uses `X-LLM-Profile-ID`, not raw key headers.
+- Streaming:
+  - backend emits typed SSE events including provider deltas.
+  - Gemini uses native streaming.
+  - OpenAI-compatible providers use SDK streaming.
+
+### Frontend
+
+- Next.js 15 App Router.
+- Active components:
+  - `SettingsModal.tsx` — vault profile manager.
+  - `ChatPanel.tsx` — chat stream UI and composer.
+  - `ObsidianGraphView.tsx` — map viewer.
+  - `CitationDrawer.tsx` — enriched node inspector.
+  - `LeftPanel.tsx` — conversation list/search/actions.
+- Removed obsolete raw-key `ApiKeyModal.tsx`.
+- Conversations remain browser-local per `gpr_device_id`.
+- API keys do not remain in browser localStorage after successful migration.
+
+### Data
+
+Active source JSON:
+
+```text
+uploads/deepseek_json_20260722_6a33e9.json
+```
+
+Built production graph:
+
+```text
+src/backend/data/curated_knowledge_graph.json
+```
+
+The enriched schema includes bilingual content, aliases, keywords, typed relations, role profiles, KPIs, approval/confidence metadata, and answerable/not-answerable boundaries.
 
 ---
 
-## Next Steps for User Acceptance & Future Feature Additions
+## Active branch and workflow
 
-1. **User Acceptance Testing (Live Railway / Docker Bundle):**
-   - Connect `Ahmed-Sleem/gpr-general-purpose-rag` on Railway (`railway.com`) or launch via `./start.sh`.
-   - Open GUI, click `[ 🔑 Add API Key ]`, select Groq/DeepSeek, and click `[ ⚡ Test API Connection ]`.
-   - Drag and drop any corporate policy or PDF over the panel to test full-panel frosted overlay and cancelable analysis drawer.
-   - Switch to `[ 🕸️ Obsidian Graph ]` and observe instant preloading across nodes and links.
-   - Submit bilingual queries and observe real-time camera panning (`centerAt`).
+Current feature branch:
 
-2. **Future Enhancements (When Requested):**
-   - Live email service wire-up (Resend / Postfix API for production OTP dispatch).
-   - Multi-user RBAC role scoping (restricting specific document access to `admin` vs `staff` groups).
+```text
+feat/gpr-vault-streaming-ui-polish-20260722
+```
+
+Workflow:
+
+1. Continue closing `GAP-GPR-41` through `GAP-GPR-50` one by one.
+2. Validate each gap before moving to the next.
+3. Commit and push each completed gap to the feature branch.
+4. Do **not** merge to `main` until Ahmed approves the final branch.
+
+---
+
+## Remaining high-level work after the latest closed gaps
+
+- Final docs/deployment/repo hygiene if not already closed.
+- Final full validation and manual UI acceptance matrix.
+- Confirm with Ahmed before merge to `main`.
+
+---
+
+## Acceptance URLs after main merge/deploy
+
+If/when merged to main and deployed, acceptance should be performed on the live GPR URL configured by Ahmed/Railway, plus any local Docker check if needed.

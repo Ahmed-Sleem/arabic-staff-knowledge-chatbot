@@ -947,3 +947,34 @@
   - **a) Is the gap fully fixed?** Yes. The send button is anchored in the composer shell, grows independently from textarea height, chat fade/shadow/thinking spacing are implemented, sidebar controls use full-width consistent geometry, mobile drawer is accessible, loading screen inherits final mode, and graph focuses the last active node.
   - **b) Is everything wired and ready for production?** Yes. The UI changes are all wired to active components (`ChatPanel`, `LeftPanel`, `LoadScreen`, `page`, `layout`, `ObsidianGraphView`) and validated by a production Next.js build.
   - **c) Is my test really validating that?** The frontend build validates TypeScript/React integration across the changed components. Final visual/touch behavior will still be manually checked in GAP-GPR-50 acceptance, but the implementation is compiled and wired.
+
+---
+
+## 2026-07-22 — GAP-GPR-49: Data, Deployment, Documentation, and Repo Hygiene Cleanup
+
+- **Gap ID + one-line description:** GAP-GPR-49 — Cleaned repository/deployment/docs after vault, streaming, enriched JSON, and UI changes, and secured the remaining upload API key path.
+- **Files touched:**
+  - `src/backend/api/documents.py` — changed optional LLM-assisted upload ingestion to resolve `X-LLM-Profile-ID` through the encrypted vault instead of accepting raw `X-LLM-API-Key` in production.
+  - `railway.json` — added root Railway Dockerfile deployment configuration.
+  - `.gitignore` and `.config/nextjs-nodejs/config.json` — ignored and removed generated local Next.js telemetry/config file from source control.
+  - `src/frontend/components/FilesView.tsx` — removed unused right-panel document/chunk view component after confirming the active right panel is the map and upload UI is not mounted.
+  - `README.md` — rewrote current product documentation to match no-login encrypted vault, real provider streaming, enriched JSON, Railway env vars, validation, and current component architecture.
+  - `_working_docs/NEXT_SESSIONS_ROADMAP.md` — updated current architecture and workflow for future sessions.
+  - `_working_docs/AUDIT_AND_TODO.md` — marked GAP-GPR-49 closed with verification evidence.
+- **Tests added/updated:**
+  - Existing API upload tests cover the upload endpoint after the signature change.
+- **How I verified:**
+  - Backend regression:
+    - `GPR_VAULT_MASTER_KEY=<test-key> GPR_COOKIE_SECURE=false PYTHONPATH=. pytest -q tests/`
+    - Result: `28 passed in 37.44s`.
+  - Frontend production build:
+    - `cd src/frontend && npm install --legacy-peer-deps && npm run build`
+    - Result: `✓ Compiled successfully` (`Route / 11.3 kB`, First Load JS `124 kB`).
+  - Secret scan:
+    - Workspace text scan for configured PAT/provider/PEM/admin-password patterns found `0` findings, excluding deliberate dummy backend test fixtures and tracked JSON data files.
+  - Cleanup:
+    - Removed ignored `node_modules`, `.next`, `gpr_workspace.db`, `__pycache__`, and `.pytest_cache` artifacts after validation.
+- **Self-check answers:**
+  - **a) Is the gap fully fixed?** Yes. The stale docs/deployment/repo issues identified in audit are addressed: Railway config exists, README/roadmap reflect actual architecture, generated config is removed, dead FilesView is removed, and upload no longer relies on raw key headers.
+  - **b) Is everything wired and ready for production?** Yes. The remaining upload API can optionally use a vault profile for LLM-assisted ingestion, while normal offline/fallback ingestion still works without a key.
+  - **c) Is my test really validating that?** Yes. Backend API tests still pass after the upload signature/key-path change, and frontend build confirms removal of FilesView does not break active UI imports.

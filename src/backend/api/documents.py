@@ -13,17 +13,24 @@ import os
 import uuid
 import aiofiles
 from typing import List, Optional, Dict, Any
-from fastapi import APIRouter, Depends, Header, UploadFile, File, Form, HTTPException, status
+from fastapi import APIRouter, Depends, Header, UploadFile, File, Form, HTTPException, Request, Response, status
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select
 try:
     from ...db.session import get_db
     from ...db.repositories import DocumentRepository, GraphRepository
     from ...models.domain import DocumentDTO, GraphViewDTO
+    from ...models.orm import VaultProfileORM
+    from ...services.device_identity import get_or_create_device_hash
+    from ...services.vault_crypto import decrypt_api_key, VaultConfigError, VaultDecryptionError
     from ...services.ingestion.universal_pipeline import process_document_pipeline
 except ImportError:
     from db.session import get_db
     from db.repositories import DocumentRepository, GraphRepository
     from models.domain import DocumentDTO, GraphViewDTO
+    from models.orm import VaultProfileORM
+    from services.device_identity import get_or_create_device_hash
+    from services.vault_crypto import decrypt_api_key, VaultConfigError, VaultDecryptionError
     from services.ingestion.universal_pipeline import process_document_pipeline
 
 router = APIRouter(prefix="/api/v1/documents", tags=["documents"])
@@ -32,12 +39,46 @@ UPLOAD_DIR = "data/uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 
+async def _resolve_optional_upload_key(
+    session: AsyncSession,
+    request: Request,
+    response: Response,
+    profile_id: Optional[str],
+) -> Optional[str]:
+    """Resolve an optional encrypted vault profile for LLM-assisted ingestion."""
+    if not profile_id:
+        return None
+    try:
+        device_hash, _ = get_or_create_device_hash(request, response)
+    except VaultConfigError as exc:
+        raise HTTPException(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail=str(exc)) from exc
+    result = await session.execute(
+        select(VaultProfileORM).where(VaultProfileORM.device_hash == device_hash, VaultProfileORM.id == profile_id)
+    )
+    profile = result.scalars().first()
+    if not profile:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Vault profile not found for this device.")
+    try:
+        return decrypt_api_key(
+            encrypted_key=profile.encrypted_key,
+            nonce=profile.nonce,
+            device_hash=device_hash,
+            profile_id=profile.id,
+            provider=profile.provider,
+            model=profile.model,
+        )
+    except VaultDecryptionError as exc:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(exc)) from exc
+
+
 @router.post("/upload", response_model=Dict[str, Any], status_code=status.HTTP_201_CREATED)
 async def upload_document(
+    request: Request,
+    response: Response,
     file: UploadFile = File(...),
     title: Optional[str] = Form(None),
     session: AsyncSession = Depends(get_db),
-    x_llm_api_key: Optional[str] = Header(None, alias="X-LLM-API-Key"),
+    x_llm_profile_id: Optional[str] = Header(None, alias="X-LLM-Profile-ID"),
     x_llm_provider: Optional[str] = Header("deepseek", alias="X-LLM-Provider"),
     x_llm_model: Optional[str] = Header("deepseek-chat", alias="X-LLM-Model")
 ):
@@ -52,13 +93,14 @@ async def upload_document(
 
     display_title = title if title and title.strip() else os.path.splitext(filename)[0].replace("_", " ")
     
+    upload_api_key = await _resolve_optional_upload_key(session, request, response, x_llm_profile_id)
     success, message = await process_document_pipeline(
         session=session,
         doc_id=doc_id,
         title=display_title,
         filename=filename,
         file_path=save_path,
-        api_key=x_llm_api_key,
+        api_key=upload_api_key,
         provider=x_llm_provider or "deepseek",
         model=x_llm_model or "deepseek-chat"
     )

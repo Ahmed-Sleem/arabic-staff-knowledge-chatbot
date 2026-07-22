@@ -648,3 +648,13 @@
 - Converted loading screen to shared theme tokens and added an early persisted theme/language script before React hydration.
 - Updated graph camera focus to center on the last active node.
 - Verification: frontend production build compiled successfully; backend regression `28 passed in 37.07s`; secret scan found 0 configured findings.
+
+## 2026-07-22 session 36 — GAP-GPR-49 docs/deployment/repo hygiene
+
+- Secured document upload's optional LLM key path through encrypted vault profile IDs.
+- Added `railway.json` for root Dockerfile deployment.
+- Removed tracked generated `.config/nextjs-nodejs/config.json` and ignored `.config/`.
+- Removed unused `FilesView.tsx` from active frontend source.
+- Rewrote README to match the current no-login encrypted vault, real streaming, enriched JSON, and Railway setup.
+- Updated `NEXT_SESSIONS_ROADMAP.md` with current architecture and branch workflow.
+- Verification: backend suite `28 passed in 37.44s`; frontend build compiled successfully; secret scan found 0 configured findings.
