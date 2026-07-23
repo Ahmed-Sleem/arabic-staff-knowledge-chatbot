@@ -10,7 +10,13 @@ from __future__ import annotations
 
 import json
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Any, AsyncGenerator, Dict, List
+
+PROMPT_TEMPLATE_DIR = Path(__file__).resolve().parents[1] / "agent" / "prompt_templates"
+
+def _load_healthcheck_prompt() -> str:
+    return (PROMPT_TEMPLATE_DIR / "healthcheck.txt").read_text(encoding="utf-8").strip()
 
 try:
     from openai import AsyncOpenAI
@@ -157,7 +163,7 @@ async def check_provider_connection(provider: str, model: str, api_key: str) -> 
             provider_clean,
             model_clean,
             key_clean,
-            [{"role": "user", "content": "Return exactly: OK"}],
+            [{"role": "user", "content": _load_healthcheck_prompt()}],
             temperature=0,
             max_tokens=4,
         )

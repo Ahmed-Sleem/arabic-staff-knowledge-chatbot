@@ -1212,3 +1212,27 @@
   - **a) Is the issue fixed?** Yes. The tracked project now presents GPR generically and sample data is framed as replaceable placeholder data.
   - **b) Is it wired?** Yes. Active prompts, README, data builder titles, sample JSON, and generated graph data all use generic wording.
   - **c) Does validation prove it?** Yes. Automated grep confirms the removed names no longer appear in tracked text surfaces, and full backend/frontend validation passed.
+
+---
+
+## 2026-07-23 — Prompt Templates and README No-Table Gallery
+
+- **Description:** Moved prompt bodies into separated editable files and changed README screenshot presentation away from Markdown tables.
+- **Files touched:**
+  - `src/backend/agent/prompt_templates/navigation_control.md` — editable navigation/control prompt.
+  - `src/backend/agent/prompt_templates/final_answer_system.md` — editable final-answer system prompt.
+  - `src/backend/agent/prompt_templates/ingestion.md` — editable ingestion prompt.
+  - `src/backend/agent/prompt_templates/healthcheck.txt` — editable provider health-check prompt.
+  - `src/backend/agent/prompts.py` — now loads and renders prompt template files while preserving existing builder APIs and control parser.
+  - `src/backend/agent/react_agent.py` — removed unused inline Gemini prompt function, leaving prompt text in template files/builders.
+  - `src/backend/services/provider_clients.py` — reads the health-check prompt directly from the template file without circular imports.
+  - `README.md` — replaced screenshot tables with centered image sections and a collapsible details gallery.
+- **How I verified:**
+  - Backend regression: `GPR_VAULT_MASTER_KEY=<test-key> GPR_COOKIE_SECURE=false PYTHONPATH=. pytest -q tests/` → `28 passed in 39.10s`.
+  - Frontend production build: `npm run build` → `✓ Compiled successfully` (`Route / 11.9 kB`, First Load JS `124 kB`).
+  - Workspace secret scan returned `0` configured findings.
+  - `git diff --check` passed.
+- **Self-check answers:**
+  - **a) Is the request fixed?** Yes. Prompt bodies are now in separated template files that are easy to open/change, and README screenshots no longer use tables.
+  - **b) Is it wired?** Yes. Existing prompt builder functions load the new templates, and all active code continues calling those builder functions.
+  - **c) Does validation prove it?** Yes. Full backend tests, including prompt tests, still pass; frontend build also passes.

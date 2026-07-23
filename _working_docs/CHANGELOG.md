@@ -737,3 +737,16 @@
 - Updated README Data Curation Workflow to explicitly document the included curation/rebuild code: `build_curated_knowledge.py`, `seed_curated.py`, `universal_pipeline.py`, and `llm_semantic_analyzer.py`.
 - Updated active prompts/identity copy and deployment docs from product-specific wording to generic GPR wording.
 - Verification: brand grep for removed names returned 0 matches across active repo text; backend suite passed `28 passed in 37.23s`; frontend build compiled successfully; secret scan found 0 configured findings; `git diff --check` passed.
+
+## 2026-07-23 session 46 — Prompt templates and README no-table gallery
+
+- Moved editable prompt bodies into separate files under `src/backend/agent/prompt_templates/`:
+  - `navigation_control.md`
+  - `final_answer_system.md`
+  - `ingestion.md`
+  - `healthcheck.txt`
+- Kept the active prompt wording/behavior unchanged while making future prompt edits easier and safer.
+- Removed the unused inline Gemini prompt function from `react_agent.py` so active prompt text is not duplicated in implementation code.
+- Updated provider health check to read its prompt text from the template file without creating circular imports.
+- Reworked README Product Preview to remove screenshot tables and use modern centered image sections plus a collapsible details gallery.
+- Verification: backend suite passed `28 passed in 39.10s`; frontend build compiled successfully (`Route / 11.9 kB`, First Load JS `124 kB`); workspace secret scan found 0 configured findings; `git diff --check` passed.
