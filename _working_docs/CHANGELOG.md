@@ -750,3 +750,13 @@
 - Updated provider health check to read its prompt text from the template file without creating circular imports.
 - Reworked README Product Preview to remove screenshot tables and use modern centered image sections plus a collapsible details gallery.
 - Verification: backend suite passed `28 passed in 39.10s`; frontend build compiled successfully (`Route / 11.9 kB`, First Load JS `124 kB`); workspace secret scan found 0 configured findings; `git diff --check` passed.
+
+## 2026-07-23 session 47 — Updated rules, centralized verification, production audit
+
+- Read Ahmed's updated rules file. Because it contained credential-looking/outdated standing context, only the new rule concepts were safely merged into repo governance.
+- Added sanitized rules 31–35 to `_working_docs/AGENT_RULES.md`.
+- Added centralized verification command `scripts/verify.sh`.
+- Added repeatable workspace/history secret scanner `scripts/secret_scan.py`.
+- Updated README validation instructions to use `./scripts/verify.sh`.
+- Added `_working_docs/PRODUCTION_AUDIT_2026-07-23.md` with local verification, live production smoke checks, security status, brand-readiness status, and remaining non-blocking hardening recommendations.
+- Verification: `./scripts/verify.sh` passed fully; live checks returned app root 200, graph API 80 nodes / 279 links, and vault bootstrap 200 with Set-Cookie.

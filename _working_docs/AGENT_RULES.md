@@ -3,7 +3,7 @@
 **Ahmed's standing instructions for how you (the AI) MUST work on this project.**
 This file is APPEND-ONLY. Every session I re-read it before doing anything.
 
-## The rules (append-only — count grows across sessions; currently 30)
+## The rules (append-only — count grows across sessions; currently 35)
 
 ### Process rules
 1. **Think step-by-step in writing.** Before doing anything non-trivial, create a temp MD file in `_working_docs/thinking/` numbered `NN_topic.md`. Break the user's request into parts. Write down what you're going to do.
@@ -191,3 +191,17 @@ When creating new repositories or writing READMEs for Ahmed, always adhere to hi
 2. **Sharp, Direct & Minimal**: Cut the fluff. Keep instructions razor-sharp and direct. No bloated documentation paragraphs.
 3. **Detail-Rich Execution**: Never miss technical details—include exact installation steps (e.g., `chrome://extensions/`, Developer Mode), usage workflows, and output file descriptions (.csv, .json, HTML reports).
 4. **Professional Engineering Standards**: Clean file layouts, Manifest V3 extensions, zero-stub production code, and robust git commit hygiene.
+
+---
+
+## Additional mandatory rules added 2026-07-23 by Ahmed (sanitized for GPR)
+
+31. **Centralized automated verification is mandatory for every change.** Every implementation change must include automated checks that prove the changed behavior works, not just that code compiles. GPR keeps a centralized verification entry point at `scripts/verify.sh`, which runs backend tests, frontend production build, shell syntax checks, whitespace checks, and secret scans. Add focused tests for changed behavior and extend the centralized runner when new test categories are added.
+
+32. **No GitHub push without local validation and professional evidence.** Before pushing to GitHub, run the centralized verification command or a justified focused subset plus any targeted tests for touched code. Final reports must include intent, changed areas, tests run, observed results, warnings, and whether deployment was triggered. If full verification cannot run, say exactly why and do not claim it did.
+
+33. **Production-ready means real, complete, and usable — no placeholders.** Production paths must not contain mocks, fake data, empty wrappers, decorative placeholders, silent no-ops, unfinished pages, or workflows that look functional but are not. Test mocks are allowed only inside tests. If a feature is not production-ready, keep it disabled/hidden or log an explicit audit gap.
+
+34. **Security, validation, and architecture must be top-tier by default.** Validate every external input at the boundary and in backend/service layers where appropriate. Validate type, required fields, allowed values, lengths/ranges, file size/type, ownership, permissions, and business transitions. Backend validation is authoritative. Maintain clean service boundaries, object-level authorization, safe errors, audit logs for meaningful actions, secrets outside frontend, least privilege, and protections against injection, XSS, CSRF, broken access control, prompt injection, and unsafe AI tool use. Log and fix security/validation gaps before dependent features.
+
+35. **Smaller open-source projects may be used only after validation.** Do not limit research to famous tools; smaller projects can be valuable. Before using one, verify license, activity, security posture, code quality, tests, maintainability, dependency health, compatibility with GPR architecture, Arabic/RTL implications, and production risks. If useful but unsafe to reuse directly, record it as reference-only.

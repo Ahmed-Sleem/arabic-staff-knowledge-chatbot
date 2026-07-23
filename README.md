@@ -303,20 +303,23 @@ The enriched schema supports:
 
 ---
 
-## Validation Before Merge
+## Validation Before Push / Merge
 
-Required before pushing/merging to `main`:
+Run the centralized verification script before pushing production changes:
 
 ```bash
-cd src/backend
-GPR_VAULT_MASTER_KEY=<test-key> GPR_COOKIE_SECURE=false PYTHONPATH=. pytest -q tests/
-
-cd ../frontend
-npm install --legacy-peer-deps
-npm run build
+./scripts/verify.sh
 ```
 
-Also run the repository secret scan and manual desktop/mobile checks.
+It runs:
+
+- backend pytest suite,
+- frontend production build,
+- shell syntax checks,
+- `git diff --check`,
+- repository secret scan over workspace and reachable Git history.
+
+For production releases, also do manual desktop/mobile checks on the live Railway URL after deployment.
 
 ---
 

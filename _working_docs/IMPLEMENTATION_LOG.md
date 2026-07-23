@@ -1236,3 +1236,30 @@
   - **a) Is the request fixed?** Yes. Prompt bodies are now in separated template files that are easy to open/change, and README screenshots no longer use tables.
   - **b) Is it wired?** Yes. Existing prompt builder functions load the new templates, and all active code continues calling those builder functions.
   - **c) Does validation prove it?** Yes. Full backend tests, including prompt tests, still pass; frontend build also passes.
+
+---
+
+## 2026-07-23 — GAP-GPR-52: Updated Rules and Centralized Production Verification
+
+- **Gap ID + one-line description:** GAP-GPR-52 — Integrated Ahmed's new mandatory rule concepts safely, added centralized verification/secret-scan tooling, and completed a production-readiness audit.
+- **Files touched:**
+  - `_working_docs/AGENT_RULES.md` — appended sanitized rules 31–35 for centralized verification, pre-push validation, no placeholders, security/architecture, and OSS validation.
+  - `scripts/verify.sh` — new centralized local verification runner.
+  - `scripts/secret_scan.py` — new repeatable workspace/reachable-history secret scanner.
+  - `README.md` — updated validation section to use `./scripts/verify.sh`.
+  - `_working_docs/PRODUCTION_AUDIT_2026-07-23.md` — new production audit report with local/live/security evidence.
+  - `_working_docs/AUDIT_AND_TODO.md`, `_working_docs/CHANGELOG.md`, `_working_docs/IMPLEMENTATION_LOG.md` — recorded closure and evidence.
+- **Tests added/updated:**
+  - Added centralized verification runner; no product behavior tests changed.
+- **How I verified:**
+  - Ran `./scripts/verify.sh`.
+  - Result: backend `28 passed in 37.73s`, frontend `✓ Compiled successfully` (`Route / 11.9 kB`, First Load JS `124 kB`), shell syntax checks passed, `git diff --check` passed, workspace/history secret scans both returned `0` findings.
+  - Live smoke checked `https://gpr-general-purpose-rag-production.up.railway.app`:
+    - `GET /` -> `200`.
+    - `GET /api/v1/documents/graph` -> `200`, `80` nodes, `279` links.
+    - `POST /api/v1/vault/bootstrap` -> `200`, returned ready status and Set-Cookie.
+  - Brand-specific grep returned `0` matches for removed project/customer/design-process names.
+- **Self-check answers:**
+  - **a) Is the gap fully fixed?** Yes. The updated rule concepts are safely integrated, central verification exists and passes, and the production audit report is written.
+  - **b) Is everything wired and ready for production?** Yes for current critical paths. Runtime still depends on Railway env vars and volume remaining configured.
+  - **c) Is my test really validating that?** Yes. The centralized runner covers backend tests, frontend build, syntax, whitespace, and secret scans; live smoke confirms the deployed app root, graph API, and vault bootstrap work.
